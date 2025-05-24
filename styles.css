@@ -99,9 +99,9 @@
 
 .hero-image-container {
     position: relative;
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 3rem;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 2rem;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
@@ -109,6 +109,14 @@
     backdrop-filter: blur(5px);
     border: 3px solid rgba(255, 255, 255, 0.3);
     animation: pulse 6s infinite alternate;
+}
+
+@media (min-width: 640px) {
+    .hero-image-container {
+        width: 220px;
+        height: 220px;
+        margin: 0 auto 3rem;
+    }
 }
 
 @keyframes pulse {
@@ -148,4 +156,32 @@
             rgba(102, 126, 234, 0.8) 100%
         );
     pointer-events: none;
+}
+
+/* Hero section responsive adjustments */
+#home {
+    padding-top: 60px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+@media (max-width: 640px) {
+    #home {
+        padding-top: 80px;
+    }
+    
+    #home h1 {
+        margin-top: 1rem;
+    }
+}
+
+#mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    transition: all 0.3s ease;
 }

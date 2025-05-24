@@ -45,7 +45,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const headerOffset = 80;
+            // Use a larger offset for mobile devices
+            const isMobile = window.innerWidth < 768;
+            const headerOffset = isMobile ? 120 : 80;
             const elementPosition = target.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -161,7 +163,9 @@ window.addEventListener('scroll', updateScrollProgress);
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const hero = document.querySelector('#home');
-    const rate = scrolled * -0.5;
+    // Use a more subtle parallax effect on mobile
+    const isMobile = window.innerWidth < 768;
+    const rate = isMobile ? scrolled * -0.2 : scrolled * -0.5;
 
     if (hero) {
         hero.style.transform = `translateY(${rate}px)`;
