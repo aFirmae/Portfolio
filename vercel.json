@@ -1,8 +1,9 @@
 {
+    "outputDirectory": "portfolio",
     "redirects": [
       {
         "source": "/",
-        "destination": "/portfolio",
+        "destination": "/",
         "permanent": false
       }
     ]
