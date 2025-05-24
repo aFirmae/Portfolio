@@ -5,6 +5,13 @@
         "destination": "/portfolio",
         "permanent": false
       }
-    ]
+    ],
+    "rewrites": [
+      {
+        "source": "/portfolio/:path*",
+        "destination": "/portfolio/:path*"
+      }
+    ],
+    "cleanUrls": true
   }
   
