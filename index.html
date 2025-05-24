@@ -1,14 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" itemscope itemtype="http://schema.org/WebPage">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfilio - Nilashis Saha</title>
+    <title>Nilashis Saha - Full Stack Developer & Computer Science Student</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Nilashis Saha - Full Stack Developer & Computer Science Student">
+    <meta name="description"
+        content="Portfolio of Nilashis Saha, a Computer Science student at Adamas University with experience in software development and backend technologies.">
+    <meta name="keywords"
+        content="Nilashis Saha, Nilashis, Nilasis, Nilasish, Portfolio, Web Developer, Full Stack Developer, Computer Science, Adamas University, Kolkata">
+    <meta name="author" content="Nilashis Saha">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nilashis.in/">
+    <meta property="og:title" content="Nilashis Saha - Full Stack Developer & Computer Science Student">
+    <meta property="og:description"
+        content="Portfolio of Nilashis Saha, a Computer Science student at Adamas University with experience in software development and backend technologies.">
+    <meta property="og:image" content="https://tinyurl.com/22xs2guy">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nilashis.in/">
+    <meta property="twitter:title" content="Nilashis Saha - Full Stack Developer & Computer Science Student">
+    <meta property="twitter:description"
+        content="Portfolio of Nilashis Saha, a Computer Science student at Adamas University with experience in software development and backend technologies.">
+    <meta property="twitter:image" content="https://tinyurl.com/22xs2guy">
+
+    <!-- Canonical URL -->
+    <meta name="canonical" content="https://nilashis.in/">
+
     <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Nilashis Saha",
+      "alternateName": ["Nilasis", "Nilasish"],
+      "url": "https://nilashis.in/",
+      "image": "https://tinyurl.com/22xs2guy",
+      "jobTitle": "Full Stack Developer & Computer Science Student",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "KATSI Canada"
+      },
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Adamas University",
+        "sameAs": "https://adamasuniversity.ac.in/"
+      },
+      "sameAs": [
+        "https://linkedin.com/in/nilashis-saha",
+        "https://github.com/afirmae",
+        "https://www.instagram.com/nilashis_/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kolkata",
+        "addressRegion": "West Bengal",
+        "addressCountry": "India"
+      },
+      "email": "nilashis37@gmail.com",
+      "telephone": "+917980884737"
+    }
+    </script>
 </head>
 
 <body class="bg-gray-50 scroll-smooth">
@@ -67,18 +130,20 @@
                 </a>
             </div>
             <div class="flex justify-center space-x-6 mt-8">
-                <a href="mailto:nilashis37@gmail.com" class="text-white hover:text-blue-200 transition duration-300">
+                <a href="mailto:nilashis37@gmail.com" aria-label="Email"
+                    class="text-white hover:text-blue-200 transition duration-300">
                     <i class="fas fa-envelope text-2xl"></i>
                 </a>
-                <a href="https://linkedin.com/in/nilashis-saha" target="_blank"
+                <a href="https://linkedin.com/in/nilashis-saha" target="_blank" rel="noopener" aria-label="LinkedIn"
                     class="text-white hover:text-blue-200 transition duration-300">
                     <i class="fab fa-linkedin text-2xl"></i>
                 </a>
-                <a href="https://github.com/afirmae" target="_blank"
+                <a href="https://github.com/afirmae" target="_blank" rel="noopener" aria-label="GitHub"
                     class="text-white hover:text-blue-200 transition duration-300">
                     <i class="fab fa-github text-2xl"></i>
                 </a>
-                <a href="tel:+917980884737" class="text-white hover:text-blue-200 transition duration-300">
+                <a href="tel:+917980884737" aria-label="Phone"
+                    class="text-white hover:text-blue-200 transition duration-300">
                     <i class="fas fa-phone text-2xl"></i>
                 </a>
             </div>
@@ -499,7 +564,7 @@
                 </div>
 
                 <div class="text-center transform transition-transform duration-300 hover:scale-105">
-                    <a href="https://linkedin.com/in/nilashis-saha" target="_blank" class="block">
+                    <a href="https://linkedin.com/in/nilashis-saha" target="_blank" rel="noopener" class="block">
                         <div class="glass-effect w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fab fa-linkedin text-2xl"></i>
                         </div>
@@ -511,7 +576,7 @@
                 </div>
 
                 <div class="text-center transform transition-transform duration-300 hover:scale-105">
-                    <a href="https://maps.app.goo.gl/49nNRykt7ENcx3LC8" target="_blank" class="block">
+                    <a href="https://maps.app.goo.gl/49nNRykt7ENcx3LC8" target="_blank" rel="noopener" class="block">
                         <div class="glass-effect w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                             <i class="fas fa-map-marker-alt text-2xl"></i>
                         </div>
@@ -531,10 +596,22 @@
             <p>&copy;
                 <script>document.write(new Date().getFullYear());</script> Nilashis Saha. All rights reserved.
             </p>
+            <div class="mt-4 text-sm text-gray-400">
+                <p>Full Stack Developer & Computer Science Student based in Kolkata, India</p>
+                <p class="mt-2">
+                    <a href="https://linkedin.com/in/nilashis-saha" target="_blank" rel="noopener"
+                        class="hover:text-blue-300 transition-colors">LinkedIn</a> •
+                    <a href="https://github.com/afirmae" target="_blank" rel="noopener"
+                        class="hover:text-blue-300 transition-colors">GitHub</a> •
+                    <a href="https://www.instagram.com/nilashis_/" target="_blank" rel="noopener"
+                        class="hover:text-blue-300 transition-colors">Instagram</a>
+                </p>
+            </div>
         </div>
     </footer>
 
     <script src="script.js"></script>
+    <script src="seo-helper.js"></script>
 </body>
 
 </html>
