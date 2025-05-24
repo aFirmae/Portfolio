@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfilio - Nilashis Saha</title>
+    <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 7px;
+            top: 16px;
+            bottom: -16px;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="text-white font-bold text-xl">Nilashis Saha</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-blue-200 transition duration-300">Home</a>
+                    <a href="#about" class="text-white hover:text-blue-200 transition duration-300">About</a>
+                    <a href="#experience" class="text-white hover:text-blue-200 transition duration-300">Experience</a>
+                    <a href="#projects" class="text-white hover:text-blue-200 transition duration-300">Projects</a>
+                    <a href="#contact" class="text-white hover:text-blue-200 transition duration-300">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white bg-opacity-10 backdrop-blur-lg">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block text-white hover:text-blue-200 py-2">Home</a>
+                <a href="#about" class="block text-white hover:text-blue-200 py-2">About</a>
+                <a href="#experience" class="block text-white hover:text-blue-200 py-2">Experience</a>
+                <a href="#projects" class="block text-white hover:text-blue-200 py-2">Projects</a>
+                <a href="#contact" class="block text-white hover:text-blue-200 py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg min-h-screen flex items-center justify-center text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="floating-animation">
+                <div class="w-32 h-32 mx-auto mb-8 rounded-full glass-effect flex items-center justify-center">
+                    <img src="https://tinyurl.com/22xs2guy" alt="Profile Picture"
+                        class="rounded-full w-32 h-32 object-cover">
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">Nilashis Saha</h1>
+            <div
+                class="glassmorphism text-center mb-4 inline-block px-4 py-2 rounded-full bg-white bg-opacity-20 backdrop-blur">
+                <i class="fas fa-map-marker-alt mr-2"></i>
+                Kolkata, West Bengal, India
+            </div>
+            <p class="text-xl md:text-2xl mb-8 text-blue-100">Software Developer & Computer Science Student</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#contact"
+                    class="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300">
+                    Get In Touch
+                </a>
+                <a href="#projects"
+                    class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
+                    View Projects
+                </a>
+            </div>
+            <div class="flex justify-center space-x-6 mt-8">
+                <a href="mailto:nilashis37@gmail.com" class="text-white hover:text-blue-200 transition duration-300">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/nilashis-saha" target="_blank"
+                    class="text-white hover:text-blue-200 transition duration-300">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="tel:+917980884737" class="text-white hover:text-blue-200 transition duration-300">
+                    <i class="fas fa-phone text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">About Me</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
+                    I'm a Computer Science student at Adamas University with experience in software development and
+                    backend technologies.
+                </p>
+                <div class="items-center bg-gray-50 p-8 rounded-2xl shadow-lg">
+                    <ul class="items-center snap-start flex flex-col gap-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-code text-blue-500 mt-1 mr-3"></i>
+                            <span>Passionate about building web applications and exploring new technologies</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-database text-blue-500 mt-1 mr-3"></i>
+                            <span>Experienced in working with databases and backend development</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-brain text-blue-500 mt-1 mr-3"></i>
+                            <span>Interested in artificial intelligence and machine learning applications</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-users text-blue-500 mt-1 mr-3"></i>
+                            <span>Always eager to collaborate on interesting projects and learn from others</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Technical Skills</h3>
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Python</span>
+                    <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">PHP</span>
+                    <span
+                        class="skill-tag bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">JavaScript</span>
+                    <span
+                        class="skill-tag bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">Node.js</span>
+                    <span class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium">Laravel</span>
+                    <span
+                        class="skill-tag bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-medium">PostgreSQL</span>
+                    <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium">MongoDB</span>
+                    <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium">Docker</span>
+                    <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium">Git</span>
+                    <span class="skill-tag bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium">Google
+                        Cloud Platform</span>
+                    <span class="skill-tag bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium">AWS</span>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-graduation-cap text-2xl text-blue-600 mr-3"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Current Education</h3>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">B.Tech, Computer Science & Engineering</h4>
+                    <p class="text-gray-600 mb-2">Adamas University</p>
+                    <p class="text-gray-600 mb-2">2022 - 2026</p>
+                    <p class="text-blue-600 font-semibold">CGPA: 8.88/10</p>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-2xl">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-school text-2xl text-green-600 mr-3"></i>
+                        <h3 class="text-xl font-bold text-gray-800">Previous Education</h3>
+                    </div>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Senior Secondary (XII), CBSE</h4>
+                    <p class="text-gray-600 mb-2">Kalyani Public School</p>
+                    <p class="text-gray-600 mb-2">2021</p>
+                    <p class="text-green-600 font-semibold">Percentage: 82.00%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Experience</h2>
+                <p class="text-xl text-gray-600">My professional journey and learning experiences</p>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex justify-center mb-12">
+                <div class="bg-white rounded-full p-2 shadow-lg">
+                    <button onclick="switchTab('work')" id="work-tab"
+                        class="tab-btn px-6 py-3 rounded-full font-semibold transition duration-300 bg-blue-600 text-white">
+                        Work Experience
+                    </button>
+                    <button onclick="switchTab('education')" id="education-tab"
+                        class="tab-btn px-6 py-3 rounded-full font-semibold transition duration-300 text-gray-600 hover:text-blue-600">
+                        Education
+                    </button>
+                </div>
+            </div>
+
+            <!-- Work Experience Tab -->
+            <div id="work-content" class="tab-content active">
+                <div class="space-y-8">
+                    <!-- KATSI Canada -->
+                    <div class="relative pl-10">
+                        <div class="timeline-dot bg-blue-600 absolute left-0 top-2"></div>
+                        <div class="timeline-line"></div>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Software Development Intern</h3>
+                                    <p class="text-blue-600 font-semibold">KATSI Canada</p>
+                                </div>
+                                <span class="text-gray-500 font-medium">Aug 2024 - Apr 2025</span>
+                            </div>
+                            <ul class="text-gray-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-code text-blue-500 mt-1 mr-3"></i>
+                                    Co-developed an OFAC List Checking Web Application as Backend Developer using PHP
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-tools text-blue-500 mt-1 mr-3"></i>
+                                    Used Visual Paradigm and Figma for Use Case Diagrams, Activity Diagrams and Website
+                                    Design
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-vial text-blue-500 mt-1 mr-3"></i>
+                                    Conducted Manual Testing using self-written Test Cases
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-cloud text-blue-500 mt-1 mr-3"></i>
+                                    Deployed website on AWS and Hostinger platforms
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- AZMTH -->
+                    <div class="relative pl-10">
+                        <div class="timeline-dot bg-green-600 absolute left-0 top-2"></div>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Junior Research Collaborator</h3>
+                                    <p class="text-green-600 font-semibold">AZMTH, Kolkata</p>
+                                </div>
+                                <span class="text-gray-500 font-medium">Aug 2023 - Apr 2024</span>
+                            </div>
+                            <ul class="text-gray-600 space-y-2">
+                                <li class="flex items-start">
+                                    <i class="fas fa-eye text-green-500 mt-1 mr-3"></i>
+                                    Contributed to eye-ball tracking project as Junior Researcher
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-database text-green-500 mt-1 mr-3"></i>
+                                    Sent eye-tracking data to MySQL and Firebase Realtime Database using PHP and Python
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-desktop text-green-500 mt-1 mr-3"></i>
+                                    Retrieved and displayed data on frontend using PHP, Python, HTML, CSS, and
+                                    JavaScript
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Timeline Tab -->
+            <div id="education-content" class="tab-content">
+                <div class="space-y-8">
+                    <!-- Current Education -->
+                    <div class="relative pl-10">
+                        <div class="timeline-dot bg-purple-600 absolute left-0 top-2"></div>
+                        <div class="timeline-line"></div>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">B.Tech, Computer Science & Engineering
+                                    </h3>
+                                    <p class="text-purple-600 font-semibold">Adamas University</p>
+                                </div>
+                                <span class="text-gray-500 font-medium">2022 - 2026</span>
+                            </div>
+                            <p class="text-gray-600">
+                                Currently pursuing Bachelor of Technology with specialization in Computer Science &
+                                Engineering.
+                                <span class="text-purple-600 font-semibold">Current CGPA: 8.88/10</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Previous Education - Senior Secondary -->
+                    <div class="relative pl-10">
+                        <div class="timeline-dot bg-orange-600 absolute left-0 top-2"></div>
+                        <div class="timeline-line"></div>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Senior Secondary (XII), CBSE</h3>
+                                    <p class="text-orange-600 font-semibold">Kalyani Public School</p>
+                                </div>
+                                <span class="text-gray-500 font-medium">2021</span>
+                            </div>
+                            <p class="text-gray-600">
+                                Completed Higher Secondary Education in Science stream.
+                                <span class="text-orange-600 font-semibold">Percentage: 82.00%</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Education -->
+                    <div class="relative pl-10">
+                        <div class="timeline-dot bg-teal-600 absolute left-0 top-2"></div>
+                        <div class="bg-white p-8 rounded-2xl shadow-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Secondary (X), ICSE</h3>
+                                    <p class="text-teal-600 font-semibold">Douglas Memorial Higher Secondary School</p>
+                                </div>
+                                <span class="text-gray-500 font-medium">2019</span>
+                            </div>
+                            <p class="text-gray-600">
+                                Completed Secondary Education.
+                                <span class="text-teal-600 font-semibold">Percentage: 90.00%</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Certifications</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <i class="fas fa-robot text-3xl text-blue-600 mb-4"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">Generative AI</h4>
+                        <p class="text-sm text-gray-600">Google</p>
+                        <p class="text-xs text-gray-500 mt-2">Nov 2024</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <i class="fas fa-python text-3xl text-green-600 mb-4"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">Python Computing</h4>
+                        <p class="text-sm text-gray-600">NPTEL</p>
+                        <p class="text-xs text-gray-500 mt-2">Aug-Nov 2024</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <i class="fas fa-code text-3xl text-purple-600 mb-4"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">Programming in C</h4>
+                        <p class="text-sm text-gray-600">NPTEL</p>
+                        <p class="text-xs text-gray-500 mt-2">Jan-Apr 2024</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                        <i class="fas fa-brain text-3xl text-red-600 mb-4"></i>
+                        <h4 class="font-semibold text-gray-800 mb-2">AI in Real World</h4>
+                        <p class="text-sm text-gray-600">UpGrad</p>
+                        <p class="text-xs text-gray-500 mt-2">Sep-Oct 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Projects</h2>
+                <p class="text-xl text-gray-600">Some of my notable work and personal projects</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Students Data Portal -->
+                <div class="project-card bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-graduation-cap text-3xl text-blue-600 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">Students Data Portal</h3>
+                            <p class="text-gray-600">Aug 2024 - Apr 2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Comprehensive student management system featuring registration portal, admin panel for approval
+                        and editing, and dedicated portal for CSE department students.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm">PHP</span>
+                        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">MySQL</span>
+                        <span class="bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full text-sm">HTML/CSS</span>
+                        <span class="bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm">JavaScript</span>
+                    </div>
+                    <a href="https://aucseapp.in/cse/student_details/" target="_blank" class="inline-flex items-center bg-blue-100 hover:bg-blue-200 px-4 py-2 rounded-lg text-blue-600 hover:text-blue-800 font-semibold transition duration-300">
+                        <i class="fas fa-globe mr-2"></i> View Live
+                    </a>
+                </div>
+
+                <!-- GestureAI -->
+                <div class="project-card bg-gradient-to-br from-green-50 to-emerald-100 p-8 rounded-2xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-hand-paper text-3xl text-green-600 mr-4"></i>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800">GestureAI: Hand Gesture Detection</h3>
+                            <p class="text-gray-600">Feb 2025 - Apr 2025</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 mb-6">
+                        Flask web application that detects hand gestures using OpenCV and MediaPipe.
+                        Features Random Forest Classification for training the recognition model.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm">Python</span>
+                        <span class="bg-blue-200 text-blue-800 px-3 py-1 rounded-full text-sm">Flask</span>
+                        <span class="bg-red-200 text-red-800 px-3 py-1 rounded-full text-sm">OpenCV</span>
+                        <span class="bg-purple-200 text-purple-800 px-3 py-1 rounded-full text-sm">MediaPipe</span>
+                        <span class="bg-yellow-200 text-yellow-800 px-3 py-1 rounded-full text-sm">ML</span>
+                    </div>
+                    <a href="https://github.com/aFirmae/Hand-Gesture-Detection" target="_blank" class="inline-flex items-center bg-green-200 hover:bg-green-300 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 font-semibold transition duration-300">
+                        <i class="fab fa-github mr-2"></i> View Source Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg text-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
+                <p class="text-xl text-blue-100">Let's discuss opportunities and collaborate on exciting projects</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="text-center">
+                    <a href="mailto:nilashis37@gmail.com"
+                        class="block hover:transform hover:scale-105 transition duration-300">
+                        <div class="glass-effect w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-envelope text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Email</h3>
+                        <p class="text-blue-200 hover:text-white transition duration-300">
+                            nilashis37@gmail.com
+                        </p>
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <a href="tel:+917980884737" class="block hover:transform hover:scale-105 transition duration-300">
+                        <div class="glass-effect w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-phone text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Phone</h3>
+                        <p class="text-blue-200 hover:text-white transition duration-300">
+                            +91 7980884737
+                        </p>
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <a href="https://linkedin.com/in/nilashis-saha" target="_blank"
+                        class="block hover:transform hover:scale-105 transition duration-300">
+                        <div class="glass-effect w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fab fa-linkedin text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">LinkedIn</h3>
+                        <p class="text-blue-200 hover:text-white transition duration-300">
+                            Nilashis Saha
+                        </p>
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <div class="glass-effect w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marker-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Location</h3>
+                    <p class="text-blue-200">Barasat, Kolkata, West Bengal</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy;
+                <script>document.write(new Date().getFullYear());</script> Nilashis Saha. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on links
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tab buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('text-gray-600', 'hover:text-blue-600');
+            });
+
+            // Show selected tab content
+            const selectedContent = document.getElementById(tabName + '-content');
+            selectedContent.classList.add('active');
+
+            // Activate selected tab button
+            const selectedButton = document.getElementById(tabName + '-tab');
+            selectedButton.classList.add('bg-blue-600', 'text-white');
+            selectedButton.classList.remove('text-gray-600', 'hover:text-blue-600');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerOffset = 80;
+                    const elementPosition = target.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animateElements = document.querySelectorAll('.project-card, .timeline-dot, .skill-tag');
+            animateElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Typing effect for hero section
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect when page loads
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('#home h1');
+            const heroSubtitle = document.querySelector('#home p');
+
+            // Reset content
+            const originalTitle = heroTitle.textContent;
+            const originalSubtitle = heroSubtitle.textContent;
+
+            // Start typing animation after a short delay
+            setTimeout(() => {
+                typeWriter(heroTitle, originalTitle, 100);
+                setTimeout(() => {
+                    typeWriter(heroSubtitle, originalSubtitle, 50);
+                }, originalTitle.length * 100 + 500);
+            }, 1000);
+        });
+
+        // Add scroll progress indicator
+        function updateScrollProgress() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+
+            let progressBar = document.getElementById('scroll-progress');
+            if (!progressBar) {
+                progressBar = document.createElement('div');
+                progressBar.id = 'scroll-progress';
+                progressBar.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: ${scrollPercent}%;
+                    height: 3px;
+                    background: linear-gradient(90deg, #667eea, #764ba2);
+                    z-index: 9999;
+                    transition: width 0.3s ease;
+                `;
+                document.body.appendChild(progressBar);
+            } else {
+                progressBar.style.width = scrollPercent + '%';
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('#home');
+            const rate = scrolled * -0.5;
+
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        // Add click effect to project cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const projectCards = document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', function (e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 50%;
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        pointer-events: none;
+                    `;
+
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .tab-content {
+                animation: fadeInUp 0.5s ease forwards;
+            }
+            
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            const loader = document.createElement('div');
+            loader.id = 'page-loader';
+            loader.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 10000;
+                    transition: opacity 0.5s ease;
+                ">
+                    <div style="
+                        width: 50px;
+                        height: 50px;
+                        border: 3px solid rgba(255, 255, 255, 0.3);
+                        border-top: 3px solid white;
+                        border-radius: 50%;
+                        animation: spin 1s linear infinite;
+                    "></div>
+                </div>
+            `;
+
+            const spinStyle = document.createElement('style');
+            spinStyle.textContent = `
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(spinStyle);
+            document.body.appendChild(loader);
+
+            // Remove loader after page is fully loaded
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => {
+                    loader.remove();
+                }, 500);
+            }, 1500);
+        });
+
+        // Add contact form functionality (if you want to add a contact form later)
+        function handleContactForm(event) {
+            event.preventDefault();
+            // Add your contact form handling logic here
+            alert('Thank you for your message! I will get back to you soon.');
+        }
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Add smooth reveal animation for sections
+        const revealElements = document.querySelectorAll('section');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+
+</html>
