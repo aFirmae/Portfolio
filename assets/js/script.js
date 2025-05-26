@@ -1,77 +1,17 @@
-// Enhanced Mobile menu toggle with animations
+// Mobile menu toggle
 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 
 mobileMenuBtn.addEventListener('click', () => {
-    // Toggle hamburger animation
-    mobileMenuBtn.classList.toggle('active');
-
-    // Toggle mobile menu
-    mobileMenu.classList.toggle('active');
-
-    // Prevent body scroll when menu is open
-    if (mobileMenu.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
-    } else {
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Close mobile menu when clicking outside
-mobileMenu.addEventListener('click', (e) => {
-    if (e.target === mobileMenu) {
-        mobileMenuBtn.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
+    mobileMenu.classList.toggle('hidden');
 });
 
 // Close mobile menu when clicking on links
-const mobileLinks = document.querySelectorAll('.mobile-menu-link');
+const mobileLinks = document.querySelectorAll('#mobile-menu a');
 mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
-        mobileMenuBtn.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        mobileMenu.classList.add('hidden');
     });
-});
-
-// Close mobile menu when clicking outside
-document.addEventListener('click', (e) => {
-    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-        mobileMenuBtn.classList.remove('active');
-        mobileMenu.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-});
-
-// Enhanced keyboard navigation
-document.addEventListener('keydown', (e) => {
-    switch (e.key) {
-        case 'Escape':
-            // Close mobile menu
-            mobileMenuBtn.classList.remove('active');
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-
-            // Close context menu
-            contextMenu.classList.remove('active');
-            break;
-
-        case 'Home':
-            if (e.ctrlKey) {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            break;
-
-        case 'End':
-            if (e.ctrlKey) {
-                e.preventDefault();
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            }
-            break;
-    }
 });
 
 // Tab switching functionality
@@ -296,12 +236,67 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Add loading animation
+window.addEventListener('load', () => {
+    const loader = document.createElement('div');
+    loader.id = 'page-loader';
+    loader.innerHTML = `
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        ">
+            <div style="
+                width: 50px;
+                height: 50px;
+                border: 3px solid rgba(255, 255, 255, 0.3);
+                border-top: 3px solid white;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+            "></div>
+        </div>
+    `;
+
+    const spinStyle = document.createElement('style');
+    spinStyle.textContent = `
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(spinStyle);
+    document.body.appendChild(loader);
+
+    // Remove loader after page is fully loaded
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.remove();
+        }, 500);
+    }, 1500);
+});
+
 // Add contact form functionality (if you want to add a contact form later)
 function handleContactForm(event) {
     event.preventDefault();
     // Add your contact form handling logic here
     alert('Thank you for your message! I will get back to you soon.');
 }
+
+// Add keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        mobileMenu.classList.add('hidden');
+    }
+});
 
 // Add smooth reveal animation for sections
 const revealElements = document.querySelectorAll('section');
