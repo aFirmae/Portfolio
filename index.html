@@ -79,6 +79,14 @@
     <nav class="fixed top-0 w-full z-50 glass-effect">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
+                <!-- Mobile hamburger moved to left -->
+                <button id="mobile-menu-btn" class="md:hidden text-white hamburger-btn">
+                    <div class="hamburger-icon">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>
+                </button>
                 <div class="text-white font-bold text-xl">Nilashis Saha</div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#home" class="text-white hover:text-blue-200 transition duration-300">Home</a>
@@ -87,19 +95,52 @@
                     <a href="#projects" class="text-white hover:text-blue-200 transition duration-300">Projects</a>
                     <a href="#contact" class="text-white hover:text-blue-200 transition duration-300">Contact</a>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden text-white">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+                <!-- Empty div to maintain spacing on mobile -->
+                <div class="md:hidden w-8"></div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="md:hidden hidden bg-white bg-opacity-10 backdrop-blur-lg">
-            <div class="px-4 py-2 space-y-2">
-                <a href="#home" class="block text-white hover:text-blue-200 py-2">Home</a>
-                <a href="#about" class="block text-white hover:text-blue-200 py-2">About</a>
-                <a href="#experience" class="block text-white hover:text-blue-200 py-2">Experience</a>
-                <a href="#projects" class="block text-white hover:text-blue-200 py-2">Projects</a>
-                <a href="#contact" class="block text-white hover:text-blue-200 py-2">Contact</a>
+        <!-- Enhanced Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden mobile-menu-overlay">
+            <div class="mobile-menu-content">
+                <div class="mobile-menu-header">
+                    <div class="text-white font-bold text-lg">Navigation</div>
+                </div>
+                <div class="mobile-menu-links">
+                    <a href="#home" class="mobile-menu-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                    <a href="#about" class="mobile-menu-link">
+                        <i class="fas fa-user"></i>
+                        <span>About</span>
+                    </a>
+                    <a href="#experience" class="mobile-menu-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Experience</span>
+                    </a>
+                    <a href="#projects" class="mobile-menu-link">
+                        <i class="fas fa-code"></i>
+                        <span>Projects</span>
+                    </a>
+                    <a href="#contact" class="mobile-menu-link">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact</span>
+                    </a>
+                </div>
+                <div class="mobile-menu-footer">
+                    <div class="flex justify-center space-x-4">
+                        <a href="mailto:nilashis37@gmail.com" class="text-white hover:text-blue-200">
+                            <i class="fas fa-envelope text-lg"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/nilashis-saha" target="_blank"
+                            class="text-white hover:text-blue-200">
+                            <i class="fab fa-linkedin text-lg"></i>
+                        </a>
+                        <a href="https://github.com/afirmae" target="_blank" class="text-white hover:text-blue-200">
+                            <i class="fab fa-github text-lg"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
