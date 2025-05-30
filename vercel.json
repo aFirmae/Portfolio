@@ -1,4 +1,21 @@
 {
+  "redirects": [
+    {
+      "source": "/sem4",
+      "destination": "https://nilasish.notion.site/All-Semester-IV-4cefcfdad8784d319ac609315fb4a0cb?pvs=4",
+      "permanent": false
+    },
+    {
+      "source": "/sem5",
+      "destination": "https://nilasish.notion.site/5216a3e0095843d08a82261e9386a078?v=a3da1a18b64a424f85e67fea3a6eb3c5&pvs=4",
+      "permanent": false
+    },
+    {
+      "source": "/sem6",
+      "destination": "https://nilasish.notion.site/Semester-VI-Notes-and-Assignments-170f6f94bde4804f9d55c5c540f466b6?pvs=4",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
