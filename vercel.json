@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/resume",
+      "destination": "https://nilashis.in/resume.pdf",
+      "permanent": false
+    },
+    {
       "source": "/sem4",
       "destination": "https://nilasish.notion.site/All-Semester-IV-4cefcfdad8784d319ac609315fb4a0cb?pvs=4",
       "permanent": false
