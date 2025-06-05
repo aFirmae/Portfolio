@@ -827,10 +827,33 @@
         </p>
     </footer>
 
-    <script src="math.js"></script>
-    <!-- Fallback to ensure page is visible -->
-    <script>
-        // Make sure the body is visible after 1 second, regardless of script errors
+    <!-- Try multiple approaches to load the JavaScript -->
+    <script src="math.js" type="text/javascript"></script>
+
+    <!-- Fallback method 1: Use module script approach -->
+    <script type="module">
+        import { initMathsPage } from './math.module.js';
+        document.body.classList.add('loaded');
+    </script>
+
+    <!-- Fallback method 2: Use fetch to load the script -->
+    <script type="text/javascript">
+        // Add loaded class immediately to make page visible
+        document.body.classList.add('loaded');
+
+        // Fetch the script and execute it if the src method fails
+        fetch('math.js')
+            .then(response => response.text())
+            .then(scriptText => {
+                const scriptElement = document.createElement('script');
+                scriptElement.textContent = scriptText;
+                document.body.appendChild(scriptElement);
+            })
+            .catch(error => {
+                console.error('Error loading script:', error);
+            });
+
+        // Also try again after a delay, in case the DOM isn't fully loaded yet
         setTimeout(function () {
             document.body.classList.add('loaded');
         }, 1000);

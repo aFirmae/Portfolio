@@ -1,0 +1,12 @@
+# Serve JavaScript files with the correct MIME type
+AddType application/javascript .js
+
+# Allow JavaScript execution
+<FilesMatch "\.js$">
+    Header set Content-Type "application/javascript"
+</FilesMatch>
+
+# Set proper MIME types
+<IfModule mod_mime.c>
+    AddType application/javascript js
+</IfModule>
