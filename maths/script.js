@@ -1,3 +1,18 @@
+// Error handling to prevent white screen
+window.addEventListener('error', function (event) {
+    console.error('JavaScript Error:', event.message, 'at', event.filename, 'line', event.lineno);
+    // Ensure the page becomes visible even if there are JavaScript errors
+    document.body.classList.add('loaded');
+
+    // Show error message only in development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'position:fixed;top:0;left:0;background:rgba(255,0,0,0.8);color:white;padding:10px;z-index:9999;font-family:monospace;';
+        errorDiv.textContent = `Error: ${event.message}`;
+        document.body.appendChild(errorDiv);
+    }
+});
+
 // PDF Data
 const pdfData = [
     {
@@ -217,10 +232,77 @@ class SearchManager {
     }
 
     search(query) {
-        return pdfData.filter(item =>
-            item.title.toLowerCase().includes(query) ||
-            item.unit.toLowerCase().includes(query)
-        );
+        // Fuzzy search implementation
+        if (query.length === 0) return [];
+
+        const calculateSimilarity = (str, term) => {
+            // Simple fuzzy matching - check if all characters appear in order
+            str = str.toLowerCase();
+            term = term.toLowerCase();
+
+            // Check for exact substring match first (highest priority)
+            if (str.includes(term)) {
+                return 1.0;
+            }
+
+            // Levenshtein distance calculation (simplified)
+            const levenshteinDistance = (s1, s2) => {
+                if (s1.length === 0) return s2.length;
+                if (s2.length === 0) return s1.length;
+
+                const matrix = [];
+
+                // Initialize matrix
+                for (let i = 0; i <= s1.length; i++) {
+                    matrix[i] = [i];
+                }
+
+                for (let j = 0; j <= s2.length; j++) {
+                    matrix[0][j] = j;
+                }
+
+                // Fill matrix
+                for (let i = 1; i <= s1.length; i++) {
+                    for (let j = 1; j <= s2.length; j++) {
+                        const cost = s1[i - 1] === s2[j - 1] ? 0 : 1;
+                        matrix[i][j] = Math.min(
+                            matrix[i - 1][j] + 1,      // deletion
+                            matrix[i][j - 1] + 1,      // insertion
+                            matrix[i - 1][j - 1] + cost  // substitution
+                        );
+                    }
+                }
+
+                return matrix[s1.length][s2.length];
+            };
+
+            // Calculate similarity score (0-1)
+            const maxLength = Math.max(str.length, term.length);
+            if (maxLength === 0) return 1; // Both strings are empty
+
+            const distance = levenshteinDistance(str, term);
+            // Convert distance to similarity score (higher is better)
+            return 1 - (distance / maxLength);
+        };
+
+        // Calculate similarity for title and unit, take the better match
+        const results = pdfData.map(item => {
+            const titleSimilarity = calculateSimilarity(item.title, query);
+            const unitSimilarity = calculateSimilarity(item.unit, query);
+            const bestSimilarity = Math.max(titleSimilarity, unitSimilarity);
+
+            return {
+                item,
+                similarity: bestSimilarity
+            };
+        });
+
+        // Sort by similarity (highest first) and filter out low-scoring matches
+        const threshold = 0.4; // Adjust this threshold to control fuzziness
+        return results
+            .filter(result => result.similarity > threshold)
+            .sort((a, b) => b.similarity - a.similarity)
+            .map(result => result.item);
     }
 
     showResults(results) {
@@ -340,61 +422,67 @@ function openInNewTabDirect(filename) {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Prevent flash by showing body after DOM is ready
-    document.body.classList.add('loaded');
+    try {
+        // Prevent flash by showing body after DOM is ready
+        document.body.classList.add('loaded');
 
-    // Initialize search functionality
-    new SearchManager();
+        // Initialize search functionality
+        new SearchManager();
 
-    // Add PDF button event handlers
-    document.addEventListener('click', (e) => {
-        if (e.target.closest('.download-pdf-btn')) {
-            const pdfItem = e.target.closest('.pdf-item');
-            const pdfFile = pdfItem.dataset.pdf;
-            downloadPDFDirect(pdfFile);
-        }
+        // Add PDF button event handlers
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.download-pdf-btn')) {
+                const pdfItem = e.target.closest('.pdf-item');
+                const pdfFile = pdfItem.dataset.pdf;
+                downloadPDFDirect(pdfFile);
+            }
 
-        if (e.target.closest('.open-new-tab-btn')) {
-            const pdfItem = e.target.closest('.pdf-item');
-            const pdfFile = pdfItem.dataset.pdf;
-            openInNewTabDirect(pdfFile);
-        }
-    });
-
-    // Add smooth scrolling for any anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+            if (e.target.closest('.open-new-tab-btn')) {
+                const pdfItem = e.target.closest('.pdf-item');
+                const pdfFile = pdfItem.dataset.pdf;
+                openInNewTabDirect(pdfFile);
             }
         });
-    });
 
-    // Improved intersection observer to reduce conflicts and flashing
-    const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -20px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                // Unobserve after animation to prevent re-triggering
-                observer.unobserve(entry.target);
-            }
+        // Add smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
-    }, observerOptions);
 
-    // Observe fade-in elements with staggered delay to prevent flash
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach((el, index) => {
-        setTimeout(() => {
-            observer.observe(el);
-        }, index * 50 + 200); // Stagger animations
-    });
+        // Improved intersection observer to reduce conflicts and flashing
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -20px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Unobserve after animation to prevent re-triggering
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe fade-in elements with staggered delay to prevent flash
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach((el, index) => {
+            setTimeout(() => {
+                observer.observe(el);
+            }, index * 50 + 200); // Stagger animations
+        });
+    } catch (error) {
+        console.error('Error during initialization:', error);
+        // Make sure the page is visible even if there's an error
+        document.body.classList.add('loaded');
+    }
 });
