@@ -134,25 +134,47 @@
         }
 
         .icon-btn-download {
-            background: linear-gradient(135deg, #10b981, #059669);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            transition: all 0.3s ease;
         }
 
         .icon-btn-download:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-            transform: translateY(-1px);
+            color: #059669;
+            transform: translateY(-1px) scale(1.1);
         }
 
         .icon-btn-external {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            color: #8b5cf6;
+            transition: all 0.3s ease;
         }
 
         .icon-btn-external:hover {
-            background: linear-gradient(135deg, #7c3aed, #6d28d9);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-            transform: translateY(-1px);
+            color: #7c3aed;
+            transform: translateY(-1px) scale(1.1);
+        }
+
+        .unit-content {
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .unit-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .unit-content::-webkit-scrollbar-track {
+            background: rgba(148, 163, 184, 0.1);
+            border-radius: 3px;
+        }
+
+        .unit-content::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.3);
+            border-radius: 3px;
+        }
+
+        .unit-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.5);
         }
 
         .icon-btn-close {
@@ -295,19 +317,21 @@
                         <i class="fas fa-infinity text-3xl text-blue-400 mr-4"></i>
                         <h2 class="text-3xl font-bold text-white">Sequence and Series</h2>
                     </div>
-                    <div class="space-y-4">
+                    <div class="unit-content space-y-4">
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Arithmetic Progressions</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calculator text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Arithmetic Progressions</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -315,16 +339,18 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Geometric Progressions</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-line text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Geometric Progressions</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -332,16 +358,76 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Infinite Series</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-infinity text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Infinite Series</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional topics for demonstration -->
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-square-root-alt text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Convergence Tests</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-wave-square text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Fourier Series</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-function text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Power Series</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -355,19 +441,21 @@
                         <i class="fas fa-compass text-3xl text-purple-400 mr-4"></i>
                         <h2 class="text-3xl font-bold text-white">Complex Numbers</h2>
                     </div>
-                    <div class="space-y-4">
+                    <div class="unit-content space-y-4">
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Complex Plane</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-project-diagram text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Complex Plane</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -375,16 +463,18 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Polar Form</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-compass text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Polar Form</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -392,16 +482,76 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Complex Functions</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-function text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Complex Functions</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional topics -->
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-sync text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Complex Conjugates</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-square-root-alt text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Roots of Unity</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-chart-area text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Cauchy-Riemann Equations</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -415,25 +565,27 @@
                         <i class="fas fa-wave-square text-3xl text-green-400 mr-4"></i>
                         <h2 class="text-3xl font-bold text-white">Ordinary Differential Equations</h2>
                     </div>
-                    <div class="space-y-4">
+                    <div class="unit-content space-y-4">
                         <div class="pdf-item pdf-card glass-card rounded-lg p-4 cursor-pointer"
                             data-pdf="Formulation of ODE.pdf" data-title="Formulation of ODE"
                             data-unit="Ordinary Differential Equations">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Formulation of ODE</h3>
-                                    <p class="text-slate-400 text-sm">Available</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-file-alt text-green-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Formulation of ODE</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
                                     <button
-                                        class="p-3 rounded-lg transition-all duration-300 download-pdf-btn icon-btn icon-btn-download"
+                                        class="p-3 rounded-lg transition-all duration-300 download-pdf-btn icon-btn-download"
                                         title="Download PDF">
-                                        <i class="fas fa-download text-white"></i>
+                                        <i class="fas fa-download"></i>
                                     </button>
                                     <button
-                                        class="p-3 rounded-lg transition-all duration-300 hidden md:block open-new-tab-btn icon-btn icon-btn-external"
+                                        class="p-3 rounded-lg transition-all duration-300 hidden md:block open-new-tab-btn icon-btn-external"
                                         title="Open in new tab">
-                                        <i class="fas fa-external-link-alt text-white"></i>
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -441,16 +593,18 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">First Order ODEs</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-sort-numeric-down text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">First Order ODEs</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -458,16 +612,95 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Higher Order ODEs</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-layer-group text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Higher Order ODEs</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional topics -->
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-divide text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Separable Equations</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-random text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Linear ODEs</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-exchange-alt text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Laplace Transforms</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-project-diagram text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Systems of ODEs</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -481,19 +714,21 @@
                         <i class="fas fa-vector-square text-3xl text-red-400 mr-4"></i>
                         <h2 class="text-3xl font-bold text-white">Vector Calculus</h2>
                     </div>
-                    <div class="space-y-4">
+                    <div class="unit-content space-y-4">
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Vector Fields</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-arrows-alt text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Vector Fields</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -501,16 +736,18 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Line Integrals</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-route text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Line Integrals</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
@@ -518,16 +755,95 @@
 
                         <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="text-lg font-semibold text-white">Green's Theorem</h3>
-                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                <div class="flex items-center">
+                                    <i class="fas fa-draw-polygon text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Green's Theorem</h3>
+                                    </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
                                         <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional topics -->
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-cube text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Surface Integrals</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-expand-arrows-alt text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Divergence Theorem</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-sync-alt text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Stokes' Theorem</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <i class="fas fa-tornado text-slate-400 mr-3"></i>
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-white">Curl and Divergence</h3>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                    <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                        <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
                             </div>
