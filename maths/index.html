@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Notes - By Nilashis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <style>
+        .constellation-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%);
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #94a3b8;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .star:hover {
+            background: #60a5fa;
+            transform: scale(2);
+            box-shadow: 0 0 10px #60a5fa;
+        }
+
+        .constellation-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #475569, transparent);
+            transform-origin: left center;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .constellation-line:hover {
+            opacity: 0.8;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .pdf-card {
+            transition: all 0.3s ease;
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-glow {
+            box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+        }
+
+        .modal-backdrop {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            opacity: 1;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        .modal-backdrop.hidden {
+            opacity: 0;
+        }
+
+        .icon-btn {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-btn-view {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .icon-btn-view:hover {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .icon-btn-download {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .icon-btn-download:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .icon-btn-external {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .icon-btn-external:hover {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .icon-btn-close {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .icon-btn-close:hover {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .pdf-canvas-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+        }
+
+        .pdf-canvas-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        .pdf-canvas-container::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 4px;
+        }
+
+        .pdf-canvas-container::-webkit-scrollbar-thumb {
+            background: #64748b;
+            border-radius: 4px;
+        }
+
+        .pdf-canvas-container::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        #pdfCanvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Prevent flash of unstyled content */
+        body {
+            opacity: 0;
+            transition: opacity 0.3s ease-in;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        /* Smooth modal transitions */
+        #pdfModal {
+            opacity: 0;
+            transition: opacity 0.25s ease-in-out;
+        }
+
+        #pdfModal:not(.hidden) {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen text-slate-200 overflow-x-hidden">
+    <!-- Constellation Background -->
+    <div class="constellation-bg" id="constellation"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10">
+        <!-- Header -->
+        <header class="text-center py-12 px-4">
+            <h1
+                class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-4 fade-in">
+                Mathematics Notes
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 fade-in" style="animation-delay: 0.2s;">
+                Comprehensive study materials for advanced mathematics
+            </p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="max-w-2xl mx-auto px-4 mb-12 fade-in" style="animation-delay: 0.4s;">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Search for topics, units, or PDFs..."
+                    class="w-full px-6 py-4 bg-slate-800/80 border border-slate-600 rounded-full text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 search-glow transition-all duration-300">
+                <i class="fas fa-search absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+            </div>
+            <div id="searchResults" class="mt-4 hidden"></div>
+        </div>
+
+        <!-- Units Grid -->
+        <div class="max-w-7xl mx-auto px-4 pb-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Sequence and Series -->
+                <div class="glass-card rounded-2xl p-8 fade-in" style="animation-delay: 0.6s;">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-infinity text-3xl text-blue-400 mr-4"></i>
+                        <h2 class="text-3xl font-bold text-white">Sequence and Series</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Arithmetic Progressions</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Geometric Progressions</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Infinite Series</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Complex Numbers -->
+                <div class="glass-card rounded-2xl p-8 fade-in" style="animation-delay: 0.8s;">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-compass text-3xl text-purple-400 mr-4"></i>
+                        <h2 class="text-3xl font-bold text-white">Complex Numbers</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Complex Plane</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Polar Form</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Complex Functions</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ordinary Differential Equations -->
+                <div class="glass-card rounded-2xl p-8 fade-in" style="animation-delay: 1s;">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-wave-square text-3xl text-green-400 mr-4"></i>
+                        <h2 class="text-3xl font-bold text-white">Ordinary Differential Equations</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="pdf-item pdf-card glass-card rounded-lg p-4 cursor-pointer"
+                            data-pdf="Formulation of ODE.pdf" data-title="Formulation of ODE"
+                            data-unit="Ordinary Differential Equations">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Formulation of ODE</h3>
+                                    <p class="text-slate-400 text-sm">Available</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="p-3 rounded-lg transition-all duration-300 view-pdf-btn icon-btn icon-btn-view">
+                                        <i class="fas fa-eye text-white"></i>
+                                    </button>
+                                    <button
+                                        class="p-3 rounded-lg transition-all duration-300 download-pdf-btn icon-btn icon-btn-download">
+                                        <i class="fas fa-download text-white"></i>
+                                    </button>
+                                    <button
+                                        class="p-3 rounded-lg transition-all duration-300 hidden md:block open-new-tab-btn icon-btn icon-btn-external">
+                                        <i class="fas fa-external-link-alt text-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">First Order ODEs</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Higher Order ODEs</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vector Calculus -->
+                <div class="glass-card rounded-2xl p-8 fade-in" style="animation-delay: 1.2s;">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-vector-square text-3xl text-red-400 mr-4"></i>
+                        <h2 class="text-3xl font-bold text-white">Vector Calculus</h2>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Vector Fields</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Line Integrals</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pdf-item glass-card rounded-lg p-4 cursor-not-allowed opacity-60">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-semibold text-white">Green's Theorem</h3>
+                                    <p class="text-slate-400 text-sm">Coming Soon</p>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="p-2 bg-slate-700 rounded-lg opacity-50 cursor-not-allowed">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="fixed inset-0 z-50 hidden modal-backdrop">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="glass-card rounded-2xl w-full max-w-6xl h-[90vh] flex flex-col">
+                <div class="flex items-center justify-between p-6 border-b border-slate-600">
+                    <h3 id="modalTitle" class="text-xl font-bold text-white"></h3>
+                    <div class="flex space-x-3">
+                        <button id="downloadModalBtn"
+                            class="p-3 rounded-lg transition-all duration-300 icon-btn icon-btn-download"
+                            title="Download PDF">
+                            <i class="fas fa-download text-white"></i>
+                        </button>
+                        <button id="newTabModalBtn"
+                            class="p-3 rounded-lg transition-all duration-300 hidden md:block icon-btn icon-btn-external"
+                            title="Open in new tab">
+                            <i class="fas fa-external-link-alt text-white"></i>
+                        </button>
+                        <button id="closeModal"
+                            class="p-3 rounded-lg transition-all duration-300 icon-btn icon-btn-close"
+                            title="Close (Esc)">
+                            <i class="fas fa-times text-white"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex-1 p-6 overflow-hidden">
+                    <div class="pdf-canvas-container">
+                        <canvas id="pdfCanvas"></canvas>
+                    </div>
+                </div>
+                <div class="p-4 border-t border-slate-600 flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <button id="zoomOutBtn"
+                            class="p-2 rounded-lg transition-all duration-300 icon-btn icon-btn-view"
+                            title="">
+                            <i class="fas fa-search-minus text-white"></i>
+                        </button>
+                        <button id="resetZoomBtn"
+                            class="p-2 rounded-lg transition-all duration-300 icon-btn icon-btn-view"
+                            title="">
+                            <i class="fas fa-expand-arrows-alt text-white"></i>
+                        </button>
+                        <button id="zoomInBtn"
+                            class="p-2 rounded-lg transition-all duration-300 icon-btn icon-btn-view"
+                            title="">
+                            <i class="fas fa-search-plus text-white"></i>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="prevPage" class="p-3 rounded-lg transition-all duration-300 icon-btn icon-btn-view"
+                            title="Previous page (← Arrow)">
+                            <i class="fas fa-chevron-left text-white"></i>
+                        </button>
+                        <span id="pageInfo" class="text-white min-w-[150px] text-center"></span>
+                        <button id="nextPage" class="p-3 rounded-lg transition-all duration-300 icon-btn icon-btn-view"
+                            title="Next page (→ Arrow)">
+                            <i class="fas fa-chevron-right text-white"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 border-t border-slate-700 bg-slate-900/50">
+        <p class="text-slate-400">
+            Made with <span class="text-red-400">❤️</span> by Nilashis
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
