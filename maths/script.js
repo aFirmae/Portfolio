@@ -232,7 +232,7 @@ class SearchManager {
             `;
         } else {
             this.searchResults.innerHTML = results.map(item => `
-                <div class="glass-card rounded-lg p-4 mt-2 cursor-pointer hover:bg-slate-700/50 transition-colors search-result-item ${!item.available ? 'opacity-60' : ''}" 
+                <div class="glass-card rounded-lg p-4 mt-2 hover:bg-slate-700/50 transition-colors search-result-item ${!item.available ? 'opacity-60' : ''}" 
                      data-unit="${item.unit}" data-title="${item.title}" data-available="${item.available}" data-file="${item.file || ''}">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
