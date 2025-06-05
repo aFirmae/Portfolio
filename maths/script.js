@@ -244,17 +244,17 @@ class SearchManager {
                         </div>
                         <div class="flex space-x-2">
                             ${item.available ? `
-                                <button class="p-2 icon-btn-download transition-all duration-300" title="Download PDF">
+                                <button class="p-2 icon-btn-download transition-all duration-300">
                                     <i class="fas fa-download"></i>
                                 </button>
-                                <button class="p-2 icon-btn-external transition-all duration-300" title="Open in new tab">
+                                <button class="p-2 icon-btn-external transition-all duration-300">
                                     <i class="fas fa-external-link-alt"></i>
                                 </button>
                             ` : `
-                                <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                <button class="p-2 text-slate-500 cursor-not-allowed">
                                     <i class="fas fa-download"></i>
                                 </button>
-                                <button class="p-2 text-slate-500 cursor-not-allowed" title="Not available">
+                                <button class="p-2 text-slate-500 cursor-not-allowed">
                                     <i class="fas fa-external-link-alt"></i>
                                 </button>
                             `}
