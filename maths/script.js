@@ -3,7 +3,7 @@ const pdfData = [
     {
         title: "Formulation of ODE",
         unit: "Ordinary Differential Equations",
-        file: "Formulation of ODE.pdf",
+        file: "ode/Formulation of ODE.pdf",
         available: true,
         icon: "fas fa-file-alt"
     },
@@ -48,7 +48,7 @@ const pdfData = [
         unit: "Sequence and Series",
         file: null,
         available: false,
-        icon: "fas fa-function"
+        icon: "fas fa-superscript"
     },
     // Complex Numbers
     {
@@ -70,7 +70,7 @@ const pdfData = [
         unit: "Complex Numbers",
         file: null,
         available: false,
-        icon: "fas fa-function"
+        icon: "fas fa-sitemap"
     },
     {
         title: "Complex Conjugates",
