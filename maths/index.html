@@ -364,19 +364,22 @@
                             </div>
                         </div>
 
-                        <div class="pdf-item glass-card rounded-lg p-4 opacity-60">
+                        <div class="pdf-item pdf-card glass-card rounded-lg p-4" data-pdf="series/Fourier Series.pdf"
+                            data-title="Fourier Series" data-unit="Sequence and Series">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
-                                    <i class="fas fa-wave-square text-slate-400 mr-3"></i>
+                                    <i class="fas fa-wave-square text-blue-400 mr-3"></i>
                                     <div>
                                         <h3 class="text-lg font-semibold text-white">Fourier Series</h3>
                                     </div>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <button class="p-2 text-slate-500 cursor-not-allowed">
+                                    <button
+                                        class="p-3 rounded-lg transition-all duration-300 download-pdf-btn icon-btn-download">
                                         <i class="fas fa-download"></i>
                                     </button>
-                                    <button class="p-2 text-slate-500 cursor-not-allowed">
+                                    <button
+                                        class="p-3 rounded-lg transition-all duration-300 hidden md:block open-new-tab-btn icon-btn-external">
                                         <i class="fas fa-external-link-alt"></i>
                                     </button>
                                 </div>
@@ -912,8 +915,8 @@
             {
                 title: "Fourier Series",
                 unit: "Sequence and Series",
-                file: null,
-                available: false,
+                file: "series/Fourier Series.pdf",
+                available: true,
                 icon: "fas fa-wave-square"
             },
             {
@@ -1170,7 +1173,7 @@
                 });
 
                 // Sort by similarity (highest first) and filter out low-scoring matches
-                const threshold = 0.5; // Adjust this threshold to control fuzziness
+                const threshold = 0.6; // Adjust this threshold to control fuzziness.
                 return results
                     .filter(result => result.similarity > threshold)
                     .sort((a, b) => b.similarity - a.similarity)
@@ -1276,7 +1279,9 @@
             hideResults() {
                 this.searchResults.classList.add('hidden');
             }
-        }        // Debug utility to verify PDF paths
+        }
+
+        // Debug utility to verify PDF paths
         console.log('Document loaded on: ', window.location.href);
         document.querySelectorAll('.pdf-item[data-pdf]').forEach(item => {
             const pdfPath = item.dataset.pdf;
