@@ -272,7 +272,10 @@
             <div class="relative">
                 <input type="text" id="searchInput" placeholder="Search for topics, units, or PDFs..."
                     class="w-full px-6 py-4 bg-slate-800/80 border border-slate-600 rounded-full text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 search-glow transition-all duration-300">
-                <i class="fas fa-search absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                <i class="fas fa-search absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400"
+                    id="searchIcon"></i>
+                <i class="fas fa-times absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400 hidden cursor-pointer"
+                    id="clearIcon"></i>
             </div>
             <div id="searchResults" class="mt-4 hidden"></div>
         </div>
@@ -1083,6 +1086,8 @@
             constructor() {
                 this.searchInput = document.getElementById('searchInput');
                 this.searchResults = document.getElementById('searchResults');
+                this.searchIcon = document.getElementById('searchIcon');
+                this.clearIcon = document.getElementById('clearIcon');
 
                 this.bindEvents();
             }
@@ -1090,6 +1095,15 @@
             bindEvents() {
                 this.searchInput.addEventListener('input', (e) => {
                     const query = e.target.value.toLowerCase().trim();
+
+                    // Toggle between search and clear icons
+                    if (query.length > 0) {
+                        this.searchIcon.classList.add('hidden');
+                        this.clearIcon.classList.remove('hidden');
+                    } else {
+                        this.searchIcon.classList.remove('hidden');
+                        this.clearIcon.classList.add('hidden');
+                    }
 
                     if (query.length === 0) {
                         this.hideResults();
@@ -1099,8 +1113,17 @@
                     this.showResults(this.search(query));
                 });
 
+                // Add click handler for the clear icon
+                this.clearIcon.addEventListener('click', () => {
+                    this.searchInput.value = '';
+                    this.hideResults();
+                    this.searchIcon.classList.remove('hidden');
+                    this.clearIcon.classList.add('hidden');
+                    this.searchInput.focus();
+                });
+
                 document.addEventListener('click', (e) => {
-                    if (!this.searchInput.contains(e.target) && !this.searchResults.contains(e.target)) {
+                    if (!this.searchInput.contains(e.target) && !this.searchResults.contains(e.target) && !this.clearIcon.contains(e.target)) {
                         this.hideResults();
                     }
                 });
@@ -1201,10 +1224,10 @@
                         </div>
                         <div class="flex space-x-2">
                             ${item.available ? `
-                                <button class="p-2 icon-btn-download transition-all duration-300">
+                                <button class="p-2 rounded-lg icon-btn-download transition-all duration-300">
                                     <i class="fas fa-download"></i>
                                 </button>
-                                <button class="p-2 icon-btn-external transition-all duration-300">
+                                <button class="p-2 rounded-lg icon-btn-external transition-all duration-300">
                                     <i class="fas fa-external-link-alt"></i>
                                 </button>
                             ` : `
@@ -1228,31 +1251,6 @@
                     const isAvailable = item.dataset.available === 'true';
 
                     if (isAvailable) {
-                        // Add click handler for available items
-                        item.addEventListener('click', (e) => {
-                            // Check if click was on download or external link button
-                            if (e.target.closest('.icon-btn-download')) {
-                                e.stopPropagation();
-                                const file = item.dataset.file;
-                                if (file) downloadPDFDirect(file);
-                                return;
-                            }
-
-                            if (e.target.closest('.icon-btn-external')) {
-                                e.stopPropagation();
-                                const file = item.dataset.file;
-                                if (file) openInNewTabDirect(file);
-                                return;
-                            }
-
-                            // Default click action - open in new tab
-                            const file = item.dataset.file;
-                            if (file) openInNewTabDirect(file);
-
-                            this.hideResults();
-                            this.searchInput.value = '';
-                        });
-
                         // Add specific button handlers
                         const downloadBtn = item.querySelector('.icon-btn-download');
                         const externalBtn = item.querySelector('.icon-btn-external');
@@ -1270,6 +1268,8 @@
                                 e.stopPropagation();
                                 const file = item.dataset.file;
                                 if (file) openInNewTabDirect(file);
+                                this.hideResults();
+                                this.searchInput.value = '';
                             });
                         }
                     }
