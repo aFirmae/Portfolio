@@ -17,12 +17,25 @@
           "value": "application/pdf"
         }
       ]
+    },
+    {
+      "source": "/(.*)\\.png",
+      "headers": [
+        {
+          "key": "Content-Type", 
+          "value": "image/png"
+        }
+      ]
     }
   ],
   "trailingSlash": false,
   "routes": [
     { 
       "handle": "filesystem" 
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/maths/$1"
     }
   ]
 }

@@ -8,7 +8,7 @@
     <meta name="description" content="Comprehensive study materials for Semester II Engineering Mathematics">
     <meta name="keywords" content="Engineering Mathematics, Semester II, Notes, Study Materials, Nilashis">
     <meta name="author" content="Nilashis">
-    <link rel="icon" href="icon.png" type="image/x-icon">
+    <link rel="icon" href="/maths/icon.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -1219,24 +1219,19 @@
             hideResults() {
                 this.searchResults.classList.add('hidden');
             }
-        }
-
-        // Debug utility to verify PDF paths
+        }        // Debug utility to verify PDF paths
         console.log('Document loaded on: ', window.location.href);
         document.querySelectorAll('.pdf-item[data-pdf]').forEach(item => {
             const pdfPath = item.dataset.pdf;
-            const basePath = window.location.pathname.endsWith('/')
-                ? window.location.pathname
-                : window.location.pathname + '/';
-            const fullUrl = new URL(pdfPath, window.location.origin + basePath).href;
-            console.log('PDF path:', pdfPath, 'Full URL:', fullUrl);
+            const absolutePath = `/maths/${pdfPath}`;
+            console.log('PDF path:', pdfPath, 'Absolute URL:', absolutePath);
 
             // Test if the PDF exists with a HEAD request
-            fetch(fullUrl, { method: 'HEAD' })
+            fetch(absolutePath, { method: 'HEAD' })
                 .then(response => {
                     console.log('PDF access status:', pdfPath, response.status, response.ok);
                     if (!response.ok) {
-                        console.error('PDF not accessible:', fullUrl);
+                        console.error('PDF not accessible:', absolutePath);
                     }
                 })
                 .catch(err => console.error('Error checking PDF:', pdfPath, err));
@@ -1245,11 +1240,9 @@
         // Utility functions for download and open in new tab
         function downloadPDFDirect(filename) {
             const link = document.createElement('a');
-            // Ensure path is correct whether it's local or on the server
-            const basePath = window.location.pathname.endsWith('/')
-                ? window.location.pathname
-                : window.location.pathname + '/';
-            link.href = new URL(filename, window.location.origin + basePath).href;
+            // Always use absolute path from root
+            const absolutePath = `/maths/${filename}`;
+            link.href = absolutePath;
             link.download = filename.split('/').pop(); // Just use the filename portion
             document.body.appendChild(link);
             link.click();
@@ -1258,13 +1251,10 @@
         }
 
         function openInNewTabDirect(filename) {
-            // Ensure path is correct whether it's local or on the server
-            const basePath = window.location.pathname.endsWith('/')
-                ? window.location.pathname
-                : window.location.pathname + '/';
-            const fullUrl = new URL(filename, window.location.origin + basePath).href;
-            console.log('Opening PDF in new tab:', fullUrl); // Debug info
-            window.open(fullUrl, '_blank');
+            // Always use absolute path from root
+            const absolutePath = `/maths/${filename}`;
+            console.log('Opening PDF in new tab:', absolutePath); // Debug info
+            window.open(absolutePath, '_blank');
         }
 
         // Initialize everything when DOM is loaded
