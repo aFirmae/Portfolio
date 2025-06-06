@@ -1221,18 +1221,50 @@
             }
         }
 
+        // Debug utility to verify PDF paths
+        console.log('Document loaded on: ', window.location.href);
+        document.querySelectorAll('.pdf-item[data-pdf]').forEach(item => {
+            const pdfPath = item.dataset.pdf;
+            const basePath = window.location.pathname.endsWith('/')
+                ? window.location.pathname
+                : window.location.pathname + '/';
+            const fullUrl = new URL(pdfPath, window.location.origin + basePath).href;
+            console.log('PDF path:', pdfPath, 'Full URL:', fullUrl);
+
+            // Test if the PDF exists with a HEAD request
+            fetch(fullUrl, { method: 'HEAD' })
+                .then(response => {
+                    console.log('PDF access status:', pdfPath, response.status, response.ok);
+                    if (!response.ok) {
+                        console.error('PDF not accessible:', fullUrl);
+                    }
+                })
+                .catch(err => console.error('Error checking PDF:', pdfPath, err));
+        });
+
         // Utility functions for download and open in new tab
         function downloadPDFDirect(filename) {
             const link = document.createElement('a');
-            link.href = filename;
-            link.download = filename;
+            // Ensure path is correct whether it's local or on the server
+            const basePath = window.location.pathname.endsWith('/')
+                ? window.location.pathname
+                : window.location.pathname + '/';
+            link.href = new URL(filename, window.location.origin + basePath).href;
+            link.download = filename.split('/').pop(); // Just use the filename portion
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            console.log('Downloading PDF:', link.href); // Debug info
         }
 
         function openInNewTabDirect(filename) {
-            window.open(filename, '_blank');
+            // Ensure path is correct whether it's local or on the server
+            const basePath = window.location.pathname.endsWith('/')
+                ? window.location.pathname
+                : window.location.pathname + '/';
+            const fullUrl = new URL(filename, window.location.origin + basePath).href;
+            console.log('Opening PDF in new tab:', fullUrl); // Debug info
+            window.open(fullUrl, '_blank');
         }
 
         // Initialize everything when DOM is loaded

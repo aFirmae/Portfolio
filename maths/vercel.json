@@ -8,6 +8,21 @@
           "value": "application/javascript"
         }
       ]
+    },
+    {
+      "source": "/(.*)\\.pdf",
+      "headers": [
+        {
+          "key": "Content-Type", 
+          "value": "application/pdf"
+        }
+      ]
+    }
+  ],
+  "trailingSlash": false,
+  "routes": [
+    { 
+      "handle": "filesystem" 
     }
   ]
 }
