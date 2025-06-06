@@ -830,13 +830,6 @@
     <script>
         // PDF Data
         const pdfData = [
-            {
-                title: "Formulation of ODE",
-                unit: "Ordinary Differential Equations",
-                file: "ode/Formulation of ODE.pdf",
-                available: true,
-                icon: "fas fa-file-alt"
-            },
             // Sequence and Series
             {
                 title: "Arithmetic Progressions",
@@ -924,6 +917,13 @@
                 icon: "fas fa-chart-area"
             },
             // Ordinary Differential Equations
+            {
+                title: "Formulation of ODE",
+                unit: "Ordinary Differential Equations",
+                file: "ode/Formulation of ODE.pdf",
+                available: true,
+                icon: "fas fa-file-alt"
+            },
             {
                 title: "First Order ODEs",
                 unit: "Ordinary Differential Equations",
@@ -1113,7 +1113,7 @@
                 });
 
                 // Sort by similarity (highest first) and filter out low-scoring matches
-                const threshold = 0.4; // Adjust this threshold to control fuzziness
+                const threshold = 0.5; // Adjust this threshold to control fuzziness
                 return results
                     .filter(result => result.similarity > threshold)
                     .sort((a, b) => b.similarity - a.similarity)
