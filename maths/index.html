@@ -223,6 +223,40 @@
         body.loaded {
             opacity: 1;
         }
+
+        /* Search icon animation styles */
+        .search-icon {
+            transition: all 0.3s ease;
+        }
+
+        .search-circle {
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+
+        .search-handle {
+            transition: all 0.3s ease;
+            transform-origin: 15px 15px;
+        }
+
+        .close-icon {
+            transition: all 0.3s ease;
+            transform-origin: center;
+            stroke-dasharray: 0;
+        }
+
+        .search-icon.searching .search-circle {
+            transform: scale(0);
+            opacity: 0;
+        }
+
+        .search-icon.searching .search-handle {
+            opacity: 0;
+        }
+
+        .search-icon.searching .close-icon {
+            stroke-opacity: 1;
+        }
     </style>
 </head>
 
@@ -272,10 +306,20 @@
             <div class="relative">
                 <input type="text" id="searchInput" placeholder="Search for topics, units, or PDFs..."
                     class="w-full px-6 py-4 bg-slate-800/80 border border-slate-600 rounded-full text-white placeholder-slate-400 focus:outline-none focus:border-blue-400 search-glow transition-all duration-300">
-                <i class="fas fa-search absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400"
-                    id="searchIcon"></i>
-                <i class="fas fa-times absolute right-6 top-1/2 transform -translate-y-1/2 text-slate-400 hidden cursor-pointer"
-                    id="clearIcon"></i>
+                <div class="absolute right-6 top-1/2 transform -translate-y-1/2 w-5 h-5 cursor-pointer"
+                    id="searchIconContainer">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        class="w-full h-full text-slate-400 search-icon">
+                        <path class="search-circle" fill="none" stroke="currentColor" stroke-width="2"
+                            d="M10,17 a7,7 0 1,1 0,-14 a7,7 0 1,1 0,14" />
+                        <path class="search-handle" fill="none" stroke="currentColor" stroke-width="2"
+                            d="M15,15 L21,21" />
+                        <path class="close-icon" fill="none" stroke="currentColor" stroke-width="2" d="M6,6 L18,18"
+                            stroke-opacity="0" />
+                        <path class="close-icon" fill="none" stroke="currentColor" stroke-width="2" d="M6,18 L18,6"
+                            stroke-opacity="0" />
+                    </svg>
+                </div>
             </div>
             <div id="searchResults" class="mt-4 hidden"></div>
         </div>
@@ -1086,8 +1130,8 @@
             constructor() {
                 this.searchInput = document.getElementById('searchInput');
                 this.searchResults = document.getElementById('searchResults');
-                this.searchIcon = document.getElementById('searchIcon');
-                this.clearIcon = document.getElementById('clearIcon');
+                this.searchIconContainer = document.getElementById('searchIconContainer');
+                this.searchIcon = this.searchIconContainer.querySelector('.search-icon');
 
                 this.bindEvents();
             }
@@ -1096,13 +1140,11 @@
                 this.searchInput.addEventListener('input', (e) => {
                     const query = e.target.value.toLowerCase().trim();
 
-                    // Toggle between search and clear icons
+                    // Toggle icon animation state
                     if (query.length > 0) {
-                        this.searchIcon.classList.add('hidden');
-                        this.clearIcon.classList.remove('hidden');
+                        this.searchIcon.classList.add('searching');
                     } else {
-                        this.searchIcon.classList.remove('hidden');
-                        this.clearIcon.classList.add('hidden');
+                        this.searchIcon.classList.remove('searching');
                     }
 
                     if (query.length === 0) {
@@ -1113,17 +1155,24 @@
                     this.showResults(this.search(query));
                 });
 
-                // Add click handler for the clear icon
-                this.clearIcon.addEventListener('click', () => {
-                    this.searchInput.value = '';
-                    this.hideResults();
-                    this.searchIcon.classList.remove('hidden');
-                    this.clearIcon.classList.add('hidden');
-                    this.searchInput.focus();
+                // Add click handler for the search icon container
+                this.searchIconContainer.addEventListener('click', () => {
+                    if (this.searchInput.value.trim().length > 0) {
+                        // If there's text, clear it
+                        this.searchInput.value = '';
+                        this.hideResults();
+                        this.searchIcon.classList.remove('searching');
+                        this.searchInput.focus();
+                    } else {
+                        // If empty, focus the search input
+                        this.searchInput.focus();
+                    }
                 });
 
                 document.addEventListener('click', (e) => {
-                    if (!this.searchInput.contains(e.target) && !this.searchResults.contains(e.target) && !this.clearIcon.contains(e.target)) {
+                    if (!this.searchInput.contains(e.target) &&
+                        !this.searchResults.contains(e.target) &&
+                        !this.searchIconContainer.contains(e.target)) {
                         this.hideResults();
                     }
                 });
