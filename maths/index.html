@@ -137,23 +137,21 @@
         }
 
         .icon-btn-download {
-            color: #10b981;
             transition: all 0.3s ease;
         }
 
         .icon-btn-download:hover {
-            color: #059669;
             transform: translateY(-1px) scale(1.1);
+            filter: brightness(1.2);
         }
 
         .icon-btn-external {
-            color: #8b5cf6;
             transition: all 0.3s ease;
         }
 
         .icon-btn-external:hover {
-            color: #7c3aed;
             transform: translateY(-1px) scale(1.1);
+            filter: brightness(1.2);
         }
 
         .unit-content {
@@ -576,8 +574,9 @@
                             </div>
                         </div>
 
-                        <div class="pdf-item pdf-card glass-card rounded-lg p-4" data-pdf="complex/Complex Integration.pdf"
-                            data-title="Complex Integration" data-unit="Complex Numbers">
+                        <div class="pdf-item pdf-card glass-card rounded-lg p-4"
+                            data-pdf="complex/Complex Integration.pdf" data-title="Complex Integration"
+                            data-unit="Complex Numbers">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center">
                                     <i class="fas fa-calculator text-purple-400 mr-3"></i>
@@ -950,6 +949,38 @@
     </footer>
 
     <script>
+        // Unit color information
+        const unitColors = {
+            "Sequence and Series": {
+                primaryColor: "text-blue-400",
+                primaryColorClass: "blue-400",
+                complementaryColor: "text-pink-400",
+                complementaryColorClass: "pink-400",
+                unitIcon: "fas fa-infinity"
+            },
+            "Complex Numbers": {
+                primaryColor: "text-violet-400",
+                primaryColorClass: "violet-400",
+                complementaryColor: "text-lime-300",
+                complementaryColorClass: "lime-300",
+                unitIcon: "fas fa-compass"
+            },
+            "Ordinary Differential Equations": {
+                primaryColor: "text-green-400",
+                primaryColorClass: "green-400",
+                complementaryColor: "text-purple-400",
+                complementaryColorClass: "purple-400",
+                unitIcon: "fas fa-wave-square"
+            },
+            "Vector Calculus": {
+                primaryColor: "text-red-400",
+                primaryColorClass: "red-400",
+                complementaryColor: "text-yellow-400",
+                complementaryColorClass: "yellow-400",
+                unitIcon: "fas fa-vector-square"
+            }
+        };
+
         // PDF Data
         const pdfData = [
             // Sequence and Series
@@ -1289,12 +1320,18 @@
                 </div>
             `;
                 } else {
-                    this.searchResults.innerHTML = results.map(item => `
+                    this.searchResults.innerHTML = results.map(item => {
+                        const unitColorInfo = unitColors[item.unit] || {
+                            primaryColor: "text-slate-400",
+                            complementaryColor: "text-purple-400"
+                        };
+
+                        return `
                 <div class="glass-card rounded-lg p-4 mt-2 hover:bg-slate-700/50 transition-colors search-result-item ${!item.available ? 'opacity-60' : ''}" 
                      data-unit="${item.unit}" data-title="${item.title}" data-available="${item.available}" data-file="${item.file || ''}">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
-                            <i class="${item.icon} ${item.available ? 'text-green-400' : 'text-slate-400'} mr-3"></i>
+                            <i class="${item.icon} ${item.available ? unitColorInfo.primaryColor : 'text-slate-400'} mr-3"></i>
                             <div>
                                 <h3 class="text-white font-semibold">${item.title}</h3>
                                 <p class="text-slate-400 text-sm">${item.unit}</p>
@@ -1302,11 +1339,11 @@
                         </div>
                         <div class="flex space-x-2">
                             ${item.available ? `
-                                <button class="p-2 rounded-lg icon-btn-download transition-all duration-300">
-                                    <i class="fas fa-download"></i>
+                                <button class="p-2 rounded-lg transition-all duration-300">
+                                    <i class="fas fa-download ${unitColorInfo.primaryColor}"></i>
                                 </button>
-                                <button class="p-2 rounded-lg icon-btn-external transition-all duration-300">
-                                    <i class="fas fa-external-link-alt"></i>
+                                <button class="p-2 rounded-lg transition-all duration-300">
+                                    <i class="fas fa-external-link-alt ${unitColorInfo.complementaryColor}"></i>
                                 </button>
                             ` : `
                                 <button class="p-2 text-slate-500 cursor-not-allowed">
@@ -1319,7 +1356,7 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
                 }
 
                 this.searchResults.classList.remove('hidden');
@@ -1397,11 +1434,48 @@
             window.open(absolutePath, '_blank');
         }
 
+        // Function to apply unit colors to all icons
+        function applyUnitColorsToIcons() {
+            // Apply colors to all topic icons
+            document.querySelectorAll('.pdf-item').forEach(pdfItem => {
+                // Skip if it's not available
+                if (pdfItem.classList.contains('opacity-60')) return;
+
+                const unitName = pdfItem.dataset.unit;
+                if (!unitName) return;
+
+                const unitColorInfo = unitColors[unitName];
+                if (!unitColorInfo) return;
+
+                // Set topic icon color to match unit color
+                const topicIcon = pdfItem.querySelector('.flex.items-center i');
+                if (topicIcon) {
+                    topicIcon.classList.remove('text-slate-400');
+                    topicIcon.classList.add(unitColorInfo.primaryColor);
+                }
+
+                // Set download icon color
+                const downloadIcon = pdfItem.querySelector('.download-pdf-btn i');
+                if (downloadIcon) {
+                    downloadIcon.classList.add(unitColorInfo.primaryColor);
+                }
+
+                // Set external link icon color
+                const externalIcon = pdfItem.querySelector('.open-new-tab-btn i');
+                if (externalIcon) {
+                    externalIcon.classList.add(unitColorInfo.complementaryColor);
+                }
+            });
+        }
+
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             try {
                 // Prevent flash by showing body after DOM is ready
                 document.body.classList.add('loaded');
+
+                // Apply unit colors to all topic icons
+                applyUnitColorsToIcons();
 
                 // Initialize search functionality
                 new SearchManager();
@@ -1457,6 +1531,9 @@
                         observer.observe(el);
                     }, index * 50 + 200); // Stagger animations
                 });
+
+                // Apply unit colors to icons initially
+                applyUnitColorsToIcons();
             } catch (error) {
                 console.error('Error during initialization:', error);
                 // Make sure the page is visible even if there's an error
