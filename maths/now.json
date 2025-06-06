@@ -1,7 +1,7 @@
 {
   "routes": [
     { 
-      "src": "/(.*).js", 
+      "src": "/(.*)\\.js", 
       "headers": { "content-type": "application/javascript" },
       "continue": true 
     }
