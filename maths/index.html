@@ -344,6 +344,56 @@
         .search-icon.searching .close-icon {
             stroke-opacity: 1;
         }
+
+        /* Easter egg waving animation */
+        .waving-emoji {
+            display: inline-block;
+            transform-origin: 70% 70%;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .waving-emoji:hover {
+            animation: wave-once 0.8s ease-in-out;
+        }
+
+        @keyframes wave-once {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            15%,
+            35%,
+            55%,
+            75% {
+                transform: rotate(-15deg);
+            }
+
+            25%,
+            45%,
+            65%,
+            85% {
+                transform: rotate(15deg);
+            }
+        }
+
+        .easter-egg-container {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+            }
+
+            to {
+                box-shadow: 0 0 30px rgba(250, 204, 21, 0.4);
+            }
+        }
     </style>
 </head>
 
@@ -1304,6 +1354,12 @@
                         return;
                     }
 
+                    // Check for easter egg
+                    if (query === 'nilashis') {
+                        this.showEasterEgg();
+                        return;
+                    }
+
                     this.showResults(this.search(query));
                 });
 
@@ -1501,6 +1557,61 @@
                         }
                     }
                 });
+            }
+
+            showEasterEgg() {
+                this.searchResults.innerHTML = `
+                    <div class="glass-card rounded-lg p-6 mt-2 easter-egg-container">
+                        <div class="text-center">
+                            <div class="waving-emoji text-6xl mb-4">👋</div>
+                            <h3 class="text-white font-bold text-xl mb-2">Oh hey, that's me the developer and the notes provider!</h3>
+                            <p class="text-slate-300 mb-4">Here's some sample questions for you:</p>
+                            
+                            <div class="glass-card rounded-lg p-4 mt-4 hover:bg-slate-700/50 transition-colors search-result-item" 
+                                 data-unit="Sample" data-title="Sample Questions" data-available="true" data-file="Sample Questions.pdf">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-file-pdf text-red-400 mr-3"></i>
+                                        <div>
+                                            <h3 class="text-white font-semibold">Sample Questions</h3>
+                                        </div>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <button class="icon-btn-download p-2 rounded-lg transition-all duration-300">
+                                            <i class="fas fa-download text-red-400"></i>
+                                        </button>
+                                        <button class="icon-btn-external p-2 rounded-lg transition-all duration-300 hidden sm:block">
+                                            <i class="fas fa-external-link-alt text-pink-400"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                this.searchResults.classList.remove('hidden');
+
+                // Add click handlers to the sample questions item
+                const sampleItem = this.searchResults.querySelector('.search-result-item');
+                if (sampleItem) {
+                    const downloadBtn = sampleItem.querySelector('.icon-btn-download');
+                    const externalBtn = sampleItem.querySelector('.icon-btn-external');
+
+                    if (downloadBtn) {
+                        downloadBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            downloadPDFDirect('Sample Questions.pdf');
+                        });
+                    }
+
+                    if (externalBtn) {
+                        externalBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            openInNewTabDirect('Sample Questions.pdf');
+                        });
+                    }
+                }
             }
 
             hideResults() {
