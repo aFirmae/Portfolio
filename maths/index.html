@@ -189,6 +189,95 @@
             transform: translateY(-1px);
         }
 
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: auto;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .toast-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .toast-icon {
+            color: #10b981;
+            font-size: 20px;
+        }
+
+        .toast-text {
+            flex: 1;
+            color: #f1f5f9;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .toast-subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+            word-break: break-all;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .toast-close:hover {
+            background: rgba(148, 163, 184, 0.1);
+            color: #f1f5f9;
+        }
+
+        .toast-progress {
+            position: absolute;
+            bottom: 0px;
+            left: 3px;
+            height: 3px;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 0 0 12px 12px;
+            transition: width 0.1s linear;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -259,6 +348,9 @@
 </head>
 
 <body class="min-h-screen text-slate-200 overflow-x-hidden">
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
     <!-- SVG Animated Background -->
     <div class="animated-bg">
         <svg class="floating-shapes" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -1434,6 +1526,98 @@
                 .catch(err => console.error('Error checking PDF:', pdfPath, err));
         });
 
+        // Toast Notification Manager
+        class ToastManager {
+            constructor() {
+                this.container = document.getElementById('toastContainer');
+                this.toasts = new Map();
+                this.toastCounter = 0;
+            }
+
+            showDownloadToast(filename) {
+                const toastId = `toast-${++this.toastCounter}`;
+
+                // Check if we're on a desktop device (screen width > 768px)
+                const isDesktop = window.innerWidth > 768;
+                const displayName = filename ? filename.split('/').pop() : 'File';
+
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.id = toastId;
+
+                toast.innerHTML = `
+                    <div class="toast-content">
+                        <i class="fas fa-check-circle toast-icon"></i>
+                        <div class="toast-text">
+                            <div class="toast-title">Download completed</div>
+                            ${isDesktop ? `<div class="toast-subtitle">${displayName}</div>` : ''}
+                        </div>
+                        <button class="toast-close" onclick="toastManager.hideToast('${toastId}')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="toast-progress" style="width: 100%"></div>
+                `;
+
+                this.container.appendChild(toast);
+
+                // Show the toast with animation
+                setTimeout(() => {
+                    toast.classList.add('show');
+                }, 10);
+
+                // Animate progress bar
+                const progressBar = toast.querySelector('.toast-progress');
+                let width = 100;
+                const interval = setInterval(() => {
+                    width -= 1;
+                    progressBar.style.width = width + '%';
+                    if (width <= 0) {
+                        clearInterval(interval);
+                        this.hideToast(toastId);
+                    }
+                }, 100); // 10 seconds total (100 * 100ms)
+
+                // Store toast info
+                this.toasts.set(toastId, { element: toast, interval });
+
+                return toastId;
+            }
+
+            hideToast(toastId) {
+                const toastInfo = this.toasts.get(toastId);
+                if (!toastInfo) return;
+
+                const { element, interval } = toastInfo;
+
+                // Clear the progress interval
+                if (interval) {
+                    clearInterval(interval);
+                }
+
+                // Hide with animation
+                element.classList.remove('show');
+                element.classList.add('hide');
+
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    if (element.parentNode) {
+                        element.parentNode.removeChild(element);
+                    }
+                    this.toasts.delete(toastId);
+                }, 400);
+            }
+
+            clearAllToasts() {
+                this.toasts.forEach((_, toastId) => {
+                    this.hideToast(toastId);
+                });
+            }
+        }
+
+        // Initialize toast manager
+        const toastManager = new ToastManager();
+
         // Utility functions for download and open in new tab
         function downloadPDFDirect(filename) {
             console.log('downloadPDFDirect called with:', filename);
@@ -1448,6 +1632,9 @@
 
             document.body.appendChild(link);
             link.click();
+
+            // Show download toast notification
+            toastManager.showDownloadToast(filename);
 
             // Clean up after a short delay
             setTimeout(() => {
