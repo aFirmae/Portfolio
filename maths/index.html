@@ -1229,11 +1229,31 @@
                     }
                 });
 
+                // Single document click handler that handles BOTH search hiding AND PDF button clicks
                 document.addEventListener('click', (e) => {
-                    if (!this.searchInput.contains(e.target) &&
-                        !this.searchResults.contains(e.target) &&
-                        !this.searchIconContainer.contains(e.target)) {
-                        this.hideResults();
+                    // Handle PDF button clicks first
+                    if (e.target.closest('.download-pdf-btn')) {
+                        console.log('Main download button clicked');
+                        e.stopPropagation();
+                        const pdfItem = e.target.closest('.pdf-item');
+                        const pdfFile = pdfItem.dataset.pdf;
+                        downloadPDFDirect(pdfFile);
+                        return;
+                    }
+
+                    if (e.target.closest('.open-new-tab-btn')) {
+                        console.log('Main external button clicked');
+                        e.stopPropagation();
+                        const pdfItem = e.target.closest('.pdf-item');
+                        const pdfFile = pdfItem.dataset.pdf;
+                        openInNewTabDirect(pdfFile);
+                        return;
+                    }
+
+                    // Check if click is on search result PDF buttons
+                    if (e.target.closest('.icon-btn-download') || e.target.closest('.icon-btn-external')) {
+                        console.log('Search result PDF button clicked, not hiding search results');
+                        return; // Don't hide results for search result PDF button clicks
                     }
                 });
             }
@@ -1372,6 +1392,7 @@
 
                         if (downloadBtn) {
                             downloadBtn.addEventListener('click', (e) => {
+                                console.log('Search result download button clicked');
                                 e.stopPropagation();
                                 const file = item.dataset.file;
                                 if (file) downloadPDFDirect(file);
@@ -1380,11 +1401,10 @@
 
                         if (externalBtn) {
                             externalBtn.addEventListener('click', (e) => {
+                                console.log('Search result external button clicked');
                                 e.stopPropagation();
                                 const file = item.dataset.file;
                                 if (file) openInNewTabDirect(file);
-                                this.hideResults();
-                                this.searchInput.value = '';
                             });
                         }
                     }
@@ -1416,14 +1436,26 @@
 
         // Utility functions for download and open in new tab
         function downloadPDFDirect(filename) {
+            console.log('downloadPDFDirect called with:', filename);
             const link = document.createElement('a');
             // Always use absolute path from root
             const absolutePath = `/maths/${filename}`;
             link.href = absolutePath;
             link.download = filename.split('/').pop(); // Just use the filename portion
+            link.style.display = 'none';
+            link.style.position = 'absolute';
+            link.style.top = '-9999px';
+
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);
+
+            // Clean up after a short delay
+            setTimeout(() => {
+                if (link.parentNode) {
+                    document.body.removeChild(link);
+                }
+            }, 100);
+
             console.log('Downloading PDF:', link.href); // Debug info
         }
 
@@ -1477,23 +1509,8 @@
                 // Apply unit colors to all topic icons
                 applyUnitColorsToIcons();
 
-                // Initialize search functionality
+                // Initialize search functionality (now handles PDF clicks too)
                 new SearchManager();
-
-                // Add PDF button event handlers
-                document.addEventListener('click', (e) => {
-                    if (e.target.closest('.download-pdf-btn')) {
-                        const pdfItem = e.target.closest('.pdf-item');
-                        const pdfFile = pdfItem.dataset.pdf;
-                        downloadPDFDirect(pdfFile);
-                    }
-
-                    if (e.target.closest('.open-new-tab-btn')) {
-                        const pdfItem = e.target.closest('.pdf-item');
-                        const pdfFile = pdfItem.dataset.pdf;
-                        openInNewTabDirect(pdfFile);
-                    }
-                });
 
                 // Add smooth scrolling for any anchor links
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
