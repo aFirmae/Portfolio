@@ -154,6 +154,15 @@
             filter: brightness(1.2);
         }
 
+        .icon-btn-youtube {
+            transition: all 0.3s ease;
+        }
+
+        .icon-btn-youtube:hover {
+            transform: translateY(-1px) scale(1.1);
+            filter: brightness(1.2);
+        }
+
         .unit-content {
             max-height: 400px;
             overflow-y: auto;
@@ -560,6 +569,10 @@
                                     </div>
                                 </div>
                                 <div class="flex space-x-2">
+                                    <button class="icon-btn-youtube p-3 rounded-lg transition-all duration-300"
+                                        data-youtube-url="https://youtube.com/playlist?list=PLKS7ZMKnbPrQHf0tf29cSp4xkLVG5xLWF&si=PG8aBz2WRLL1-8UC">
+                                        <i class="fab fa-youtube text-red-400"></i>
+                                    </button>
                                     <button
                                         class="p-3 rounded-lg transition-all duration-300 download-pdf-btn icon-btn-download">
                                         <i class="fas fa-download"></i>
@@ -1130,42 +1143,48 @@
                 unit: "Sequence and Series",
                 file: null,
                 available: false,
-                icon: "fas fa-calculator"
+                icon: "fas fa-calculator",
+                link: null
             },
             {
                 title: "Geometric Progressions",
                 unit: "Sequence and Series",
                 file: null,
                 available: false,
-                icon: "fas fa-chart-line"
+                icon: "fas fa-chart-line",
+                link: null
             },
             {
                 title: "Infinite Series",
                 unit: "Sequence and Series",
                 file: null,
                 available: false,
-                icon: "fas fa-infinity"
+                icon: "fas fa-infinity",
+                link: null
             },
             {
                 title: "Convergence Tests",
                 unit: "Sequence and Series",
                 file: null,
                 available: false,
-                icon: "fas fa-square-root-alt"
+                icon: "fas fa-square-root-alt",
+                link: null
             },
             {
                 title: "Fourier Series",
                 unit: "Sequence and Series",
                 file: "series/Fourier Series.pdf",
                 available: true,
-                icon: "fas fa-wave-square"
+                icon: "fas fa-wave-square",
+                link: "https://youtube.com/playlist?list=PLKS7ZMKnbPrQHf0tf29cSp4xkLVG5xLWF&si=PG8aBz2WRLL1-8UC"
             },
             {
                 title: "Power Series",
                 unit: "Sequence and Series",
                 file: null,
                 available: false,
-                icon: "fas fa-superscript"
+                icon: "fas fa-superscript",
+                link: null
             },
             // Complex Numbers
             {
@@ -1173,49 +1192,56 @@
                 unit: "Complex Numbers",
                 file: null,
                 available: false,
-                icon: "fas fa-project-diagram"
+                icon: "fas fa-project-diagram",
+                link: null
             },
             {
                 title: "Polar Form",
                 unit: "Complex Numbers",
                 file: null,
                 available: false,
-                icon: "fas fa-compass"
+                icon: "fas fa-compass",
+                link: null
             },
             {
                 title: "Complex Functions",
                 unit: "Complex Numbers",
                 file: null,
                 available: false,
-                icon: "fas fa-sitemap"
+                icon: "fas fa-sitemap",
+                link: null
             },
             {
                 title: "Complex Conjugates",
                 unit: "Complex Numbers",
                 file: null,
                 available: false,
-                icon: "fas fa-sync"
+                icon: "fas fa-sync",
+                link: null
             },
             {
                 title: "Roots of Unity",
                 unit: "Complex Numbers",
                 file: null,
                 available: false,
-                icon: "fas fa-square-root-alt"
+                icon: "fas fa-square-root-alt",
+                link: null
             },
             {
                 title: "Cauchy-Riemann Equations",
                 unit: "Complex Numbers",
                 file: null,
                 available: false,
-                icon: "fas fa-chart-area"
+                icon: "fas fa-chart-area",
+                link: null
             },
             {
                 title: "Complex Integration",
                 unit: "Complex Numbers",
                 file: "complex/Complex Integration.pdf",
                 available: true,
-                icon: "fas fa-calculator"
+                icon: "fas fa-calculator",
+                link: null
             },
             // Ordinary Differential Equations
             {
@@ -1223,56 +1249,64 @@
                 unit: "Ordinary Differential Equations",
                 file: "ode/Formulation of ODE.pdf",
                 available: true,
-                icon: "fas fa-file-alt"
+                icon: "fas fa-file-alt",
+                link: null
             },
             {
                 title: "First Order Linear ODE",
                 unit: "Ordinary Differential Equations",
                 file: "ode/First Order Linear ODE.pdf",
                 available: true,
-                icon: "fas fa-sort-numeric-down"
+                icon: "fas fa-sort-numeric-down",
+                link: null
             },
             {
                 title: "First Order Homogeneous ODE",
                 unit: "Ordinary Differential Equations",
                 file: "ode/First Order Homogeneous ODE.pdf",
                 available: true,
-                icon: "fas fa-equals"
+                icon: "fas fa-equals",
+                link: null
             },
             {
                 title: "First Order Non Homogeneous ODE",
                 unit: "Ordinary Differential Equations",
                 file: "ode/First Order Non Homogeneous ODE.pdf",
                 available: true,
-                icon: "fas fa-not-equal"
+                icon: "fas fa-not-equal",
+                link: null
             },
             {
                 title: "Second Order Linear ODE",
                 unit: "Ordinary Differential Equations",
                 file: "ode/Second Order Liner ODE.pdf",
                 available: true,
-                icon: "fas fa-layer-group"
+                icon: "fas fa-layer-group",
+                link: null
             },
             {
                 title: "Bernoulli's Equation",
                 unit: "Ordinary Differential Equations",
                 file: "ode/Bernoulli's Equation.pdf",
                 available: true,
-                icon: "fas fa-superscript"
+                icon: "fas fa-superscript",
+                link: null
             },
             {
                 title: "Exact ODE",
                 unit: "Ordinary Differential Equations",
                 file: "ode/Exact ODE.pdf",
                 available: true,
-                icon: "fas fa-check-circle"
+                icon: "fas fa-check-circle",
+                link: null
             },
             {
                 title: "Inexact ODE",
                 unit: "Ordinary Differential Equations",
                 file: "ode/Inexact ODE.pdf",
                 available: true,
-                icon: "fas fa-times-circle"
+                icon: "fas fa-times-circle",
+                link: null
             },
             // Vector Calculus
             {
@@ -1280,49 +1314,56 @@
                 unit: "Vector Calculus",
                 file: "vector/Introduction to Vector Calculus.pdf",
                 available: true,
-                icon: "fas fa-arrows-alt"
+                icon: "fas fa-arrows-alt",
+                link: null
             },
             {
                 title: "Line Integrals",
                 unit: "Vector Calculus",
                 file: null,
                 available: false,
-                icon: "fas fa-route"
+                icon: "fas fa-route",
+                link: null
             },
             {
                 title: "Green's Theorem",
                 unit: "Vector Calculus",
                 file: null,
                 available: false,
-                icon: "fas fa-draw-polygon"
+                icon: "fas fa-draw-polygon",
+                link: null
             },
             {
                 title: "Surface Integrals",
                 unit: "Vector Calculus",
                 file: null,
                 available: false,
-                icon: "fas fa-cube"
+                icon: "fas fa-cube",
+                link: null
             },
             {
                 title: "Divergence Theorem",
                 unit: "Vector Calculus",
                 file: null,
                 available: false,
-                icon: "fas fa-expand-arrows-alt"
+                icon: "fas fa-expand-arrows-alt",
+                link: null
             },
             {
                 title: "Stokes' Theorem",
                 unit: "Vector Calculus",
                 file: null,
                 available: false,
-                icon: "fas fa-sync-alt"
+                icon: "fas fa-sync-alt",
+                link: null
             },
             {
                 title: "Curl and Divergence",
                 unit: "Vector Calculus",
                 file: null,
                 available: false,
-                icon: "fas fa-tornado"
+                icon: "fas fa-tornado",
+                link: null
             }
         ];
 
@@ -1378,6 +1419,18 @@
 
                 // Single document click handler that handles BOTH search hiding AND PDF button clicks
                 document.addEventListener('click', (e) => {
+                    // Handle YouTube button clicks
+                    if (e.target.closest('.icon-btn-youtube')) {
+                        console.log('YouTube button clicked');
+                        e.stopPropagation();
+                        const youtubeBtn = e.target.closest('.icon-btn-youtube');
+                        const youtubeUrl = youtubeBtn.dataset.youtubeUrl;
+                        if (youtubeUrl) {
+                            window.open(youtubeUrl, '_blank');
+                        }
+                        return;
+                    }
+
                     // Handle PDF button clicks first
                     if (e.target.closest('.download-pdf-btn')) {
                         console.log('Main download button clicked');
@@ -1495,7 +1548,7 @@
 
                         return `
                 <div class="glass-card rounded-lg p-4 mt-2 hover:bg-slate-700/50 transition-colors search-result-item ${!item.available ? 'opacity-60' : ''}" 
-                     data-unit="${item.unit}" data-title="${item.title}" data-available="${item.available}" data-file="${item.file || ''}">
+                     data-unit="${item.unit}" data-title="${item.title}" data-available="${item.available}" data-file="${item.file || ''}" data-link="${item.link || ''}">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <i class="${item.icon} ${item.available ? unitColorInfo.primaryColor : 'text-slate-400'} mr-3"></i>
@@ -1505,6 +1558,11 @@
                             </div>
                         </div>
                         <div class="flex space-x-2">
+                            ${item.link ? `
+                                <button class="icon-btn-youtube p-2 rounded-lg transition-all duration-300" data-youtube-url="${item.link}">
+                                    <i class="fab fa-youtube text-red-400"></i>
+                                </button>
+                            ` : ''}
                             ${item.available ? `
                                 <button class="icon-btn-download p-2 rounded-lg transition-all duration-300">
                                     <i class="fas fa-download ${unitColorInfo.primaryColor}"></i>
@@ -1793,6 +1851,13 @@
                 const externalIcon = pdfItem.querySelector('.open-new-tab-btn i');
                 if (externalIcon) {
                     externalIcon.classList.add(unitColorInfo.complementaryColor);
+                }
+
+                // Set YouTube icon color (keep red color for YouTube)
+                const youtubeIcon = pdfItem.querySelector('.icon-btn-youtube i');
+                if (youtubeIcon) {
+                    // YouTube buttons keep their red color regardless of unit color
+                    youtubeIcon.classList.add('text-red-400');
                 }
             });
         }
