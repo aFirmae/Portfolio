@@ -470,6 +470,30 @@
                 </div>
             </div>
             <div id="searchResults" class="mt-4 hidden"></div>
+
+            <!-- YouTube Tip -->
+            <div id="youtubeTip"
+                class="mt-6 glass-card p-5 rounded-xl border border-red-500/30 shadow-lg shadow-red-500/5 fade-in hidden"
+                style="animation-delay: 0.5s;">
+                <div class="relative">
+                    <button id="closeTipBtn"
+                        class="absolute -top-3 -right-3 w-7 h-7 bg-slate-800 hover:bg-slate-700 border border-red-500/50 text-red-400 rounded-full flex items-center justify-center text-xs transition-colors duration-200 shadow-md">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="flex items-start gap-4">
+                        <div class="mt-1 text-xl text-red-400">
+                            <i class="fab fa-youtube"></i>
+                        </div>
+                        <div>
+                            <div class="text-white font-medium mb-1">YouTube Tutorials Available</div>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Some topics have video explanations that I think are helpful. <br>
+                                Look for the <i class="fab fa-youtube text-red-400 mx-1"></i> icon to access them!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Units Grid -->
@@ -1862,6 +1886,54 @@
             });
         }
 
+        // YouTube Tip Manager
+        class YouTubeTipManager {
+            constructor() {
+                this.tipElement = document.getElementById('youtubeTip');
+                this.closeBtn = document.getElementById('closeTipBtn');
+                this.storageKey = 'youtubeTipLastShown';
+                this.showInterval = 60 * 60 * 1000; // 1 hour in milliseconds
+
+                this.init();
+            }
+
+            init() {
+                if (this.shouldShowTip()) {
+                    this.showTip();
+                }
+
+                // Add close button event listener
+                if (this.closeBtn) {
+                    this.closeBtn.addEventListener('click', () => {
+                        this.hideTip();
+                    });
+                }
+            }
+
+            shouldShowTip() {
+                const lastShown = localStorage.getItem(this.storageKey);
+                if (!lastShown) {
+                    return true; // First time visit
+                }
+
+                const timeSinceLastShown = Date.now() - parseInt(lastShown);
+                return timeSinceLastShown >= this.showInterval;
+            }
+
+            showTip() {
+                if (this.tipElement) {
+                    this.tipElement.classList.remove('hidden');
+                    localStorage.setItem(this.storageKey, Date.now().toString());
+                }
+            }
+
+            hideTip() {
+                if (this.tipElement) {
+                    this.tipElement.classList.add('hidden');
+                }
+            }
+        }
+
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             try {
@@ -1873,6 +1945,9 @@
 
                 // Initialize search functionality (now handles PDF clicks too)
                 new SearchManager();
+
+                // Initialize YouTube tip manager
+                new YouTubeTipManager();
 
                 // Add smooth scrolling for any anchor links
                 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
