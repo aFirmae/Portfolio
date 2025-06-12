@@ -85,8 +85,8 @@ function switchTab(tabName) {
     // Remove active class from all tab buttons
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => {
-        btn.classList.remove('bg-slate-700', 'text-white');
-        btn.classList.add('text-slate-600', 'hover:text-slate-300');
+        btn.classList.remove('bg-blue-600', 'text-white');
+        btn.classList.add('text-gray-600', 'hover:text-blue-600');
     });
 
     // Show selected tab content
@@ -95,8 +95,8 @@ function switchTab(tabName) {
 
     // Activate selected tab button
     const selectedButton = document.getElementById(tabName + '-tab');
-    selectedButton.classList.add('bg-slate-700', 'text-white');
-    selectedButton.classList.remove('text-slate-600', 'hover:text-slate-300');
+    selectedButton.classList.add('bg-blue-600', 'text-white');
+    selectedButton.classList.remove('text-gray-600', 'hover:text-blue-600');
 }
 
 // Smooth scrolling for navigation links
@@ -123,7 +123,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
     if (window.scrollY > 50) {
-        nav.style.background = 'rgba(15, 23, 42, 0.95)';
+        nav.style.background = 'rgba(102, 126, 234, 0.95)';
     } else {
         nav.style.background = 'rgba(255, 255, 255, 0.1)';
     }
@@ -207,7 +207,7 @@ function updateScrollProgress() {
             left: 0;
             width: ${scrollPercent}%;
             height: 3px;
-            background: linear-gradient(90deg, #1e3a8a, #1e1b4b);
+            background: linear-gradient(90deg, #667eea, #764ba2);
             z-index: 9999;
             transition: width 0.3s ease;
         `;
@@ -315,43 +315,4 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 revealElements.forEach(el => {
     revealObserver.observe(el);
-});
-
-// Mouse Scroll Indicator functionality
-const scrollIndicator = document.getElementById('scroll-indicator');
-let isAtTop = true;
-
-function handleScrollIndicator() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const shouldShow = scrollTop <= 50; // Show when within 50px of top
-
-    if (shouldShow && !isAtTop) {
-        // Show indicator
-        scrollIndicator.classList.remove('hidden');
-        isAtTop = true;
-    } else if (!shouldShow && isAtTop) {
-        // Hide indicator
-        scrollIndicator.classList.add('hidden');
-        isAtTop = false;
-    }
-}
-
-// Initial state - show indicator if at top
-document.addEventListener('DOMContentLoaded', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop <= 50) {
-        scrollIndicator.classList.remove('hidden');
-        isAtTop = true;
-    } else {
-        scrollIndicator.classList.add('hidden');
-        isAtTop = false;
-    }
-});
-
-// Listen for scroll events
-window.addEventListener('scroll', handleScrollIndicator);
-
-// Optional: Hide indicator when clicking on it
-scrollIndicator.addEventListener('click', () => {
-    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
 });
