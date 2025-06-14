@@ -1527,7 +1527,7 @@
                     }
 
                     // Check for easter egg
-                    if (query.includes('nilashis') || query.includes('sample')) {
+                    if (query.includes('nilashis')) {
                         this.showEasterEgg();
                         return;
                     }
@@ -1999,7 +1999,7 @@
             constructor() {
                 this.tipElement = document.getElementById('youtubeTip');
                 this.closeBtn = document.getElementById('closeTipBtn');
-                this.storageKey = 'youtubeTipLastShown';
+                this.storageKey = 'youtubeTipLastClosed';
                 this.showInterval = 60 * 60 * 1000; // 1 hour in milliseconds
 
                 this.init();
@@ -2014,24 +2014,24 @@
                 if (this.closeBtn) {
                     this.closeBtn.addEventListener('click', () => {
                         this.hideTip();
+                        localStorage.setItem(this.storageKey, Date.now().toString());
                     });
                 }
             }
 
             shouldShowTip() {
-                const lastShown = localStorage.getItem(this.storageKey);
-                if (!lastShown) {
-                    return true; // First time visit
+                const lastClosed = localStorage.getItem(this.storageKey);
+                if (!lastClosed) {
+                    return true; // First time visit or never closed before
                 }
 
-                const timeSinceLastShown = Date.now() - parseInt(lastShown);
-                return timeSinceLastShown >= this.showInterval;
+                const timeSinceLastClosed = Date.now() - parseInt(lastClosed);
+                return timeSinceLastClosed >= this.showInterval;
             }
 
             showTip() {
                 if (this.tipElement) {
                     this.tipElement.classList.remove('hidden');
-                    localStorage.setItem(this.storageKey, Date.now().toString());
                 }
             }
 
