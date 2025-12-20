@@ -445,3 +445,90 @@ html.enhanced-scroll {
         transform: translateX(0);
     }
 }
+
+/* New Hero Section Styles */
+.hero-bg {
+    background-color: #FFFEF9; /* Off-white/Cream background similar to reference */
+    position: relative;
+}
+
+/* Sprinkles and Shapes */
+.sprinkle {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.sprinkle-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #FFBC42; /* Yellow-Orange */
+    animation: float 4s ease-in-out infinite;
+    animation-delay: 0.5s;
+}
+
+.sprinkle-triangle {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 16px solid #D81159; /* Pink-Red */
+    transform: rotate(25deg);
+    animation: float 5s ease-in-out infinite;
+    animation-delay: 1.5s;
+}
+
+.sprinkle-cross {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: float 6s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+.sprinkle-cross::before,
+.sprinkle-cross::after {
+    content: '';
+    position: absolute;
+    background-color: #0496FF; /* Blue */
+    border-radius: 2px;
+}
+
+.sprinkle-cross::before {
+    width: 100%;
+    height: 4px;
+}
+
+.sprinkle-cross::after {
+    height: 100%;
+    width: 4px;
+}
+
+.sprinkle-squiggle {
+    width: 40px;
+    height: 20px;
+    border: 3px solid #00A676; /* Green */
+    border-radius: 50px;
+    border-top-color: transparent;
+    transform: rotate(-15deg);
+    animation: float 7s ease-in-out infinite;
+    animation-delay: 0.2s;
+}
+
+/* Override/Enhance Layout for Hero */
+#home h1 {
+    line-height: 1.2;
+}
+
+/* Animation Utilities */
+.animate-float {
+    animation: float 5s ease-in-out infinite;
+}
+
+/* Specific delay for the badge */
+.animate-float:nth-child(2) {
+    animation-delay: 1s;
+}

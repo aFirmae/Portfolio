@@ -120,12 +120,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Navbar background change on scroll
+// Navbar background change on scroll
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
     if (window.scrollY > 50) {
-        nav.style.background = 'rgba(102, 126, 234, 0.95)';
+        nav.style.background = 'rgba(255, 255, 255, 0.95)';
+        nav.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'; // Tailwind shadow-md
     } else {
         nav.style.background = 'rgba(255, 255, 255, 0.1)';
+        nav.style.boxShadow = 'none';
     }
 });
 
