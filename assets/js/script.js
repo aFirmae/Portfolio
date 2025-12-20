@@ -317,6 +317,50 @@ const revealObserver = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.15 });
 
-revealElements.forEach(el => {
-    revealObserver.observe(el);
+
+// Fetch LeetCode Stats
+document.addEventListener('DOMContentLoaded', () => {
+    const username = 'aFirma';
+    
+    // 1. Basic Stats & Streak Calculation
+    fetch(`https://leetcode-stats-api.herokuapp.com/${username}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Update text content
+                document.getElementById('leetcode-total').innerText = data.totalSolved;
+                document.getElementById('leetcode-rank').innerText = data.ranking.toLocaleString();
+                
+                // Detailed stats
+                document.getElementById('leetcode-easy').innerText = data.easySolved;
+                document.getElementById('leetcode-total-easy').innerText = data.totalEasy;
+                document.getElementById('leetcode-medium').innerText = data.mediumSolved;
+                document.getElementById('leetcode-total-medium').innerText = data.totalMedium;
+                document.getElementById('leetcode-hard').innerText = data.hardSolved;
+                document.getElementById('leetcode-total-hard').innerText = data.totalHard;
+
+                // Update progress bars
+                const easyPct = (data.easySolved / data.totalEasy) * 100;
+                const mediumPct = (data.mediumSolved / data.totalMedium) * 100;
+                const hardPct = (data.hardSolved / data.totalHard) * 100;
+
+                document.getElementById('leetcode-easy-bar').style.width = `${easyPct}%`;
+                document.getElementById('leetcode-medium-bar').style.width = `${mediumPct}%`;
+                document.getElementById('leetcode-hard-bar').style.width = `${hardPct}%`;
+
+                // Update Acceptance Rate
+                document.getElementById('leetcode-acceptance').innerText = `${data.acceptanceRate}%`;
+            }
+        })
+        .catch(err => console.error('Error fetching LeetCode stats:', err));
+
+    // 2. Badges Fetch
+    fetch(`https://alfa-leetcode-api.onrender.com/${username}/badges`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.badgesCount !== undefined) {
+                document.getElementById('leetcode-badges').innerText = data.badgesCount;
+            }
+        })
+        .catch(err => console.error('Error fetching badges:', err));
 });
