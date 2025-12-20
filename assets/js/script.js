@@ -318,11 +318,12 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 
-// Fetch LeetCode Stats
+// Fetch LeetCode Stats (Heroku API + Error Handling)
 document.addEventListener('DOMContentLoaded', () => {
     const username = 'aFirma';
+    const card = document.getElementById('leetcode-card');
     
-    // 1. Basic Stats & Streak Calculation
+    // 1. Main Stats from Heroku (Complete data, slightly slower)
     fetch(`https://leetcode-stats-api.herokuapp.com/${username}`)
         .then(res => res.json())
         .then(data => {
@@ -331,15 +332,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('leetcode-total').innerText = data.totalSolved;
                 document.getElementById('leetcode-rank').innerText = data.ranking.toLocaleString();
                 
-                // Detailed stats
+                // Detailed stats & Denominators from API
                 document.getElementById('leetcode-easy').innerText = data.easySolved;
                 document.getElementById('leetcode-total-easy').innerText = data.totalEasy;
+                
                 document.getElementById('leetcode-medium').innerText = data.mediumSolved;
                 document.getElementById('leetcode-total-medium').innerText = data.totalMedium;
+                
                 document.getElementById('leetcode-hard').innerText = data.hardSolved;
                 document.getElementById('leetcode-total-hard').innerText = data.totalHard;
 
-                // Update progress bars
+                // Progress Bars
                 const easyPct = (data.easySolved / data.totalEasy) * 100;
                 const mediumPct = (data.mediumSolved / data.totalMedium) * 100;
                 const hardPct = (data.hardSolved / data.totalHard) * 100;
@@ -348,19 +351,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('leetcode-medium-bar').style.width = `${mediumPct}%`;
                 document.getElementById('leetcode-hard-bar').style.width = `${hardPct}%`;
 
-                // Update Acceptance Rate
+                // Acceptance Rate
                 document.getElementById('leetcode-acceptance').innerText = `${data.acceptanceRate}%`;
+            } else {
+                throw new Error('API Error');
             }
         })
-        .catch(err => console.error('Error fetching LeetCode stats:', err));
+        .catch(err => {
+            console.error('Error fetching LeetCode stats:', err);
+            // Error Fallback UI
+            card.innerHTML = `
+                <div class="absolute top-0 right-0 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">LEETCODE</div>
+                
+                <div class="flex items-center mb-8">
+                    <div class="w-16 h-16 bg-gray-900 rounded-lg flex items-center justify-center mr-4 shadow-lg shadow-orange-100">
+                         <img src="/assets/images/leetcode_logo.png" alt="LeetCode" class="w-10 h-10">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-800">Competitive Programmer</h3>
+                        <p class="text-gray-500">Unleashing Algorithms</p>
+                    </div>
+                </div>
 
-    // 2. Badges Fetch
+                <div class="flex flex-col items-center justify-center py-6 text-center">
+                    <div class="bg-red-50 p-4 rounded-full mb-4 animate-bounce">
+                        <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Stats Temporarily Unavailable</h4>
+                    <p class="text-gray-500 mb-6 max-w-xs text-sm">We couldn't fetch the latest stats right now, but you can verify my skills directly on LeetCode.</p>
+                    <a href="https://leetcode.com/u/${username}/" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                        View Full Profile <i class="fas fa-external-link-alt ml-2"></i>
+                    </a>
+                </div>
+            `;
+        });
+
+    // 2. Badges Fetch (Separate to allow partial failure)
     fetch(`https://alfa-leetcode-api.onrender.com/${username}/badges`)
         .then(res => res.json())
         .then(data => {
-            if (data.badgesCount !== undefined) {
-                document.getElementById('leetcode-badges').innerText = data.badgesCount;
+            const badgeEl = document.getElementById('leetcode-badges');
+            // Only update if element exists (i.e. no main error) and data is valid
+            if (badgeEl && data.badgesCount !== undefined) {
+                badgeEl.innerText = data.badgesCount;
+            } else if (badgeEl) {
+                badgeEl.innerText = 28; // Fallback
             }
         })
-        .catch(err => console.error('Error fetching badges:', err));
+        .catch(err => {
+            console.error('Error fetching badges:', err);
+            const badgeEl = document.getElementById('leetcode-badges');
+            if (badgeEl) badgeEl.innerText = 28; // Fallback
+        });
 });
