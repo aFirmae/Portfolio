@@ -436,7 +436,6 @@ html.enhanced-scroll {
 .mobile-menu-overlay.active .mobile-menu-link:nth-child(1) { animation-delay: 0.1s; }
 .mobile-menu-overlay.active .mobile-menu-link:nth-child(2) { animation-delay: 0.15s; }
 .mobile-menu-overlay.active .mobile-menu-link:nth-child(3) { animation-delay: 0.2s; }
-.mobile-menu-overlay.active .mobile-menu-link:nth-child(4) { animation-delay: 0.25s; }
 .mobile-menu-overlay.active .mobile-menu-link:nth-child(5) { animation-delay: 0.3s; }
 
 @keyframes slideInLeft {
@@ -444,6 +443,78 @@ html.enhanced-scroll {
         opacity: 1;
         transform: translateX(0);
     }
+}
+
+/* Doodle Header Styles */
+.doodle-underline {
+    position: relative;
+    display: inline-block;
+    z-index: 10;
+}
+
+.doodle-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,10 Q50,20 100,10' stroke='%23FFBC42' stroke-width='4' fill='none' /%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: -1;
+}
+
+/* Updated Timeline Styles */
+.timeline-dot {
+    background-color: #fff;
+    border: 3px solid #0496FF; /* Blue border */
+}
+
+.timeline-dot::before {
+    background: #0496FF;
+}
+
+.timeline-line {
+    background: #E5E7EB; /* Light gray line instead of purple gradient */
+}
+
+/* Custom colors for specific timeline dots */
+.timeline-dot.purple { border-color: #8B5CF6; }
+.timeline-dot.purple::before { background: #8B5CF6; }
+
+.timeline-dot.blue { border-color: #0496FF; }
+.timeline-dot.blue::before { background: #0496FF; }
+
+.timeline-dot.green { border-color: #00A676; }
+.timeline-dot.green::before { background: #00A676; }
+
+.timeline-dot.orange { border-color: #F59E0B; }
+.timeline-dot.orange::before { background: #F59E0B; }
+
+.timeline-dot.teal { border-color: #14B8A6; }
+.timeline-dot.teal::before { background: #14B8A6; }
+
+
+/* Updated Project Card Styles */
+.project-card {
+    background: #fff;
+    border: 1px solid #F3F4F6;
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(4, 150, 255, 0.15); /* Blue-ish shadow */
+    border-color: #BFDBFE;
+}
+
+/* Updated Scrollbar to match new theme */
+::-webkit-scrollbar-thumb {
+    background: #D1D5DB; /* Gray */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
 }
 
 /* New Hero Section Styles */
@@ -516,6 +587,25 @@ html.enhanced-scroll {
     transform: rotate(-15deg);
     animation: float 7s ease-in-out infinite;
     animation-delay: 0.2s;
+}
+
+.sprinkle-star {
+    font-size: 20px;
+    color: #8B5CF6; /* Purple */
+    animation: float 4.5s ease-in-out infinite;
+    animation-delay: 0.8s;
+}
+.sprinkle-star::before {
+    content: '★';
+}
+
+.sprinkle-diamond {
+    width: 12px;
+    height: 12px;
+    background-color: #F87171; /* Red-Light */
+    transform: rotate(45deg);
+    animation: float 5.5s ease-in-out infinite;
+    animation-delay: 1.2s;
 }
 
 /* Override/Enhance Layout for Hero */

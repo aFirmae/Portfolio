@@ -75,6 +75,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Tab switching functionality
+// Tab switching functionality
 function switchTab(tabName) {
     // Hide all tab contents
     const contents = document.querySelectorAll('.tab-content');
@@ -85,8 +86,8 @@ function switchTab(tabName) {
     // Remove active class from all tab buttons
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => {
-        btn.classList.remove('bg-blue-600', 'text-white');
-        btn.classList.add('text-gray-600', 'hover:text-blue-600');
+        btn.classList.remove('bg-gray-900', 'text-white', 'shadow-md');
+        btn.classList.add('text-gray-500', 'hover:text-gray-900');
     });
 
     // Show selected tab content
@@ -95,8 +96,8 @@ function switchTab(tabName) {
 
     // Activate selected tab button
     const selectedButton = document.getElementById(tabName + '-tab');
-    selectedButton.classList.add('bg-blue-600', 'text-white');
-    selectedButton.classList.remove('text-gray-600', 'hover:text-blue-600');
+    selectedButton.classList.add('bg-gray-900', 'text-white', 'shadow-md');
+    selectedButton.classList.remove('text-gray-500', 'hover:text-gray-900');
 }
 
 // Smooth scrolling for navigation links
