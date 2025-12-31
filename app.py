@@ -15,10 +15,10 @@ def custom_static(filename):
     return send_from_directory('assets', filename)
 
 # Serve specific root files
-@app.route('/Resume - Nilashis Saha.pdf')
+@app.route('/resume')
 def resume():
     return send_from_directory('.', 'Resume - Nilashis Saha.pdf')
-
+    
 @app.route('/robots.txt')
 def robots():
     return send_from_directory('.', 'robots.txt')
