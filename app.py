@@ -17,7 +17,7 @@ def custom_static(filename):
 # Serve specific root files
 @app.route('/resume')
 def resume():
-    return send_from_directory('.', 'Resume - Nilashis Saha.pdf')
+    return send_from_directory('.', './assets/Resume - Nilashis Saha.pdf')
     
 @app.route('/robots.txt')
 def robots():

@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function applyFadeInAnimation() {
     const heroTitle = document.querySelector('#home h1');
     const heroSubtitle = document.querySelector('#home p');
-    const heroButtons = document.querySelectorAll('#home a');
+    const heroButtons = document.querySelectorAll('#home .animate-on-load');
     const heroSocial = document.querySelector('#home .flex.justify-center.space-x-6');
 
     // Apply initial styles
@@ -404,3 +404,31 @@ document.addEventListener('DOMContentLoaded', () => {
             if (badgeEl) badgeEl.innerText = 28; // Fallback
         });
 });
+
+// Toast Notification Function
+function showToast(message) {
+    const toast = document.getElementById('toast-notification');
+    const toastMessage = toast.querySelector('p');
+    
+    // Update message if provided
+    if (message) {
+        toastMessage.textContent = message;
+    }
+
+    // Show toast
+    toast.classList.remove('hidden');
+    // Small delay to allow display:block to apply before transition
+    setTimeout(() => {
+        toast.classList.remove('opacity-0', 'translate-y-[-20px]');
+    }, 10);
+
+    // Hide after 3 seconds
+    setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-[-20px]');
+        
+        // Wait for transition to finish before hiding element
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 300);
+    }, 3000);
+}

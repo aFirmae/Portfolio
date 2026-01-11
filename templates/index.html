@@ -173,12 +173,37 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
-                        <a href="Resume - Nilashis Saha.pdf" download
-                            class="bg-gray-900 text-white px-8 py-3 rounded-full font-semibold hover:bg-gray-800 transition duration-300 shadow-lg flex items-center justify-center space-x-2">
-                            <span>Download Resume</span>
-                        </a>
+                        <div class="relative inline-block text-left group animate-on-load z-50">
+                            <div class="inline-flex shadow-xl rounded-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-2xl">
+                                <a href="/assets/Resume - Nilashis Saha.pdf" download onclick="showToast('Resume download started')"
+                                    class="bg-gray-900 text-white px-6 py-3 rounded-l-full font-semibold hover:bg-gray-800 transition duration-300 flex items-center justify-center space-x-2 border-r border-gray-700">
+                                    <span>Download Resume</span>
+                                </a>
+                                <button type="button" onclick="toggleResumeDropdown(event)"
+                                    class="bg-gray-900 text-white px-3 py-3 rounded-r-full font-semibold hover:bg-gray-800 transition duration-300 flex items-center justify-center">
+                                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="resume-dropdown"
+                                class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 overflow-hidden transform transition-all duration-200 origin-top-right">
+                                <div class="py-1">
+                                    <a href="/resume"
+                                        class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex items-center">
+                                        <i class="fas fa-eye mr-2 w-4 text-center"></i> View Resume
+                                    </a>
+                                    <a href="/assets/Resume - Nilashis Saha.pdf" download onclick="showToast('Resume download started')"
+                                        class="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 flex items-center">
+                                        <i class="fas fa-download mr-2 w-4 text-center"></i> Download PDF
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                         <a href="#projects"
-                            class="text-gray-700 font-semibold hover:text-blue-600 transition duration-300 px-8 py-3">
+                            class="text-gray-700 font-semibold hover:text-blue-600 transition duration-300 px-8 py-3 animate-on-load">
                             View Projects
                         </a>
                     </div>
@@ -190,10 +215,10 @@
                         </div>
                         <div class="flex gap-4">
                             <a href="https://linkedin.com/in/nilashis-saha" target="_blank"
-                                class="text-gray-400 hover:text-blue-600 text-2xl"><i class="fab fa-linkedin"></i></a>
+                                class="text-gray-400 hover:text-blue-600 text-2xl animate-on-load"><i class="fab fa-linkedin"></i></a>
                             <a href="https://github.com/afirmae" target="_blank"
-                                class="text-gray-400 hover:text-gray-900 text-2xl"><i class="fab fa-github"></i></a>
-                            <a href="mailto:nilashis37@gmail.com" class="text-gray-400 hover:text-red-500 text-2xl"><i
+                                class="text-gray-400 hover:text-gray-900 text-2xl animate-on-load"><i class="fab fa-github"></i></a>
+                            <a href="mailto:nilashis37@gmail.com" class="text-gray-400 hover:text-red-500 text-2xl animate-on-load"><i
                                     class="fas fa-envelope"></i></a>
                         </div>
                     </div>
@@ -280,102 +305,146 @@
             <!-- Skills -->
             <div class="mb-16">
                 <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Technical Skills</h3>
-                <div class="flex flex-wrap gap-3 justify-center">
-                    <span
-                        class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-python mr-2"></i>Python
-                    </span>
-                    <span
-                        class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-java mr-2"></i>Java
-                    </span>
-                    <span
-                        class="skill-tag bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-php mr-2"></i>PHP
-                    </span>
-                    <span
-                        class="skill-tag bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-js mr-2"></i>JavaScript
-                    </span>
-                    <span
-                        class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-node-js mr-2"></i>Node.js
-                    </span>
-                    <span
-                        class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-server mr-2"></i>Express.js
-                    </span>
-                    <span
-                        class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-laravel mr-2"></i>Laravel
-                    </span>
-                    <span
-                        class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-flask mr-2"></i>Flask
-                    </span>
-                    <span
-                        class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-wind mr-2"></i>Tailwind CSS
-                    </span>
-                    <span
-                        class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-database mr-2"></i>SQL
-                    </span>
-                    <span
-                        class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-leaf mr-2"></i>MongoDB
-                    </span>
-                    <span
-                        class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-docker mr-2"></i>Docker
-                    </span>
-                    <span
-                        class="skill-tag bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-git-alt mr-2"></i>Git
-                    </span>
-                    <span
-                        class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-play-circle mr-2"></i>GitHub Actions
-                    </span>
-                    <span
-                        class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-google mr-2"></i>Google Cloud Platform
-                    </span>
-                    <span
-                        class="skill-tag bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-aws mr-2"></i>AWS
-                    </span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Frontend -->
+                    <div>
+                        <h4 class="text-md font-semibold text-gray-500 mb-4 text-center uppercase tracking-wider">Frontend</h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="skill-tag bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-html5 mr-2"></i>HTML5
+                            </span>
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-react mr-2"></i>React
+                            </span>
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-react mr-2"></i>React Native
+                            </span>
+                            <span class="skill-tag bg-teal-100 text-teal-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-wind mr-2"></i>Tailwind CSS
+                            </span>
+                            <span class="skill-tag bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-js mr-2"></i>JavaScript
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div>
+                         <h4 class="text-md font-semibold text-gray-500 mb-4 text-center uppercase tracking-wider">Backend</h4>
+                         <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-node-js mr-2"></i>Node.js
+                            </span>
+                            <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-server mr-2"></i>Express.js
+                            </span>
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-python mr-2"></i>Python
+                            </span>
+                            <span class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-java mr-2"></i>Java
+                            </span>
+                            <span class="skill-tag bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-php mr-2"></i>PHP
+                            </span>
+                             <span class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-laravel mr-2"></i>Laravel
+                            </span>
+                            <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-flask mr-2"></i>Flask
+                            </span>
+                         </div>
+                    </div>
+
+                    <!-- Database & Tools -->
+                    <div>
+                        <h4 class="text-md font-semibold text-gray-500 mb-4 text-center uppercase tracking-wider">Database & Cloud</h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-database mr-2"></i>SQL
+                            </span>
+                            <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-leaf mr-2"></i>MongoDB
+                            </span>
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-microsoft mr-2"></i>Azure
+                            </span>
+                            <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <svg class="w-4 h-4 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                                </svg>Google Cloud
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Others -->
+                    <div>
+                        <h4 class="text-md font-semibold text-gray-500 mb-4 text-center uppercase tracking-wider">Tools & Others</h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-docker mr-2"></i>Docker
+                            </span>
+                            <span class="skill-tag bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-git-alt mr-2"></i>Git
+                            </span>
+                            <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-play-circle mr-2"></i>GitHub Actions
+                            </span>
+                             <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-bolt mr-2"></i>Socket.io
+                            </span>
+                            <span class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-check-double mr-2"></i>Jest
+                            </span>
+                            <span class="skill-tag bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-vial mr-2"></i>Supertest
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Software Proficiency -->
             <div class="mb-16">
                 <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">Software Proficiency</h3>
-                <div class="flex flex-wrap gap-3 justify-center">
-                    <span
-                        class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-code mr-2"></i>Visual Studio Code
-                    </span>
-                    <span
-                        class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-java mr-2"></i>IntelliJ IDEA
-                    </span>
-                    <span
-                        class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-python mr-2"></i>PyCharm
-                    </span>
-                    <span
-                        class="skill-tag bg-pink-100 text-pink-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-figma mr-2"></i>Figma
-                    </span>
-                    <span
-                        class="skill-tag bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fas fa-paper-plane mr-2"></i>Postman
-                    </span>
-                    <span
-                        class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
-                        <i class="fab fa-jira mr-2"></i>Jira
-                    </span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                     <!-- IDEs -->
+                    <div>
+                        <h4 class="text-md font-semibold text-gray-500 mb-4 text-center uppercase tracking-wider">IDE & Editors</h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-code mr-2"></i>Visual Studio Code
+                            </span>
+                            <span class="skill-tag bg-red-100 text-red-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-java mr-2"></i>IntelliJ IDEA
+                            </span>
+                             <span class="skill-tag bg-green-100 text-green-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-python mr-2"></i>PyCharm
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Management & Design -->
+                    <div>
+                        <h4 class="text-md font-semibold text-gray-500 mb-4 text-center uppercase tracking-wider">Management & Design</h4>
+                        <div class="flex flex-wrap gap-3 justify-center">
+                            <span class="skill-tag bg-pink-100 text-pink-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-figma mr-2"></i>Figma
+                            </span>
+                            <span class="skill-tag bg-orange-100 text-orange-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-paper-plane mr-2"></i>Postman
+                            </span>
+                            <span class="skill-tag bg-blue-100 text-blue-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fab fa-jira mr-2"></i>Jira
+                            </span>
+                            <span class="skill-tag bg-gray-100 text-gray-800 px-4 py-2 rounded-full font-medium flex items-center">
+                                <i class="fas fa-layer-group mr-2"></i>Expo
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -428,7 +497,7 @@
                                     <h3 class="text-xl font-bold text-gray-800">Software Development Intern</h3>
                                     <p class="text-purple-600 font-semibold">Department of CSE, Adamas University</p>
                                 </div>
-                                <span class="text-gray-500 font-medium">May 2025 - Present</span>
+                                <span class="text-gray-500 font-medium">May 2025 - January 2026</span>
                             </div>
                             <ul class="text-gray-600 space-y-4">
                                 <li class="flex items-start">
@@ -636,7 +705,10 @@
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Delivery Hub -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                        PERSONAL</div>
                     <div class="flex items-center mb-6">
                         <i class="fas fa-truck text-3xl text-orange-600 mr-4"></i>
                         <div>
@@ -651,6 +723,8 @@
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span
+                            class="bg-blue-50 text-blue-800 px-3 py-1 rounded-full text-sm border border-blue-100">React Native</span>
+                        <span
                             class="bg-green-50 text-green-800 px-3 py-1 rounded-full text-sm border border-green-100">Node.js</span>
                         <span
                             class="bg-gray-50 text-gray-800 px-3 py-1 rounded-full text-sm border border-gray-200">Express.js</span>
@@ -660,7 +734,7 @@
                             class="bg-red-50 text-red-800 px-3 py-1 rounded-full text-sm border border-red-100">Jest</span>
                         <span
                             class="bg-orange-50 text-orange-800 px-3 py-1 rounded-full text-sm border border-orange-100">Postman</span>
-                        <span
+                         <span
                             class="bg-purple-50 text-purple-800 px-3 py-1 rounded-full text-sm border border-purple-100">QA</span>
                     </div>
                     <div class="flex gap-4">
@@ -1152,7 +1226,34 @@
         </div>
     </footer>
 
+    <!-- Toast Notification -->
+    <div id="toast-notification"
+        class="fixed top-5 left-1/2 -translate-x-1/2 md:left-auto md:right-5 md:translate-x-0 z-[100] hidden transition-all duration-300 transform opacity-0 translate-y-[-20px]">
+        <div class="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center space-x-3 border border-gray-700">
+            <i class="fas fa-check-circle text-green-400 text-xl"></i>
+            <div>
+                <h4 class="font-bold text-sm">Success</h4>
+                <p class="text-xs text-gray-300">Resume download started</p>
+            </div>
+        </div>
+    </div>
+
     <script src="/assets/js/script.js?v=1.0.2"></script>
+    <script>
+        function toggleResumeDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const dropdown = document.getElementById('resume-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('resume-dropdown');
+            if (!dropdown.classList.contains('hidden') && !event.target.closest('#resume-dropdown') && !event.target.closest('button[onclick="toggleResumeDropdown(event)"]')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
     <script src="/assets/js/seo-helper.js"></script>
     <script src="/assets/js/scroll-progress.js"></script>
 </body>
