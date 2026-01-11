@@ -252,8 +252,8 @@ html.enhanced-scroll {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.5); /* Dimmed background for the remaining 1/4 */
+    backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
@@ -269,15 +269,15 @@ html.enhanced-scroll {
     position: absolute;
     top: 0;
     left: 0;
-    width: 280px;
+    width: 75%; /* 3/4 of the screen */
     height: 100vh;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+    background: rgba(255, 255, 255, 0.98); /* Light theme background */
     backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     overflow-y: auto;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
 }
 
 .mobile-menu-overlay.active .mobile-menu-content {
@@ -286,8 +286,8 @@ html.enhanced-scroll {
 
 .mobile-menu-header {
     padding: 2rem 1.5rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .mobile-menu-links {
@@ -298,23 +298,31 @@ html.enhanced-scroll {
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    color: white;
+    color: #1f2937; /* Dark gray text */
     text-decoration: none;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
     margin: 0.25rem 0;
+    font-weight: 500;
 }
 
 .mobile-menu-link:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-left-color: white;
+    background: rgba(0, 0, 0, 0.03);
+    border-left-color: #3b82f6; /* Blue accent */
     transform: translateX(5px);
+    color: #2563eb;
 }
 
 .mobile-menu-link i {
     width: 24px;
     margin-right: 1rem;
     font-size: 1.1rem;
+    color: #6b7280; /* Muted icon color */
+    transition: color 0.3s ease;
+}
+
+.mobile-menu-link:hover i {
+    color: #2563eb;
 }
 
 .mobile-menu-footer {
@@ -323,8 +331,8 @@ html.enhanced-scroll {
     left: 0;
     right: 0;
     padding: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(249, 250, 251, 0.8);
 }
 
 /* Hamburger Animation Styles */
@@ -347,7 +355,7 @@ html.enhanced-scroll {
     display: block;
     height: 2px;
     width: 100%;
-    background: white;
+    background: #1f2937; /* Dark lines */
     border-radius: 1px;
     position: absolute;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -370,6 +378,7 @@ html.enhanced-scroll {
 .hamburger-btn.active .hamburger-line:nth-child(1) {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
+    background: #ef4444; /* Red close icon */
 }
 
 .hamburger-btn.active .hamburger-line:nth-child(2) {
@@ -379,14 +388,13 @@ html.enhanced-scroll {
 .hamburger-btn.active .hamburger-line:nth-child(3) {
     bottom: 50%;
     transform: translateY(50%) rotate(-45deg);
+    background: #ef4444; /* Red close icon */
 }
 
 /* Enhanced mobile menu visibility on all backgrounds */
 @media (max-width: 768px) {
     .mobile-menu-content {
-        background: linear-gradient(135deg, 
-            rgba(102, 126, 234, 0.98) 0%, 
-            rgba(118, 75, 162, 0.98) 100%);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(25px);
         -webkit-backdrop-filter: blur(25px);
     }
@@ -394,8 +402,9 @@ html.enhanced-scroll {
 
 /* Responsive improvements */
 @media (max-width: 480px) {
+    /* Keep 75% width even on small screens as requested, or maybe 85% if really small, but user said 3/4 */
     .mobile-menu-content {
-        width: 100%;
+        width: 75%; 
     }
 }
 

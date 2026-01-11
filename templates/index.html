@@ -36,7 +36,7 @@
     <link rel="shortcut icon" href="/assets/images/icon.png" type="image/x-icon">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/styles.css?v=1.0.2">
+    <link rel="stylesheet" href="/assets/css/styles.css?v={{ version }}">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -104,7 +104,7 @@
         <div id="mobile-menu" class="md:hidden mobile-menu-overlay">
             <div class="mobile-menu-content">
                 <div class="mobile-menu-header">
-                    <div class="text-white font-bold text-lg">Navigation</div>
+                    <div class="text-gray-900 font-bold text-lg">Navigation</div>
                 </div>
                 <div class="mobile-menu-links">
                     <a href="#home" class="mobile-menu-link">
@@ -130,14 +130,14 @@
                 </div>
                 <div class="mobile-menu-footer">
                     <div class="flex justify-center space-x-4">
-                        <a href="mailto:nilashis37@gmail.com" class="text-white hover:text-blue-200">
+                        <a href="mailto:nilashis37@gmail.com" class="text-gray-500 hover:text-red-500 transition-colors">
                             <i class="fas fa-envelope text-lg"></i>
                         </a>
                         <a href="https://linkedin.com/in/nilashis-saha" target="_blank"
-                            class="text-white hover:text-blue-200">
+                            class="text-gray-500 hover:text-blue-600 transition-colors">
                             <i class="fab fa-linkedin text-lg"></i>
                         </a>
-                        <a href="https://github.com/afirmae" target="_blank" class="text-white hover:text-blue-200">
+                        <a href="https://github.com/afirmae" target="_blank" class="text-gray-500 hover:text-gray-900 transition-colors">
                             <i class="fab fa-github text-lg"></i>
                         </a>
                     </div>
@@ -605,7 +605,7 @@
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-desktop text-orange-500 mt-1 mr-3"></i>
-                                    Developed frontend dashboard using HTML & PHP, enabling visualization of tracking
+                                    Developed frontend dashboard using HTML and JS, enabling visualization of tracking
                                     data for various research experiments.
                                 </li>
                             </ul>
@@ -1238,7 +1238,7 @@
         </div>
     </div>
 
-    <script src="/assets/js/script.js?v=1.0.2"></script>
+    <script src="/assets/js/script.js?v={{ version }}"></script>
     <script>
         function toggleResumeDropdown(event) {
             event.preventDefault();
