@@ -5,7 +5,7 @@ import os
 # We set static_folder to current directory but we'll use specific routes for assets to be safe
 app = Flask(__name__, template_folder='templates')
 
-VERSION = '1.0.3'
+VERSION = '1.0.4'
 
 @app.route('/')
 def home():

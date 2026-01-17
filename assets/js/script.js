@@ -395,13 +395,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (badgeEl && data.badgesCount !== undefined) {
                 badgeEl.innerText = data.badgesCount;
             } else if (badgeEl) {
-                badgeEl.innerText = 28; // Fallback
+                badgeEl.innerText = 29; // Fallback
             }
         })
         .catch(err => {
             console.error('Error fetching badges:', err);
             const badgeEl = document.getElementById('leetcode-badges');
-            if (badgeEl) badgeEl.innerText = 28; // Fallback
+            if (badgeEl) badgeEl.innerText = 29; // Fallback
         });
 });
 

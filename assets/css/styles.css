@@ -504,6 +504,9 @@ html.enhanced-scroll {
 .timeline-dot.teal { border-color: #14B8A6; }
 .timeline-dot.teal::before { background: #14B8A6; }
 
+.timeline-dot.red { border-color: #EF4444; }
+.timeline-dot.red::before { background: #EF4444; }
+
 
 /* Updated Project Card Styles */
 .project-card {
