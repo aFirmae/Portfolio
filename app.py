@@ -1,7 +1,5 @@
 from flask import Flask, render_template, send_from_directory, redirect
 
-# Initialize Flask with specific static folder configuration to match existing structure
-# We set static_folder to current directory but we'll use specific routes for assets to be safe
 app = Flask(__name__, template_folder='templates')
 
 VERSION = '1.0.4'
@@ -18,8 +16,10 @@ def custom_static(filename):
 # Serve specific root files
 @app.route('/resume')
 def resume():
-    return redirect('/assets/Resume_Nilashis_Saha.pdf')
-    
+    try:
+        return send_from_directory('public/assets', 'Resume_Nilashis_Saha.pdf')
+    except Exception:
+        return redirect("/assets/Resume_Nilashis_Saha.pdf")
 
 
 if __name__ == '__main__':
