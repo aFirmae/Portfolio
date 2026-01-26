@@ -14,12 +14,12 @@ def home():
 # Serve assets folder
 @app.route('/assets/<path:filename>')
 def custom_static(filename):
-    return send_from_directory('assets', filename)
+    return send_from_directory('public/assets', filename)
 
 # Serve specific root files
 @app.route('/resume')
 def resume():
-    return send_from_directory('assets', 'Resume_Nilashis_Saha.pdf')
+    return send_from_directory('public/assets', 'Resume_Nilashis_Saha.pdf')
     
 @app.route('/robots.txt')
 def robots():
