@@ -1,5 +1,4 @@
-from flask import Flask, render_template, send_from_directory
-import os
+from flask import Flask, render_template, send_from_directory, redirect
 
 # Initialize Flask with specific static folder configuration to match existing structure
 # We set static_folder to current directory but we'll use specific routes for assets to be safe
@@ -19,7 +18,7 @@ def custom_static(filename):
 # Serve specific root files
 @app.route('/resume')
 def resume():
-    return send_from_directory('public/assets', 'Resume_Nilashis_Saha.pdf')
+    return redirect('/assets/Resume_Nilashis_Saha.pdf')
     
 
 
