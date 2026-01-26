@@ -21,13 +21,7 @@ def custom_static(filename):
 def resume():
     return send_from_directory('public/assets', 'Resume_Nilashis_Saha.pdf')
     
-@app.route('/robots.txt')
-def robots():
-    return send_from_directory('.', 'robots.txt')
 
-@app.route('/sitemap.xml')
-def sitemap():
-    return send_from_directory('.', 'sitemap.xml')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
