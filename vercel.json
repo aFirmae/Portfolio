@@ -15,6 +15,10 @@
       "destination": "/public/assets/$1"
     },
     {
+      "source": "/resume",
+      "destination": "/public/assets/Resume_Nilashis_Saha.pdf"
+    },
+    {
       "source": "/((?!assets/|robots.txt|sitemap.xml).*)",
       "destination": "/app.py"
     }
