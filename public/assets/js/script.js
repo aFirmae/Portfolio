@@ -121,7 +121,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Navbar background change on scroll
-// Navbar background change on scroll
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
     if (window.scrollY > 50) {
@@ -189,9 +188,13 @@ window.addEventListener('load', () => {
     // Animate hero image
     const heroImage = document.getElementById('hero-image');
     if (heroImage) {
-        setTimeout(() => {
+        if (heroImage.complete) {
             heroImage.classList.add('loaded');
-        }, 200);
+        } else {
+            heroImage.addEventListener('load', () => {
+                heroImage.classList.add('loaded');
+            });
+        }
     }
 });
 
@@ -300,10 +303,9 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Add contact form functionality (if you want to add a contact form later)
+// Add contact form functionality
 function handleContactForm(event) {
     event.preventDefault();
-    // Add your contact form handling logic here
     alert('Thank you for your message! I will get back to you soon.');
 }
 
@@ -318,54 +320,91 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 
-// Fetch LeetCode Stats (Heroku API + Error Handling)
+// Fetch LeetCode Stats (Tashif API + Error Handling)
 document.addEventListener('DOMContentLoaded', () => {
     const username = 'aFirma';
     const card = document.getElementById('leetcode-card');
-    
-    // 1. Main Stats from Heroku (Complete data, slightly slower)
-    fetch(`https://leetcode-stats-api.herokuapp.com/${username}`)
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === 'success') {
-                // Update text content
-                document.getElementById('leetcode-total').innerText = data.totalSolved;
-                document.getElementById('leetcode-rank').innerText = data.ranking.toLocaleString();
-                
-                // Detailed stats & Denominators from API
-                document.getElementById('leetcode-easy').innerText = data.easySolved;
-                document.getElementById('leetcode-total-easy').innerText = data.totalEasy;
-                
-                document.getElementById('leetcode-medium').innerText = data.mediumSolved;
-                document.getElementById('leetcode-total-medium').innerText = data.totalMedium;
-                
-                document.getElementById('leetcode-hard').innerText = data.hardSolved;
-                document.getElementById('leetcode-total-hard').innerText = data.totalHard;
 
-                // Progress Bars
-                const easyPct = (data.easySolved / data.totalEasy) * 100;
-                const mediumPct = (data.mediumSolved / data.totalMedium) * 100;
-                const hardPct = (data.hardSolved / data.totalHard) * 100;
+    async function fetchLeetCodeStats() {
+        const cacheKey = 'leetcode_stats_cache';
+        const cacheDuration = 15 * 60 * 1000; // 15 minutes in milliseconds
 
-                document.getElementById('leetcode-easy-bar').style.width = `${easyPct}%`;
-                document.getElementById('leetcode-medium-bar').style.width = `${mediumPct}%`;
-                document.getElementById('leetcode-hard-bar').style.width = `${hardPct}%`;
+        const updateUI = (statsData, profileData) => {
+            // Helper to update text safely
+            const updateText = (id, text) => {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            };
 
-                // Acceptance Rate
-                document.getElementById('leetcode-acceptance').innerText = `${data.acceptanceRate}%`;
+            // Update text content
+            updateText('leetcode-total', statsData.totalSolved);
+            updateText('leetcode-rank', statsData.ranking.toLocaleString());
+
+            // Detailed stats & Denominators from API
+            updateText('leetcode-easy', statsData.easySolved);
+            updateText('leetcode-total-easy', statsData.totalEasy);
+
+            updateText('leetcode-medium', statsData.mediumSolved);
+            updateText('leetcode-total-medium', statsData.totalMedium);
+
+            updateText('leetcode-hard', statsData.hardSolved);
+            updateText('leetcode-total-hard', statsData.totalHard);
+
+            // Progress Bars
+            const updateBar = (id, pct) => {
+                const el = document.getElementById(id);
+                if (el) el.style.width = `${pct}%`;
+            };
+
+            updateBar('leetcode-easy-bar', (statsData.easySolved / statsData.totalEasy) * 100);
+            updateBar('leetcode-medium-bar', (statsData.mediumSolved / statsData.totalMedium) * 100);
+            updateBar('leetcode-hard-bar', (statsData.hardSolved / statsData.totalHard) * 100);
+
+            // Acceptance Rate
+            updateText('leetcode-acceptance', `${statsData.acceptanceRate}%`);
+            // Badges
+            updateText('leetcode-badges', profileData.badges.length);
+        };
+
+        try {
+            // Check cache first
+            const cachedData = sessionStorage.getItem(cacheKey);
+            if (cachedData) {
+                const { statsData, profileData, timestamp } = JSON.parse(cachedData);
+                if (Date.now() - timestamp < cacheDuration) {
+                    updateUI(statsData, profileData);
+                    return;
+                }
+            }
+
+            // Fetch from API if no valid cache
+            const statsPromise = fetch(`https://leetcode-stats.tashif.codes/${username}`);
+            const profilePromise = fetch(`https://leetcode-stats.tashif.codes/${username}/profile`);
+
+            const [statsRes, profileRes] = await Promise.all([statsPromise, profilePromise]);
+            const statsData = await statsRes.json();
+            const profileData = await profileRes.json();
+
+            if (statsData.status === 'success' && profileData.status === 'success') {
+                updateUI(statsData, profileData);
+                // Save to session storage
+                sessionStorage.setItem(cacheKey, JSON.stringify({
+                    statsData,
+                    profileData,
+                    timestamp: Date.now()
+                }));
             } else {
                 throw new Error('API Error');
             }
-        })
-        .catch(err => {
+        } catch (err) {
             console.error('Error fetching LeetCode stats:', err);
             // Error Fallback UI
             card.innerHTML = `
                 <div class="absolute top-0 right-0 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">LEETCODE</div>
                 
                 <div class="flex items-center mb-8">
-                    <div class="w-16 h-16 bg-gray-900 rounded-lg flex items-center justify-center mr-4 shadow-lg shadow-orange-100">
-                         <img src="/assets/images/leetcode_logo.png" alt="LeetCode" class="w-10 h-10">
+                    <div class="w-12 h-12 md:w-16 md:h-16 border-2 border-gray-100 rounded-lg flex items-center justify-center mr-4 shadow-lg shadow-black-100 flex-shrink-0">
+                        <img src="/assets/images/leetcode.svg" alt="LeetCode" class="w-8 h-8 md:w-10 md:h-10">
                     </div>
                     <div>
                         <h3 class="text-2xl font-bold text-gray-800">Competitive Programmer</h3>
@@ -378,38 +417,23 @@ document.addEventListener('DOMContentLoaded', () => {
                         <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
                     </div>
                     <h4 class="text-xl font-bold text-gray-800 mb-2">Stats Temporarily Unavailable</h4>
-                    <p class="text-gray-500 mb-6 max-w-xs text-sm">We couldn't fetch the latest stats right now, but you can verify my skills directly on LeetCode.</p>
+                    <p class="text-gray-500 mb-6 max-w-xs text-sm">Couldn't fetch the latest stats right now, but you can verify my skills directly on LeetCode.</p>
                     <a href="https://leetcode.com/u/${username}/" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
                         View Full Profile <i class="fas fa-external-link-alt ml-2"></i>
                     </a>
                 </div>
             `;
-        });
+        }
+    }
 
-    // 2. Badges Fetch (Separate to allow partial failure)
-    fetch(`https://alfa-leetcode-api.onrender.com/${username}/badges`)
-        .then(res => res.json())
-        .then(data => {
-            const badgeEl = document.getElementById('leetcode-badges');
-            // Only update if element exists (i.e. no main error) and data is valid
-            if (badgeEl && data.badgesCount !== undefined) {
-                badgeEl.innerText = data.badgesCount;
-            } else if (badgeEl) {
-                badgeEl.innerText = 29; // Fallback
-            }
-        })
-        .catch(err => {
-            console.error('Error fetching badges:', err);
-            const badgeEl = document.getElementById('leetcode-badges');
-            if (badgeEl) badgeEl.innerText = 29; // Fallback
-        });
+    fetchLeetCodeStats();
 });
 
 // Toast Notification Function
 function showToast(message) {
     const toast = document.getElementById('toast-notification');
     const toastMessage = toast.querySelector('p');
-    
+
     // Update message if provided
     if (message) {
         toastMessage.textContent = message;
@@ -425,7 +449,7 @@ function showToast(message) {
     // Hide after 3 seconds
     setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-[-20px]');
-        
+
         // Wait for transition to finish before hiding element
         setTimeout(() => {
             toast.classList.add('hidden');
@@ -449,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Filter projects
             projectCards.forEach(card => {
                 const categories = card.getAttribute('data-category') ? card.getAttribute('data-category').split(' ') : [];
-                
+
                 if (filter === 'all' || categories.includes(filter)) {
                     card.style.display = 'block';
                     setTimeout(() => {

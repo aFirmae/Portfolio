@@ -2,11 +2,12 @@ from flask import Flask, render_template, send_from_directory, redirect
 
 app = Flask(__name__, template_folder='templates')
 
-VERSION = '1.0.5'
+VERSION = '1.0.6'
+LEETCODE_USERNAME = 'aFirma'
 
 @app.route('/')
 def home():
-    return render_template('index.html', version=VERSION)
+    return render_template('index.html', version=VERSION, leetcode_username=LEETCODE_USERNAME)
 
 # Serve assets folder
 @app.route('/assets/<path:filename>')

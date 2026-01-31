@@ -243,9 +243,9 @@
                     </svg>
 
                     <div
-                        class="relative z-10 w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl bg-yellow-400">
+                        class="relative z-10 w-64 h-64 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl bg-gradient-to-br from-blue-50 to-indigo-50">
                         <img id="hero-image" src="/assets/images/profile-hero.png" alt="Nilashis Saha"
-                            class="w-full h-full object-cover">
+                            class="hero-image w-full h-full object-cover">
                     </div>
 
                     <!-- floating 3D Shapes -->
@@ -575,7 +575,8 @@
                             <ul class="text-gray-600 space-y-4">
                                 <li class="flex items-start">
                                     <i class="fas fa-laptop-code text-red-500 mt-1 mr-3"></i>
-                                    Participating in a winter internship by VLED Lab under Prof. Sudarshan Iyengar at IIT Ropar,
+                                    Participating in a winter internship by VLED Lab under Prof. Sudarshan Iyengar at
+                                    IIT Ropar,
                                     focusing on full-stack MERN development with TypeScript, React, Express.js, and
                                     MongoDB.
                                 </li>
@@ -812,17 +813,29 @@
 
             <!-- Project Filters -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button class="filter-btn active px-6 py-2 rounded-full border transition-all duration-300 font-medium" data-filter="all">All</button>
-                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-sky-200 text-sky-700 hover:bg-sky-600 hover:text-white" data-filter="react">React</button>
-                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-green-200 text-green-700 hover:bg-green-600 hover:text-white" data-filter="nodejs">Node.js</button>
-                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-blue-200 text-blue-700 hover:bg-blue-600 hover:text-white" data-filter="python">Python</button>
-                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-indigo-200 text-indigo-700 hover:bg-indigo-600 hover:text-white" data-filter="php">PHP</button>
-                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-amber-200 text-amber-700 hover:bg-amber-600 hover:text-white" data-filter="testing">Testing</button>
+                <button class="filter-btn active px-6 py-2 rounded-full border transition-all duration-300 font-medium"
+                    data-filter="all">All</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-sky-200 text-sky-700 hover:bg-sky-600 hover:text-white"
+                    data-filter="react">React</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-green-200 text-green-700 hover:bg-green-600 hover:text-white"
+                    data-filter="nodejs">Node.js</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-blue-200 text-blue-700 hover:bg-blue-600 hover:text-white"
+                    data-filter="python">Python</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-indigo-200 text-indigo-700 hover:bg-indigo-600 hover:text-white"
+                    data-filter="php">PHP</button>
+                <button
+                    class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-amber-200 text-amber-700 hover:bg-amber-600 hover:text-white"
+                    data-filter="testing">Testing</button>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
                 <!-- Delivery Hub -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="react nodejs testing">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden"
+                    data-category="react nodejs testing">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -855,8 +868,6 @@
                             class="bg-red-50 text-red-800 px-3 py-1 rounded-full text-sm border border-red-100">Jest</span>
                         <span
                             class="bg-orange-50 text-orange-800 px-3 py-1 rounded-full text-sm border border-orange-100">Postman</span>
-                        <span
-                            class="bg-purple-50 text-purple-800 px-3 py-1 rounded-full text-sm border border-purple-100">QA</span>
                     </div>
                     <div class="flex gap-4">
                         <a href="https://github.com/aFirmae/delivery-hub.git" target="_blank"
@@ -867,7 +878,8 @@
                 </div>
 
                 <!-- Students Data Portal -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300" data-category="php">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300"
+                    data-category="php">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-graduation-cap text-3xl text-blue-600 mr-4"></i>
                         <div>
@@ -896,7 +908,8 @@
                 </div>
 
                 <!-- Scribe -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="python">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden"
+                    data-category="python">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -935,7 +948,8 @@
                 </div>
 
                 <!-- University Research Portal -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300" data-category="php">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300"
+                    data-category="php">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-university text-3xl text-purple-600 mr-4"></i>
                         <div>
@@ -962,7 +976,8 @@
                 </div>
 
                 <!-- Reddit Clone -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="nodejs testing">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden"
+                    data-category="nodejs testing">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -990,6 +1005,8 @@
                         <span
                             class="bg-green-50 text-green-800 px-3 py-1 rounded-full text-sm border border-green-100">MongoDB</span>
                         <span
+                            class="bg-orange-50 text-orange-800 px-3 py-1 rounded-full text-sm border border-orange-100">Postman</span>
+                        <span
                             class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm border border-yellow-200">Selenium</span>
                     </div>
                     <a href="https://github.com/aFirmae/Reddit-Clone.git" target="_blank"
@@ -999,7 +1016,8 @@
                 </div>
 
                 <!-- PBAS -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300" data-category="php">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300"
+                    data-category="php">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-chart-line text-3xl text-purple-600 mr-4"></i>
                         <div>
@@ -1025,7 +1043,8 @@
                 </div>
 
                 <!-- GestureAI -->
-                <div class="project-card p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="python">
+                <div class="project-card p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden"
+                    data-category="python">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -1094,8 +1113,11 @@
                         </div>
                         <div>
                             <h3 class="text-2xl font-bold text-gray-800">Competitive Programmer</h3>
-                            <p class="text-gray-500">Rank: <span class="font-bold text-gray-800"
-                                    id="leetcode-rank"></span> (Global)</p>
+                            <p class="text-gray-500">
+                                Rank: <span class="font-bold text-gray-800" id="leetcode-rank"></span> (Global)
+                                <a href="https://leetcode.com/u/{{ leetcode_username }}" target="_blank"
+                                    class="fas fa-external-link-alt text-sm text-gray-600 ml-1"></a>
+                            </p>
                         </div>
                     </div>
 
