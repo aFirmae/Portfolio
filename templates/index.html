@@ -565,7 +565,7 @@
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
                                     <h3 class="text-xl font-bold text-gray-800">Research & Project Intern</h3>
-                                    <p class="text-red-600 font-semibold">IIT Ropar (VLED Lab)</p>
+                                    <p class="text-red-600 font-semibold">VLED Lab, IIT Ropar</p>
                                 </div>
                                 <div class="flex flex-col md:items-end gap-0">
                                     <span class="text-gray-500 font-medium">January 2026 - March 2026</span>
@@ -575,14 +575,14 @@
                             <ul class="text-gray-600 space-y-4">
                                 <li class="flex items-start">
                                     <i class="fas fa-laptop-code text-red-500 mt-1 mr-3"></i>
-                                    Participating in Pinternship by VLED Lab under Prof. Sudarshan Iyengar at IIT Ropar,
+                                    Participating in a winter internship by VLED Lab under Prof. Sudarshan Iyengar at IIT Ropar,
                                     focusing on full-stack MERN development with TypeScript, React, Express.js, and
                                     MongoDB.
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-puzzle-piece text-red-500 mt-1 mr-3"></i>
                                     Solving structured case studies and building real-world web applications aligned
-                                    with the lab’s research-driven development practices.
+                                    with the lab's research-driven development practices.
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-chart-line text-red-500 mt-1 mr-3"></i>
@@ -810,10 +810,19 @@
                 <p class="text-lg sm:text-xl text-gray-600">Some of my notable work and personal projects</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
+            <!-- Project Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="filter-btn active px-6 py-2 rounded-full border transition-all duration-300 font-medium" data-filter="all">All</button>
+                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-sky-200 text-sky-700 hover:bg-sky-600 hover:text-white" data-filter="react">React</button>
+                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-green-200 text-green-700 hover:bg-green-600 hover:text-white" data-filter="nodejs">Node.js</button>
+                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-blue-200 text-blue-700 hover:bg-blue-600 hover:text-white" data-filter="python">Python</button>
+                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-indigo-200 text-indigo-700 hover:bg-indigo-600 hover:text-white" data-filter="php">PHP</button>
+                <button class="filter-btn px-6 py-2 rounded-full border transition-all duration-300 font-medium border-amber-200 text-amber-700 hover:bg-amber-600 hover:text-white" data-filter="testing">Testing</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8" id="projects-grid">
                 <!-- Delivery Hub -->
-                <div
-                    class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="react nodejs testing">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -858,7 +867,7 @@
                 </div>
 
                 <!-- Students Data Portal -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300" data-category="php">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-graduation-cap text-3xl text-blue-600 mr-4"></i>
                         <div>
@@ -887,8 +896,7 @@
                 </div>
 
                 <!-- Scribe -->
-                <div
-                    class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="python">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -927,7 +935,7 @@
                 </div>
 
                 <!-- University Research Portal -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300" data-category="php">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-university text-3xl text-purple-600 mr-4"></i>
                         <div>
@@ -954,8 +962,7 @@
                 </div>
 
                 <!-- Reddit Clone -->
-                <div
-                    class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="nodejs testing">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>
@@ -992,7 +999,7 @@
                 </div>
 
                 <!-- PBAS -->
-                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300">
+                <div class="project-card p-6 md:p-8 rounded-2xl shadow-sm transition-all duration-300" data-category="php">
                     <div class="flex items-center mb-6">
                         <i class="fas fa-chart-line text-3xl text-purple-600 mr-4"></i>
                         <div>
@@ -1018,8 +1025,7 @@
                 </div>
 
                 <!-- GestureAI -->
-                <div
-                    class="project-card p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden">
+                <div class="project-card p-8 rounded-2xl shadow-sm transition-all duration-300 relative overflow-hidden" data-category="python">
                     <div
                         class="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                         PERSONAL</div>

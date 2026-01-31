@@ -512,12 +512,41 @@ html.enhanced-scroll {
 .project-card {
     background: #fff;
     border: 1px solid #F3F4F6;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .project-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(4, 150, 255, 0.15); /* Blue-ish shadow */
-    border-color: #BFDBFE;
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(156, 163, 175, 0.3);
+    border-color: #DBEAFE;
+    z-index: 10;
+}
+
+/* Filter Buttons Styling */
+.filter-btn {
+    border-color: #E5E7EB;
+    background-color: #fff;
+    color: #4B5563;
+}
+
+.filter-btn.active {
+    background-color: #111827;
+    color: #fff;
+    border-color: #111827;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn[data-filter="all"].active { background-color: #111827; }
+.filter-btn[data-filter="react"].active { background-color: #0EA5E9; border-color: #0EA5E9; }
+.filter-btn[data-filter="nodejs"].active { background-color: #22C55E; border-color: #22C55E; }
+.filter-btn[data-filter="python"].active { background-color: #3B82F6; border-color: #3B82F6; }
+.filter-btn[data-filter="php"].active { background-color: #6366F1; border-color: #6366F1; }
+.filter-btn[data-filter="testing"].active { background-color: #D97706; border-color: #D97706; }
+
+.project-card.hidden {
+    display: none;
+    opacity: 0;
+    transform: scale(0.95);
 }
 
 /* Updated Scrollbar to match new theme */
