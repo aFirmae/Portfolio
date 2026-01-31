@@ -233,7 +233,7 @@ html {
 
 /* Smooth Scroll Enhancements */
 html.enhanced-scroll {
-    scroll-behavior: auto !important; /* Override default smooth scroll for custom implementation */
+    scroll-behavior: auto !important;
 }
 
 #mobile-menu {
@@ -252,7 +252,7 @@ html.enhanced-scroll {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Dimmed background for the remaining 1/4 */
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
     opacity: 0;
     visibility: hidden;
@@ -298,7 +298,7 @@ html.enhanced-scroll {
     display: flex;
     align-items: center;
     padding: 1rem 1.5rem;
-    color: #1f2937; /* Dark gray text */
+    color: #1f2937;
     text-decoration: none;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
@@ -308,7 +308,7 @@ html.enhanced-scroll {
 
 .mobile-menu-link:hover {
     background: rgba(0, 0, 0, 0.03);
-    border-left-color: #3b82f6; /* Blue accent */
+    border-left-color: #3b82f6;
     transform: translateX(5px);
     color: #2563eb;
 }
@@ -317,7 +317,7 @@ html.enhanced-scroll {
     width: 24px;
     margin-right: 1rem;
     font-size: 1.1rem;
-    color: #6b7280; /* Muted icon color */
+    color: #6b7280;
     transition: color 0.3s ease;
 }
 
@@ -355,7 +355,7 @@ html.enhanced-scroll {
     display: block;
     height: 2px;
     width: 100%;
-    background: #1f2937; /* Dark lines */
+    background: #1f2937;
     border-radius: 1px;
     position: absolute;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -378,7 +378,7 @@ html.enhanced-scroll {
 .hamburger-btn.active .hamburger-line:nth-child(1) {
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
-    background: #ef4444; /* Red close icon */
+    background: #ef4444;
 }
 
 .hamburger-btn.active .hamburger-line:nth-child(2) {
@@ -388,10 +388,9 @@ html.enhanced-scroll {
 .hamburger-btn.active .hamburger-line:nth-child(3) {
     bottom: 50%;
     transform: translateY(50%) rotate(-45deg);
-    background: #ef4444; /* Red close icon */
+    background: #ef4444;
 }
 
-/* Enhanced mobile menu visibility on all backgrounds */
 @media (max-width: 768px) {
     .mobile-menu-content {
         background: rgba(255, 255, 255, 0.98);
@@ -402,13 +401,11 @@ html.enhanced-scroll {
 
 /* Responsive improvements */
 @media (max-width: 480px) {
-    /* Keep 75% width even on small screens as requested, or maybe 85% if really small, but user said 3/4 */
     .mobile-menu-content {
         width: 75%; 
     }
 }
 
-/* Smooth animations for all interactive elements */
 .mobile-menu-link,
 .hamburger-btn {
     -webkit-tap-highlight-color: transparent;
@@ -477,7 +474,7 @@ html.enhanced-scroll {
 /* Updated Timeline Styles */
 .timeline-dot {
     background-color: #fff;
-    border: 3px solid #0496FF; /* Blue border */
+    border: 3px solid #0496FF;
 }
 
 .timeline-dot::before {
@@ -485,7 +482,7 @@ html.enhanced-scroll {
 }
 
 .timeline-line {
-    background: #E5E7EB; /* Light gray line instead of purple gradient */
+    background: #E5E7EB;
 }
 
 /* Custom colors for specific timeline dots */
@@ -558,9 +555,9 @@ html.enhanced-scroll {
     background: #9CA3AF;
 }
 
-/* New Hero Section Styles */
+/* Hero Section Styles */
 .hero-bg {
-    background-color: #FFFEF9; /* Off-white/Cream background similar to reference */
+    background-color: #FFFEF9;
     position: relative;
 }
 
@@ -575,7 +572,7 @@ html.enhanced-scroll {
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background-color: #FFBC42; /* Yellow-Orange */
+    background-color: #FFBC42;
     animation: float 4s ease-in-out infinite;
     animation-delay: 0.5s;
 }
@@ -585,7 +582,7 @@ html.enhanced-scroll {
     height: 0;
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
-    border-bottom: 16px solid #D81159; /* Pink-Red */
+    border-bottom: 16px solid #D81159;
     transform: rotate(25deg);
     animation: float 5s ease-in-out infinite;
     animation-delay: 1.5s;
@@ -605,7 +602,7 @@ html.enhanced-scroll {
 .sprinkle-cross::after {
     content: '';
     position: absolute;
-    background-color: #0496FF; /* Blue */
+    background-color: #0496FF;
     border-radius: 2px;
 }
 
@@ -622,7 +619,7 @@ html.enhanced-scroll {
 .sprinkle-squiggle {
     width: 40px;
     height: 20px;
-    border: 3px solid #00A676; /* Green */
+    border: 3px solid #00A676;
     border-radius: 50px;
     border-top-color: transparent;
     transform: rotate(-15deg);
@@ -632,7 +629,7 @@ html.enhanced-scroll {
 
 .sprinkle-star {
     font-size: 20px;
-    color: #8B5CF6; /* Purple */
+    color: #8B5CF6;
     animation: float 4.5s ease-in-out infinite;
     animation-delay: 0.8s;
 }
@@ -643,23 +640,20 @@ html.enhanced-scroll {
 .sprinkle-diamond {
     width: 12px;
     height: 12px;
-    background-color: #F87171; /* Red-Light */
+    background-color: #F87171;
     transform: rotate(45deg);
     animation: float 5.5s ease-in-out infinite;
     animation-delay: 1.2s;
 }
 
-/* Override/Enhance Layout for Hero */
 #home h1 {
     line-height: 1.2;
 }
 
-/* Animation Utilities */
 .animate-float {
     animation: float 5s ease-in-out infinite;
 }
 
-/* Specific delay for the badge */
 .animate-float:nth-child(2) {
     animation-delay: 1s;
 }

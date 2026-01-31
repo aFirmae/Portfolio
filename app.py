@@ -2,7 +2,7 @@ from flask import Flask, render_template, send_from_directory, redirect
 
 app = Flask(__name__, template_folder='templates')
 
-VERSION = '1.0.4'
+VERSION = '1.0.5'
 
 @app.route('/')
 def home():
