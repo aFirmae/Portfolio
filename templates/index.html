@@ -843,13 +843,12 @@
                         <i class="fas fa-truck text-3xl text-orange-600 mr-4"></i>
                         <div>
                             <h3 class="text-xl font-bold text-gray-800">Delivery Hub</h3>
-                            <p class="text-gray-500">Peer-to-Peer Logistics & QA Sandbox</p>
+                            <p class="text-gray-500">Peer-to-Peer Logistics</p>
                         </div>
                     </div>
                     <p class="text-gray-600 mb-6">
-                        A full-stack logistics platform that connects package senders and delivery partners,
-                        featuring secure role-based access and an integrated QA sandbox with manual test plans,
-                        Postman collections, and automated Jest suites.
+                        A full-stack logistics platform connecting package senders and delivery partners with secure
+                        role-based access, featuring manual testing, Postman collections, and automated Jest suites.
                     </p>
                     <div class="flex flex-wrap gap-2 mb-6">
                         <span
@@ -1393,6 +1392,28 @@
         </div>
     </div>
 
+    <!-- Custom Context Menu -->
+    <div id="custom-context-menu" class="hidden fixed z-50 w-48 bg-white/90 backdrop-blur-md rounded-lg shadow-2xl border border-gray-100 overflow-hidden transform transition-all duration-200 origin-top-left scale-95 opacity-0">
+        <div class="py-1">
+            <a href="/assets/images/profile-hero.png" download class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors cursor-pointer">
+                <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mr-3 group-hover:bg-blue-100 transition-colors">
+                    <i class="fas fa-download"></i>
+                </div>
+                <span class="font-medium">Download Image</span>
+            </a>
+            <a href="/gallery" class="group flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors cursor-pointer">
+                <div class="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mr-3 group-hover:bg-purple-100 transition-colors">
+                    <i class="fas fa-images"></i>
+                </div>
+                <span class="font-medium">View Gallery</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay" class="fixed inset-0 bg-white z-[100] pointer-events-none opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Scripts -->
     <script src="/assets/js/script.js?v={{ version }}"></script>
     <script>
         function toggleResumeDropdown(event) {

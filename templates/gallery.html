@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Nilashis Saha</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css?v={{ version }}">
+    <link rel="stylesheet" href="/assets/css/gallery.css?v={{ version }}">
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect backdrop-blur-md bg-white/70 border-b border-gray-200/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="group flex items-center text-gray-900 font-bold text-lg hover:text-blue-600 transition-colors">
+                    <i class="fas fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i> 
+                    <span class="font-space">Back to Home</span>
+                </a>
+                <div class="text-gray-900 font-playfair italic text-xl">Nilashis's Gallery</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Header -->
+    <header class="pt-24 pb-12 px-4 text-center relative overflow-hidden">
+        <h1 class="text-4xl md:text-5xl font-playfair font-bold text-gray-900 tracking-tight animate-fade-in-up">
+            Gallery
+        </h1>
+    </header>
+
+    <!-- Grid Layout -->
+    <main class="max-w-7xl mx-auto px-4 pb-20">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12" id="gallery-grid">
+            
+            <!-- Image Item 1 -->
+            <div class="animate-on-scroll">
+                <div class="gallery-card group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-500">
+                    <div class="image-wrapper relative bg-gray-200 aspect-[4/5] overflow-hidden">
+                        <div class="skeleton-loader absolute inset-0 z-10 bg-gray-200 animate-pulse"></div>
+                        <img 
+                            data-src="/assets/images/profile-hero.png" 
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                            alt="Profile Hero" 
+                            class="gallery-image w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-in-out lazy-load transform group-hover:scale-105 transition-transform duration-700"
+                            loading="lazy"
+                        >
+                        <!-- Download Overlay -->
+                        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 z-20">
+                            <button class="download-btn text-white hover:text-blue-200 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300" 
+                                    data-href="/assets/images/profile-hero.png" 
+                                    aria-label="Download Image">
+                                <i class="fas fa-download text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="mt-4 text-lg font-playfair font-medium text-gray-900 text-center">Profile Image</h3>
+            </div>
+
+            <!-- Image Item 2 -->
+            <div class="animate-on-scroll delay-100">
+                <div class="gallery-card group relative overflow-hidden rounded-lg shadow-sm hover:shadow-md transition-all duration-500">
+                    <div class="image-wrapper relative bg-gray-200 aspect-[4/5] overflow-hidden">
+                        <div class="skeleton-loader absolute inset-0 z-10 bg-gray-200 animate-pulse"></div>
+                        <img 
+                            data-src="/assets/images/profile-image.jpeg" 
+                            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" 
+                            alt="Profile Image" 
+                            class="gallery-image w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-in-out lazy-load transform group-hover:scale-105 transition-transform duration-700"
+                            loading="lazy"
+                        >
+                        <!-- Download Overlay -->
+                         <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 z-20">
+                            <button class="download-btn text-white hover:text-blue-200 transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300" 
+                                    data-href="/assets/images/profile-image.jpeg" 
+                                    aria-label="Profile Image">
+                                <i class="fas fa-download text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="mt-4 text-lg font-playfair font-medium text-gray-900 text-center">Profile Image (No Background)</h3>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Toast Notification (Styled) -->
+    <div id="toast-notification" class="fixed top-24 right-4 md:right-8 z-[60] transform transition-all duration-500 translate-y-[-20px] opacity-0 pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 flex items-center gap-4 bg-white/90 backdrop-blur-md border border-gray-200/50 px-6 py-4 rounded-2xl shadow-2xl">
+        <div class="flex-shrink-0 bg-green-100 rounded-full px-3.5 py-2">
+            <i class="fas fa-check text-green-600 text-lg"></i>
+        </div>
+        <div>
+            <h4 class="font-bold text-gray-900 text-sm font-space">Download Started</h4>
+            <p class="text-xs text-gray-500 font-inter">Image is being saved.</p>
+        </div>
+    </div>
+
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay" class="fixed inset-0 bg-white z-[100] pointer-events-none opacity-0 transition-opacity duration-300"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <script src="/assets/js/gallery.js?v={{ version }}"></script>
+</html>

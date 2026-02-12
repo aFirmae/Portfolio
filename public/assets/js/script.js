@@ -429,6 +429,123 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchLeetCodeStats();
 });
 
+// Custom Context Menu Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const heroImage = document.getElementById('hero-image');
+    const contextMenu = document.getElementById('custom-context-menu');
+
+    if (heroImage && contextMenu) {
+        heroImage.addEventListener('contextmenu', (e) => {
+            const rect = heroImage.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const radius = rect.width / 2;
+            const distance = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
+
+            if (distance > radius) {
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            hideContextMenu();
+
+            // Calculate position
+            let x = e.clientX;
+            let y = e.clientY;
+
+            // Adjust if menu goes off screen
+            const menuWidth = contextMenu.offsetWidth || 192; // Fallback to w-48 (12rem = 192px)
+            const menuHeight = contextMenu.offsetHeight || 100; // Approx height
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+
+            if (x + menuWidth > windowWidth) {
+                x = windowWidth - menuWidth - 10;
+            }
+
+            if (y + menuHeight > windowHeight) {
+                y = windowHeight - menuHeight - 10;
+            }
+
+            // Set position and show
+            contextMenu.style.left = `${x}px`;
+            contextMenu.style.top = `${y}px`;
+            contextMenu.classList.remove('hidden');
+            
+            // Small delay to allow display:block to apply before transition
+            requestAnimationFrame(() => {
+                contextMenu.classList.add('active');
+                contextMenu.classList.remove('opacity-0', 'scale-95');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!contextMenu.contains(e.target)) {
+                hideContextMenu();
+            }
+        });
+
+        document.addEventListener('contextmenu', (e) => {
+            if (e.target !== heroImage) {
+                hideContextMenu();
+            }
+        });
+
+        // Handle Download Item Click
+        const downloadLink = contextMenu.querySelector('a[download]');
+        if (downloadLink) {
+            downloadLink.addEventListener('click', () => {
+                hideContextMenu();
+                showToast('Image download started');
+            });
+        }
+
+        // Handle View Gallery Click
+        const galleryLink = contextMenu.querySelector('a[href="/gallery"]');
+        if (galleryLink) {
+            galleryLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                hideContextMenu();
+                
+                const overlay = document.getElementById('page-transition-overlay');
+                if (overlay) {
+                    overlay.classList.add('active'); // Start fade to white
+                    overlay.classList.remove('opacity-0', 'pointer-events-none');
+                    
+                    setTimeout(() => {
+                        window.location.href = galleryLink.href;
+                    }, 300); // Wait for transition duration
+                } else {
+                     window.location.href = galleryLink.href;
+                }
+            });
+        }
+
+        // Hide menu on scroll
+        window.addEventListener('scroll', () => {
+            hideContextMenu();
+        });
+
+        function hideContextMenu() {
+            if (contextMenu.classList.contains('active')) {
+                contextMenu.classList.remove('active');
+                contextMenu.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => {
+                    // Only hide if it hasn't been re-opened
+                    if (!contextMenu.classList.contains('active')) {
+                        contextMenu.classList.add('hidden');
+                    }
+                }, 200);
+            } else {
+                 // Ensure it's hidden if not active
+                 contextMenu.classList.add('hidden');
+            }
+        }
+    }
+});
+
 // Toast Notification Function
 function showToast(message) {
     const toast = document.getElementById('toast-notification');
