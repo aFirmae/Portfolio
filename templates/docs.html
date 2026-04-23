@@ -130,14 +130,8 @@
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 sm:left-auto sm:-translate-x-0 sm:right-4 z-50 flex flex-col items-center sm:items-end space-y-2 pointer-events-none"></div>
 
-    <script id="documents-data" type="application/json">
-        {{ documents | tojson | safe }}
-    </script>
-
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        const rawDocuments = JSON.parse(document.getElementById('documents-data').textContent);
         
         const categories = {
             'PAN Card': { icon: 'fa-id-card', color: 'text-blue-500', bg: 'bg-blue-50', items: [] },
@@ -195,6 +189,8 @@
             "Ration Card - Digilocker.pdf": { category: "Other Documents", name: "Ration Card", isDigilocker: true },
             "SC Certificate.pdf": { category: "Other Documents", name: "SC Certificate", isDigilocker: false }
         };
+
+        const rawDocuments = Object.keys(fileMap);
 
         // Categorize documents
         rawDocuments.forEach(doc => {

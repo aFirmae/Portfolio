@@ -21,13 +21,7 @@ def serve_documents(filename):
 
 @app.route('/docs')
 def docs():
-    docs_dir = os.path.join(app.root_path, 'public', 'documents')
-    documents = []
-    if os.path.exists(docs_dir):
-        # Exclude hidden files like .DS_Store
-        documents = [f for f in os.listdir(docs_dir) if os.path.isfile(os.path.join(docs_dir, f)) and not f.startswith('.')]
-    
-    return render_template('docs.html', version=VERSION, documents=documents)
+    return render_template('docs.html', version=VERSION, documents=[])
 
 
 # Serve specific root files
