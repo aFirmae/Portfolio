@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" itemscope itemtype="http://schema.org/WebPage">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Documents - Nilashis Saha</title>
+
+    <meta name="description" content="View and download documents.">
+    <meta name="author" content="Nilashis Saha">
+
+    <link rel="shortcut icon" href="/assets/images/icon.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css?v={{ version }}">
+
+    <style>
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .accordion-content.expanded {
+            max-height: 1000px;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-button.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Glassmorphism search input */
+        .search-input {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <a href="/" class="text-gray-800 font-bold text-xl hover:text-blue-600 transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> Nilashis Saha
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="/#home" class="text-gray-800 hover:text-blue-600 transition duration-300">Home</a>
+                    <a href="/#about" class="text-gray-800 hover:text-blue-600 transition duration-300">About</a>
+                    <a href="/#experience" class="text-gray-800 hover:text-blue-600 transition duration-300">Experience</a>
+                    <a href="/#projects" class="text-gray-800 hover:text-blue-600 transition duration-300">Projects</a>
+                    <a href="/#contact" class="text-gray-800 hover:text-blue-600 transition duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documents Section -->
+    <section class="min-h-screen pt-32 pb-20 relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="sprinkle sprinkle-circle top-40 left-10"></div>
+        <div class="sprinkle sprinkle-star top-1/3 right-20"></div>
+        <div class="sprinkle sprinkle-diamond bottom-20 left-1/4"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <div class="inline-block relative">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative z-10">My Documents</h1>
+                    <svg class="absolute -bottom-2 -left-4 w-32 h-8 text-blue-400 -z-10" viewBox="0 0 100 20" fill="none">
+                        <path d="M0,10 Q50,0 100,10" stroke="currentColor" stroke-width="4" />
+                    </svg>
+                </div>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
+                    Easily view and download all my professional, academic, and personal documents.
+                </p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="relative max-w-lg mx-auto mb-12">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input type="text" id="searchInput" class="search-input w-full pl-10 pr-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition-all" placeholder="Search for a document...">
+            </div>
+
+            <!-- Documents Container -->
+            <div id="documents-container" class="space-y-4">
+                <!-- Js injection -->
+            </div>
+            
+            <div id="no-results" class="hidden text-center py-10">
+                <i class="fas fa-folder-open text-4xl text-gray-300 mb-3"></i>
+                <p class="text-gray-500 text-lg">No documents found matching your search.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold mb-4">Nilashis Saha</h2>
+                <p class="text-gray-400 max-w-md mx-auto">Creating beautifully simple things, one line of code at a time.</p>
+            </div>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://linkedin.com/in/nilashis-saha" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://github.com/afirmae" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="mailto:nilashis37@gmail.com" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+            <div class="text-gray-500 text-sm">
+                &copy; <span id="current-year"></span> Nilashis Saha. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script id="documents-data" type="application/json">
+        {{ documents | tojson | safe }}
+    </script>
+
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const rawDocuments = JSON.parse(document.getElementById('documents-data').textContent);
+        
+        const categories = {
+            'PAN Card': { icon: 'fa-id-card', color: 'text-blue-500', bg: 'bg-blue-50', items: [] },
+            'Aadhar Card': { icon: 'fa-fingerprint', color: 'text-orange-500', bg: 'bg-orange-50', items: [] },
+            'Driving License': { icon: 'fa-car', color: 'text-green-500', bg: 'bg-green-50', items: [] },
+            'Voter Card / ID': { icon: 'fa-address-card', color: 'text-teal-500', bg: 'bg-teal-50', items: [] },
+            '10th (Secondary) Documents': { icon: 'fa-school', color: 'text-purple-500', bg: 'bg-purple-50', items: [] },
+            '12th (Senior Secondary) Documents': { icon: 'fa-graduation-cap', color: 'text-pink-500', bg: 'bg-pink-50', items: [] },
+            'University Semester Results': { icon: 'fa-university', color: 'text-indigo-500', bg: 'bg-indigo-50', items: [] },
+            'Other Documents': { icon: 'fa-folder', color: 'text-gray-500', bg: 'bg-gray-50', items: [] }
+        };
+
+        // Exact mapping of files to their Category, Display Name, and Digilocker status
+        const fileMap = {
+            "Aadhar.pdf": { category: "Aadhar Card", name: "Aadhar Card", isDigilocker: false },
+            "Aadhar Card - Number Hidden.pdf": { category: "Aadhar Card", name: "Aadhar Card (Masked)", isDigilocker: false },
+            
+            "PAN.pdf": { category: "PAN Card", name: "PAN Card", isDigilocker: false },
+            "PAN - Digilocker.pdf": { category: "PAN Card", name: "PAN Card", isDigilocker: true },
+            "e-PAN.pdf": { category: "PAN Card", name: "e-PAN Card", isDigilocker: false },
+            
+            "Driving License.pdf": { category: "Driving License", name: "Driving License", isDigilocker: false },
+            "Driving Licence - Digilocker.pdf": { category: "Driving License", name: "Driving License", isDigilocker: true },
+            
+            "VoterID.pdf": { category: "Voter Card / ID", name: "Voter ID", isDigilocker: false },
+            
+            "Marksheet X.pdf": { category: "10th (Secondary) Documents", name: "10th Marksheet", isDigilocker: false },
+            "Admit Card X.pdf": { category: "10th (Secondary) Documents", name: "10th Admit Card", isDigilocker: false },
+            "X Marksheet - Digilocker.pdf": { category: "10th (Secondary) Documents", name: "10th Marksheet", isDigilocker: true },
+            "X Passing Cerificate - Digilocker.pdf": { category: "10th (Secondary) Documents", name: "10th Passing Certificate", isDigilocker: true },
+            
+            "Marksheet XII.pdf": { category: "12th (Senior Secondary) Documents", name: "12th Marksheet", isDigilocker: false },
+            "Reg Card XII.pdf": { category: "12th (Senior Secondary) Documents", name: "12th Registration Card", isDigilocker: false },
+            "XII Marksheet and Certificate.pdf": { category: "12th (Senior Secondary) Documents", name: "12th Marksheet & Certificate", isDigilocker: true },
+            
+            "Result Sem 1.pdf": { category: "University Semester Results", name: "Semester 1 Result", isDigilocker: false },
+            "SEM 1 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 1 Result", isDigilocker: true },
+            "Result Sem 2.pdf": { category: "University Semester Results", name: "Semester 2 Result", isDigilocker: false },
+            "SEM 2 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 2 Result", isDigilocker: true },
+            "Result Sem 3.pdf": { category: "University Semester Results", name: "Semester 3 Result", isDigilocker: false },
+            "SEM 3 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 3 Result", isDigilocker: true },
+            "Result Sem 4.PDF": { category: "University Semester Results", name: "Semester 4 Result", isDigilocker: false },
+            "SEM 4 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 4 Result", isDigilocker: true },
+            "Result Sem 5.pdf": { category: "University Semester Results", name: "Semester 5 Result", isDigilocker: false },
+            "SEM 5 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 5 Result", isDigilocker: true },
+            "Result Sem 6.pdf": { category: "University Semester Results", name: "Semester 6 Result", isDigilocker: false },
+            "SEM 6 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 6 Result", isDigilocker: true },
+            "Result Sem 7.pdf": { category: "University Semester Results", name: "Semester 7 Result", isDigilocker: false },
+            "All Results.pdf": { category: "University Semester Results", name: "All Results", isDigilocker: false },
+            
+            "ABCID - Digilocker.pdf": { category: "Other Documents", name: "ABCID", isDigilocker: true },
+            "Birth Certificate.pdf": { category: "Other Documents", name: "Birth Certificate", isDigilocker: false },
+            "Domicile.pdf": { category: "Other Documents", name: "Domicile Certificate", isDigilocker: false },
+            "Pass Book Front Page.pdf": { category: "Other Documents", name: "Pass Book Front Page", isDigilocker: false },
+            "Ration Card - Digilocker.pdf": { category: "Other Documents", name: "Ration Card", isDigilocker: true },
+            "SC Certificate.pdf": { category: "Other Documents", name: "SC Certificate", isDigilocker: false }
+        };
+
+        // Categorize documents
+        rawDocuments.forEach(doc => {
+            const config = fileMap[doc];
+            if (config && categories[config.category]) {
+                categories[config.category].items.push({
+                    filename: doc,
+                    name: config.name,
+                    isDigilocker: config.isDigilocker
+                });
+            } else {
+                // Fallback for any unknown file dynamically
+                categories['Other Documents'].items.push({
+                    filename: doc,
+                    name: doc.replace(/\.[^/.]+$/, ""),
+                    isDigilocker: doc.toLowerCase().includes('digilocker')
+                });
+            }
+        });
+
+        // Sort items in categories
+        Object.values(categories).forEach(catData => {
+            catData.items.sort((a, b) => {
+                if (a.name < b.name) return -1;
+                if (a.name > b.name) return 1;
+                // If names are equal, Digilocker variants come second
+                if (a.isDigilocker && !b.isDigilocker) return 1;
+                if (!a.isDigilocker && b.isDigilocker) return -1;
+                return 0;
+            });
+        });
+
+        const container = document.getElementById('documents-container');
+        const noResults = document.getElementById('no-results');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderCategories(filterText = '') {
+            container.innerHTML = '';
+            let hasAnyItems = false;
+            const filterLower = filterText.toLowerCase();
+
+            Object.entries(categories).forEach(([catName, catData], index) => {
+                const filteredItems = catData.items.filter(item => item.name.toLowerCase().includes(filterLower));
+                const catMatches = catName.toLowerCase().includes(filterLower);           
+                const itemsToRender = catMatches && filterText !== '' ? catData.items : filteredItems;
+
+                if (itemsToRender.length > 0) {
+                    hasAnyItems = true;
+                    
+                    // Create Accordion Item
+                    const accItem = document.createElement('div');
+                    accItem.className = 'bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all hover:shadow-md';
+                    
+                    const isExpanded = filterText !== ''; // Auto expand if searching
+
+                    let itemsHtml = itemsToRender.map(itemObj => {
+                        const ext = itemObj.filename.split('.').pop().toLowerCase();
+                        let fileIcon = 'fa-file-pdf text-red-500';
+                        if (['png', 'jpg', 'jpeg'].includes(ext)) fileIcon = 'fa-file-image text-blue-500';
+
+                        const iconHtml = itemObj.isDigilocker 
+                            ? `<img src="/assets/images/digilocker.svg" alt="Digilocker" class="h-6 w-6 mr-3 opacity-90 group-hover:opacity-100 transition-opacity" title="Verified by Digilocker">`
+                            : `<i class="fas ${fileIcon} text-xl w-6 text-center mr-3 opacity-80 group-hover:opacity-100 transition-opacity"></i>`;
+
+                        return `
+                            <div class="flex items-center justify-between py-3 px-4 sm:px-6 hover:bg-gray-50 transition-colors border-t border-gray-50 group">
+                                <div class="flex items-center min-w-0 pr-4">
+                                    ${iconHtml}
+                                    <span class="text-sm sm:text-base font-medium text-gray-700 truncate">${itemObj.name}</span>
+                                </div>
+                                <div class="flex space-x-2 sm:space-x-4 flex-shrink-0">
+                                    <a href="/documents/${encodeURIComponent(itemObj.filename)}" target="_blank" class="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-50 rounded-full transition-colors" title="View">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="/documents/${encodeURIComponent(itemObj.filename)}" download class="p-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors" title="Download">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                    accItem.innerHTML = `
+                        <button class="accordion-button w-full px-6 py-4 flex items-center justify-between outline-none focus:outline-none ${isExpanded ? 'active' : ''}" onclick="toggleAccordion(this)">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full ${catData.bg} ${catData.color} flex items-center justify-center mr-4">
+                                    <i class="fas ${catData.icon} text-lg"></i>
+                                </div>
+                                <span class="font-bold text-gray-800 text-lg">${catName}</span>
+                                <span class="ml-3 text-xs font-semibold bg-gray-100 text-gray-600 py-1 px-2.5 rounded-full">${itemsToRender.length}</span>
+                            </div>
+                            <i class="fas fa-chevron-down accordion-icon text-gray-400 transition-transform"></i>
+                        </button>
+                        <div class="accordion-content ${isExpanded ? 'expanded' : ''}">
+                            <div class="pb-2">
+                                ${itemsHtml}
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(accItem);
+                }
+            });
+
+            if (hasAnyItems) {
+                noResults.classList.add('hidden');
+            } else {
+                noResults.classList.remove('hidden');
+            }
+        }
+
+        function toggleAccordion(btn) {
+            btn.classList.toggle('active');
+            const content = btn.nextElementSibling;
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                content.style.maxHeight = null;
+            } else {
+                content.classList.add('expanded');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            renderCategories(e.target.value);
+            
+            const contents = document.querySelectorAll('.accordion-content.expanded');
+            contents.forEach(content => {
+                content.style.maxHeight = content.scrollHeight + "px";
+            });
+        });
+
+        // Initial render
+        renderCategories();
+
+    </script>
+</body>
+</html>
