@@ -13,15 +13,15 @@ def home():
 # Serve assets folder
 @app.route('/assets/<path:filename>')
 def custom_static(filename):
-    return send_from_directory('public/assets', filename)
+    return send_from_directory(os.path.join(app.root_path, 'public', 'assets'), filename)
 
 @app.route('/documents/<path:filename>')
 def serve_documents(filename):
-    return send_from_directory('public/documents', filename)
+    return send_from_directory(os.path.join(app.root_path, 'public', 'documents'), filename)
 
 @app.route('/docs')
 def docs():
-    docs_dir = 'public/documents'
+    docs_dir = os.path.join(app.root_path, 'public', 'documents')
     documents = []
     if os.path.exists(docs_dir):
         # Exclude hidden files like .DS_Store
@@ -34,7 +34,7 @@ def docs():
 @app.route('/resume')
 def resume():
     try:
-        return send_from_directory('public/assets', 'Resume_Nilashis_Saha.pdf')
+        return send_from_directory(os.path.join(app.root_path, 'public', 'assets'), 'Resume_Nilashis_Saha.pdf')
     except Exception:
         return redirect("/assets/Resume_Nilashis_Saha.pdf")
 
