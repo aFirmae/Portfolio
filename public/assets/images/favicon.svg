@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+
+  <defs>
+    <!-- Clip for rounded square -->
+    <clipPath id="tile">
+      <rect x="30" y="30" width="140" height="140" rx="36"/>
+    </clipPath>
+  </defs>
+
+  <!-- Base white tile -->
+  <rect x="30" y="30" width="140" height="140" rx="36"
+        fill="#F1F5F9"/>
+
+  <!-- Green circle (inside tile) -->
+  <g clip-path="url(#tile)">
+    <circle cx="60" cy="140" r="42" fill="#22C55E"/>
+  </g>
+
+  <!-- Yellow circle (BEHIND N, but above tile) -->
+  <circle cx="150" cy="50" r="40" fill="#FACC15"/>
+
+  <!-- N on TOP -->
+  <path d="M60 140 
+           L60 60 
+           L140 140 
+           L140 60"
+        stroke="#0F172A"
+        stroke-width="22"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        fill="none"/>
+
+</svg>
