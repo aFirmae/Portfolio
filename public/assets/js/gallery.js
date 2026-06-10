@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (src) {
                     img.src = src;
-                    img.onload = () => {
+                    
+                    const handleLoad = () => {
                         img.classList.add('loaded'); // For CSS transition
                         img.classList.remove('opacity-0'); // Remove Tailwind opacity-0
                         
@@ -47,9 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
                     };
-                    img.onerror = () => {
-                         console.error(`Failed to load image: ${src}`);
-                         // Optionally show an error placeholder
+
+                    if (img.complete) {
+                        handleLoad();
+                    } else {
+                        img.onload = handleLoad;
+                        img.onerror = () => {
+                             console.error(`Failed to load image: ${src}`);
+                        };
                     }
                     observer.unobserve(img);
                 }

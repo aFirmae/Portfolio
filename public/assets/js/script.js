@@ -182,18 +182,23 @@ function applyFadeInAnimation() {
 }
 
 // Initialize animation when page loads
-window.addEventListener('load', () => {
+function initHeroAnimations() {
     setTimeout(applyFadeInAnimation, 500);
+}
 
-    // Animate hero image
-    const heroImage = document.getElementById('hero-image');
-    if (heroImage) {
-        if (heroImage.complete) {
-            heroImage.classList.add('loaded');
-        } else {
-            heroImage.addEventListener('load', () => {
-                heroImage.classList.add('loaded');
-            });
+window.addEventListener('load', initHeroAnimations);
+
+// Handle browser back button (BFCache)
+window.addEventListener('pageshow', (e) => {
+    // If the page is restored from cache, re-trigger the animations
+    if (e.persisted) {
+        initHeroAnimations();
+        
+        // Also clear any transition overlays if they were active
+        const overlay = document.getElementById('page-transition-overlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            overlay.classList.add('opacity-0', 'pointer-events-none');
         }
     }
 });
