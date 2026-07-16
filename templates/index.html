@@ -175,8 +175,7 @@
                         </div>
                     </div>
                     <p class="text-lg sm:text-xl md:text-2xl mb-8 text-gray-600 max-w-lg mx-auto md:mx-0">
-                        I create beautifully simple things, and I love what I do. Full Stack Developer & Computer
-                        Science Student.
+                        I create beautifully simple things, and I love what I do. Full Stack Developer & Systems Engineer.
                     </p>
 
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center">
@@ -290,8 +289,7 @@
                     </svg>
                 </div>
                 <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-6">
-                    I'm a Computer Science student at Adamas University with experience in software development and
-                    backend technologies.
+                    I am a Systems Engineer at Tata Consultancy Services with a strong foundation in full-stack software development and backend technologies.
                 </p>
                 <div class="items-center bg-gray-50 p-6 md:p-8 rounded-2xl shadow-lg">
                     <ul class="items-center snap-start flex flex-col gap-3">
@@ -544,13 +542,18 @@
 
             <!-- Tab Navigation -->
             <div class="flex justify-center mb-12">
-                <div class="bg-white rounded-full p-2 shadow-sm border border-gray-100">
+                <div class="bg-white rounded-full p-2 shadow-sm border border-gray-100 relative flex">
+                    <div id="tab-indicator" class="absolute top-2 bottom-2 bg-gray-900 rounded-full transition-all duration-300 ease-out shadow-md pointer-events-none" style="left: 8px; width: 0px;"></div>
                     <button onclick="switchTab('work')" id="work-tab"
-                        class="tab-btn px-6 py-3 rounded-full font-semibold transition duration-300 bg-gray-900 text-white shadow-md">
+                        class="tab-btn relative z-10 px-6 py-3 rounded-full font-semibold transition-colors duration-300 text-white">
                         Work Experience
                     </button>
+                    <button onclick="switchTab('internships')" id="internships-tab"
+                        class="tab-btn relative z-10 px-6 py-3 rounded-full font-semibold transition-colors duration-300 text-gray-500 hover:text-gray-900">
+                        Internships
+                    </button>
                     <button onclick="switchTab('education')" id="education-tab"
-                        class="tab-btn px-6 py-3 rounded-full font-semibold transition duration-300 text-gray-500 hover:text-gray-900">
+                        class="tab-btn relative z-10 px-6 py-3 rounded-full font-semibold transition-colors duration-300 text-gray-500 hover:text-gray-900">
                         Education
                     </button>
                 </div>
@@ -558,6 +561,37 @@
 
             <!-- Work Experience Tab -->
             <div id="work-content" class="tab-content active">
+                <div class="space-y-8">
+                    <!-- TCS -->
+                    <div class="relative pl-8 md:pl-10">
+                        <div class="timeline-dot blue absolute left-0 top-2"></div>
+                        <div class="timeline-line"></div>
+                        <div
+                            class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800">Systems Engineer</h3>
+                                    <p class="text-blue-600 font-semibold">Tata Consultancy Services, Kolkata</p>
+                                </div>
+                                <span class="text-gray-500 font-medium">June 2026 - Present</span>
+                            </div>
+                            <ul class="text-gray-600 space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-network-wired text-blue-500 mt-1 mr-3"></i>
+                                    Transitioning from initial training into enterprise systems engineering, focusing on scalable software solutions.
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-server text-blue-500 mt-1 mr-3"></i>
+                                    Learning and applying modern IT infrastructure, deployment strategies, and enterprise architecture principles.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Internships Tab -->
+            <div id="internships-content" class="tab-content">
                 <div class="space-y-8">
                     <!-- NPTEL Internship -->
                     <div class="relative pl-8 md:pl-10">
@@ -575,19 +609,19 @@
                             <ul class="text-gray-600 space-y-4">
                                 <li class="flex items-start">
                                     <i class="fas fa-laptop-code text-red-500 mt-1 mr-3"></i>
-                                    Participating in a winter internship by VLED Lab under Prof. Sudarshan Iyengar at
+                                    Participated in a winter internship by VLED Lab under Prof. Sudarshan Iyengar at
                                     IIT Ropar,
-                                    focusing on full-stack MERN development with TypeScript, React, Express.js, and
+                                    focused on full-stack MERN development with TypeScript, React, Express.js, and
                                     MongoDB.
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-puzzle-piece text-red-500 mt-1 mr-3"></i>
-                                    Solving structured case studies and building real-world web applications aligned
+                                    Solved structured case studies and built real-world web applications aligned
                                     with the lab's research-driven development practices.
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-chart-line text-red-500 mt-1 mr-3"></i>
-                                    Engaging in a 10-week, stipend-supported virtual internship, contributing to
+                                    Engaged in a 10-week, stipend-supported virtual internship, contributed to
                                     milestone-based projects and continuous skill evaluation.
                                 </li>
                             </ul>
@@ -740,9 +774,8 @@
                                 <span class="text-gray-500 font-medium">2022 - 2026</span>
                             </div>
                             <p class="text-gray-600">
-                                Currently pursuing Bachelor of Technology with specialization in Computer Science &
-                                Engineering.
-                                <span class="text-purple-600 font-semibold">Current CGPA: 9.17/10</span>
+                                Completed Bachelor of Technology with specialization in Computer Science & Engineering.
+                                <span class="text-purple-600 font-semibold">CGPA: 9.20/10</span>
                             </p>
                         </div>
                     </div>

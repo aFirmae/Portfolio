@@ -83,22 +83,46 @@ function switchTab(tabName) {
         content.classList.remove('active');
     });
 
-    // Remove active class from all tab buttons
+    // Remove active text classes from all tab buttons
     const buttons = document.querySelectorAll('.tab-btn');
     buttons.forEach(btn => {
-        btn.classList.remove('bg-gray-900', 'text-white', 'shadow-md');
+        btn.classList.remove('text-white');
         btn.classList.add('text-gray-500', 'hover:text-gray-900');
     });
 
     // Show selected tab content
     const selectedContent = document.getElementById(tabName + '-content');
-    selectedContent.classList.add('active');
+    if(selectedContent) selectedContent.classList.add('active');
 
-    // Activate selected tab button
+    // Activate selected tab button text
     const selectedButton = document.getElementById(tabName + '-tab');
-    selectedButton.classList.add('bg-gray-900', 'text-white', 'shadow-md');
-    selectedButton.classList.remove('text-gray-500', 'hover:text-gray-900');
+    if (selectedButton) {
+        selectedButton.classList.add('text-white');
+        selectedButton.classList.remove('text-gray-500', 'hover:text-gray-900');
+
+        // Move the animated background indicator
+        const indicator = document.getElementById('tab-indicator');
+        if (indicator) {
+            indicator.style.width = selectedButton.offsetWidth + 'px';
+            indicator.style.transform = `translateX(${selectedButton.offsetLeft - 8}px)`; // -8px for container padding
+        }
+
+        // Remember the active tab for page reloads
+        sessionStorage.setItem('activeExperienceTab', tabName);
+    }
 }
+
+// Initialize tab indicator on load
+window.addEventListener('DOMContentLoaded', () => {
+    // Fetch previously active tab or default to 'work'
+    const savedTab = sessionStorage.getItem('activeExperienceTab') || 'work';
+    const activeTabEl = document.getElementById(savedTab + '-tab');
+    
+    if (activeTabEl) {
+        // slight delay to ensure layout is calculated before measuring width
+        setTimeout(() => switchTab(savedTab), 50);
+    }
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -592,6 +616,9 @@ document.addEventListener('DOMContentLoaded', () => {
             filterButtons.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
+            // Save to sessionStorage
+            sessionStorage.setItem('activeProjectFilter', filter);
+
             // Filter projects
             projectCards.forEach(card => {
                 const categories = card.getAttribute('data-category') ? card.getAttribute('data-category').split(' ') : [];
@@ -612,4 +639,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // Restore saved filter
+    const savedFilter = sessionStorage.getItem('activeProjectFilter');
+    if (savedFilter) {
+        const targetBtn = Array.from(filterButtons).find(b => b.getAttribute('data-filter') === savedFilter);
+        if (targetBtn) {
+            targetBtn.click();
+        }
+    }
 });
