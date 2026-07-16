@@ -1,7 +1,11 @@
 from flask import Flask, render_template, send_from_directory, redirect, request, make_response
 import os
+import json
+from dotenv import load_dotenv
+load_dotenv()
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import pyotp
 
 app = Flask(__name__, template_folder='templates')
 
@@ -35,26 +39,34 @@ def serve_documents(filename):
 def docs():
     # Check if user has the authorization cookie
     if request.cookies.get('docs_access') == 'true':
-        return render_template('docs.html', version=VERSION, documents=[])
+        return render_template('docs.html', version=VERSION)
     
-    # If not, render the auth page
     return render_template('docs_auth.html', version=VERSION)
 
 @app.route('/docs/auth', methods=['POST'])
-@limiter.limit("10 per minute") # Stricter limit for password guess
+@limiter.limit("10 per minute")
 def docs_auth():
-    keyword = request.form.get('keyword')
-    expected_keyword = os.environ.get("DOCS_PASSWORD", "NilashisDocs2024")
+    otp_code = request.form.get('otp_code')
+    totp_secret = os.environ.get("TOTP_SECRET")
     
-    if keyword == expected_keyword:
+    if not otp_code:
+        return render_template('docs_auth.html', version=VERSION, error="Missing authentication code.")
+        
+    if not totp_secret:
+        return render_template('docs_auth.html', version=VERSION, error="Server configuration error: TOTP secret missing.")
+        
+    totp = pyotp.TOTP(totp_secret)
+    
+    # Verify the code (allows 1 period before/after for slight time drift)
+    if totp.verify(otp_code, valid_window=1):
         # Create a response that redirects to /docs
         resp = make_response(redirect('/docs'))
         # Set a cookie valid for 1 day (86400 seconds)
-        resp.set_cookie('docs_access', 'true', max_age=86400, httponly=True, secure=False) # In prod on Vercel it's HTTPS, but for local testing secure=False is fine
+        resp.set_cookie('docs_access', 'true', max_age=86400, httponly=True, secure=False)
         return resp
     else:
         # Re-render with error
-        return render_template('docs_auth.html', version=VERSION, error="Invalid keyword. Please try again.")
+        return render_template('docs_auth.html', version=VERSION, error="Invalid code. Please try again.")
 
 
 # Serve specific root files
