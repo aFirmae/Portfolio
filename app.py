@@ -61,8 +61,8 @@ def docs_auth():
     if totp.verify(otp_code, valid_window=1):
         # Create a response that redirects to /docs
         resp = make_response(redirect('/docs'))
-        # Set a cookie valid for 1 day (86400 seconds)
-        resp.set_cookie('docs_access', 'true', max_age=86400, httponly=True, secure=False)
+        # Set a cookie valid for 1 minute
+        resp.set_cookie('docs_access', 'true', max_age=60, httponly=True, secure=False)
         return resp
     else:
         # Re-render with error

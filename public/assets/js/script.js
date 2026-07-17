@@ -119,8 +119,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const activeTabEl = document.getElementById(savedTab + '-tab');
     
     if (activeTabEl) {
-        // slight delay to ensure layout is calculated before measuring width
-        setTimeout(() => switchTab(savedTab), 50);
+        // Wait for fonts to load to ensure layout dimensions are correct
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(() => {
+                setTimeout(() => switchTab(savedTab), 50);
+            });
+        } else {
+            // Fallback delay
+            setTimeout(() => switchTab(savedTab), 200);
+        }
     }
 });
 
