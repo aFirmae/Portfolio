@@ -144,6 +144,14 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
+        // Heartbeat to keep session alive while on the docs page
+        setInterval(() => {
+            fetch('/docs/ping', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => console.log('Heartbeat response:', data))
+                .catch(err => console.error('Heartbeat failed:', err));
+        }, 30000); // Ping every 30 seconds
+
         const categories = {
             'PAN Card': { icon: 'fa-id-card', color: 'text-blue-500', bg: 'bg-blue-50', items: [] },
             'Aadhar Card': { icon: 'fa-fingerprint', color: 'text-orange-500', bg: 'bg-orange-50', items: [] },

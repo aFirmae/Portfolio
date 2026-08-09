@@ -91,6 +91,15 @@ def docs():
     
     return render_template('docs_auth.html', version=VERSION)
 
+@app.route('/docs/ping', methods=['POST'])
+@limiter.exempt
+def docs_ping():
+    if request.cookies.get('docs_access') == 'true':
+        resp = make_response({"status": "ok"})
+        resp.set_cookie('docs_access', 'true', max_age=60, httponly=True, secure=False)
+        return resp
+    return {"status": "unauthorized"}, 401
+
 @app.route('/docs/auth', methods=['POST'])
 @limiter.limit("10 per minute")
 def docs_auth():
