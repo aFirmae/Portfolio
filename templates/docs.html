@@ -158,51 +158,51 @@
 
         // Exact mapping of files to their Category, Display Name, and Digilocker status
         const fileMap = {
-            "Aadhar.pdf": { category: "Aadhar Card", name: "Aadhar Card", isDigilocker: false },
-            "Aadhar Card - Number Hidden.pdf": { category: "Aadhar Card", name: "Aadhar Card (Masked)", isDigilocker: false },
+            "Aadhar.pdf": { slug: "aadhar", category: "Aadhar Card", name: "Aadhar Card", isDigilocker: false },
+            "Aadhar Card - Number Hidden.pdf": { slug: "aadhar-masked", category: "Aadhar Card", name: "Aadhar Card (Masked)", isDigilocker: false },
 
-            "PAN.pdf": { category: "PAN Card", name: "PAN Card", isDigilocker: false },
-            "PAN - Digilocker.pdf": { category: "PAN Card", name: "PAN Card", isDigilocker: true },
-            "e-PAN.pdf": { category: "PAN Card", name: "e-PAN Card", isDigilocker: false },
+            "PAN.pdf": { slug: "pan", category: "PAN Card", name: "PAN Card", isDigilocker: false },
+            "PAN - Digilocker.pdf": { slug: "pan-digilocker", category: "PAN Card", name: "PAN Card", isDigilocker: true },
+            "e-PAN.pdf": { slug: "e-pan", category: "PAN Card", name: "e-PAN Card", isDigilocker: false },
 
-            "Driving License.pdf": { category: "Driving License", name: "Driving License", isDigilocker: false },
-            "Driving Licence - Digilocker.pdf": { category: "Driving License", name: "Driving License", isDigilocker: true },
+            "Driving License.pdf": { slug: "driving-license", category: "Driving License", name: "Driving License", isDigilocker: false },
+            "Driving Licence - Digilocker.pdf": { slug: "driving-license-digilocker", category: "Driving License", name: "Driving License", isDigilocker: true },
 
-            "VoterID.pdf": { category: "Voter Card / ID", name: "Voter ID", isDigilocker: false },
-            "Passport.pdf": { category: "Passport", name: "Passport", isDigilocker: false },
+            "VoterID.pdf": { slug: "voter-id", category: "Voter Card / ID", name: "Voter ID", isDigilocker: false },
+            "Passport.pdf": { slug: "passport", category: "Passport", name: "Passport", isDigilocker: false },
 
-            "Marksheet X.pdf": { category: "10th (Secondary) Documents", name: "10th Marksheet", isDigilocker: false },
-            "Admit Card X.pdf": { category: "10th (Secondary) Documents", name: "10th Admit Card", isDigilocker: false },
-            "X Marksheet - Digilocker.pdf": { category: "10th (Secondary) Documents", name: "10th Marksheet", isDigilocker: true },
-            "X Passing Cerificate - Digilocker.pdf": { category: "10th (Secondary) Documents", name: "10th Passing Certificate", isDigilocker: true },
+            "Marksheet X.pdf": { slug: "10th-marksheet", category: "10th (Secondary) Documents", name: "10th Marksheet", isDigilocker: false },
+            "Admit Card X.pdf": { slug: "10th-admit-card", category: "10th (Secondary) Documents", name: "10th Admit Card", isDigilocker: false },
+            "X Marksheet - Digilocker.pdf": { slug: "10th-marksheet-digilocker", category: "10th (Secondary) Documents", name: "10th Marksheet", isDigilocker: true },
+            "X Passing Cerificate - Digilocker.pdf": { slug: "10th-passing-certificate-digilocker", category: "10th (Secondary) Documents", name: "10th Passing Certificate", isDigilocker: true },
 
-            "Marksheet XII.pdf": { category: "12th (Senior Secondary) Documents", name: "12th Marksheet", isDigilocker: false },
-            "Reg Card XII.pdf": { category: "12th (Senior Secondary) Documents", name: "12th Registration Card", isDigilocker: false },
-            "XII Marksheet and Certificate.pdf": { category: "12th (Senior Secondary) Documents", name: "12th Marksheet & Certificate", isDigilocker: true },
+            "Marksheet XII.pdf": { slug: "12th-marksheet", category: "12th (Senior Secondary) Documents", name: "12th Marksheet", isDigilocker: false },
+            "Reg Card XII.pdf": { slug: "12th-reg-card", category: "12th (Senior Secondary) Documents", name: "12th Registration Card", isDigilocker: false },
+            "XII Marksheet and Certificate.pdf": { slug: "12th-marksheet-certificate-digilocker", category: "12th (Senior Secondary) Documents", name: "12th Marksheet & Certificate", isDigilocker: true },
 
-            "Result Sem 1.pdf": { category: "University Semester Results", name: "Semester 1 Result", isDigilocker: false },
-            "SEM 1 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 1 Result", isDigilocker: true },
-            "Result Sem 2.pdf": { category: "University Semester Results", name: "Semester 2 Result", isDigilocker: false },
-            "SEM 2 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 2 Result", isDigilocker: true },
-            "Result Sem 3.pdf": { category: "University Semester Results", name: "Semester 3 Result", isDigilocker: false },
-            "SEM 3 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 3 Result", isDigilocker: true },
-            "Result Sem 4.PDF": { category: "University Semester Results", name: "Semester 4 Result", isDigilocker: false },
-            "SEM 4 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 4 Result", isDigilocker: true },
-            "Result Sem 5.pdf": { category: "University Semester Results", name: "Semester 5 Result", isDigilocker: false },
-            "SEM 5 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 5 Result", isDigilocker: true },
-            "Result Sem 6.pdf": { category: "University Semester Results", name: "Semester 6 Result", isDigilocker: false },
-            "SEM 6 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 6 Result", isDigilocker: true },
-            "Result Sem 7.pdf": { category: "University Semester Results", name: "Semester 7 Result", isDigilocker: false },
-            "SEM 7 - Digilocker.pdf": { category: "University Semester Results", name: "Semester 7 Result", isDigilocker: true },
-            "Result Sem 8.pdf": { category: "University Semester Results", name: "Semester 8 Result", isDigilocker: false },
-            "All Results.pdf": { category: "University Semester Results", name: "All Results", isDigilocker: false },
+            "Result Sem 1.pdf": { slug: "sem1", category: "University Semester Results", name: "Semester 1 Result", isDigilocker: false },
+            "SEM 1 - Digilocker.pdf": { slug: "sem1-digilocker", category: "University Semester Results", name: "Semester 1 Result", isDigilocker: true },
+            "Result Sem 2.pdf": { slug: "sem2", category: "University Semester Results", name: "Semester 2 Result", isDigilocker: false },
+            "SEM 2 - Digilocker.pdf": { slug: "sem2-digilocker", category: "University Semester Results", name: "Semester 2 Result", isDigilocker: true },
+            "Result Sem 3.pdf": { slug: "sem3", category: "University Semester Results", name: "Semester 3 Result", isDigilocker: false },
+            "SEM 3 - Digilocker.pdf": { slug: "sem3-digilocker", category: "University Semester Results", name: "Semester 3 Result", isDigilocker: true },
+            "Result Sem 4.PDF": { slug: "sem4", category: "University Semester Results", name: "Semester 4 Result", isDigilocker: false },
+            "SEM 4 - Digilocker.pdf": { slug: "sem4-digilocker", category: "University Semester Results", name: "Semester 4 Result", isDigilocker: true },
+            "Result Sem 5.pdf": { slug: "sem5", category: "University Semester Results", name: "Semester 5 Result", isDigilocker: false },
+            "SEM 5 - Digilocker.pdf": { slug: "sem5-digilocker", category: "University Semester Results", name: "Semester 5 Result", isDigilocker: true },
+            "Result Sem 6.pdf": { slug: "sem6", category: "University Semester Results", name: "Semester 6 Result", isDigilocker: false },
+            "SEM 6 - Digilocker.pdf": { slug: "sem6-digilocker", category: "University Semester Results", name: "Semester 6 Result", isDigilocker: true },
+            "Result Sem 7.pdf": { slug: "sem7", category: "University Semester Results", name: "Semester 7 Result", isDigilocker: false },
+            "SEM 7 - Digilocker.pdf": { slug: "sem7-digilocker", category: "University Semester Results", name: "Semester 7 Result", isDigilocker: true },
+            "Result Sem 8.pdf": { slug: "sem8", category: "University Semester Results", name: "Semester 8 Result", isDigilocker: false },
+            "All Results.pdf": { slug: "all-results", category: "University Semester Results", name: "All Results", isDigilocker: false },
 
-            "ABCID - Digilocker.pdf": { category: "Other Documents", name: "ABCID", isDigilocker: true },
-            "Birth Certificate.pdf": { category: "Other Documents", name: "Birth Certificate", isDigilocker: false },
-            "Domicile.pdf": { category: "Other Documents", name: "Domicile Certificate", isDigilocker: false },
-            "Pass Book Front Page.pdf": { category: "Other Documents", name: "Pass Book Front Page", isDigilocker: false },
-            "Ration Card - Digilocker.pdf": { category: "Other Documents", name: "Ration Card", isDigilocker: true },
-            "SC Certificate.pdf": { category: "Other Documents", name: "SC Certificate", isDigilocker: false }
+            "ABCID - Digilocker.pdf": { slug: "abcid-digilocker", category: "Other Documents", name: "ABCID", isDigilocker: true },
+            "Birth Certificate.pdf": { slug: "birth-certificate", category: "Other Documents", name: "Birth Certificate", isDigilocker: false },
+            "Domicile.pdf": { slug: "domicile", category: "Other Documents", name: "Domicile Certificate", isDigilocker: false },
+            "Pass Book Front Page.pdf": { slug: "passbook", category: "Other Documents", name: "Pass Book Front Page", isDigilocker: false },
+            "Ration Card - Digilocker.pdf": { slug: "ration-card-digilocker", category: "Other Documents", name: "Ration Card", isDigilocker: true },
+            "SC Certificate.pdf": { slug: "sc-certificate", category: "Other Documents", name: "SC Certificate", isDigilocker: false }
         };
 
         const rawDocuments = Object.keys(fileMap);
@@ -214,6 +214,7 @@
                 categories[config.category].items.push({
                     filename: doc,
                     name: config.name,
+                    slug: config.slug,
                     isDigilocker: config.isDigilocker
                 });
             } else {
@@ -282,11 +283,11 @@
                                     <span class="text-sm sm:text-base font-medium text-gray-700 truncate">${itemObj.name}</span>
                                 </div>
                                 <div class="flex space-x-2 sm:space-x-3 flex-shrink-0 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 sm:translate-x-4 sm:group-hover:translate-x-0">
-                                    <a href="/documents/${encodeURIComponent(itemObj.filename)}" target="_blank" onclick="showToast('Opened ${itemObj.name} in a new tab', 'info', 'fa-external-link-alt')" class="flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 border border-blue-100 hover:border-transparent shadow-sm hover:shadow text-xs sm:text-sm font-semibold tracking-wide" title="View Document">
+                                    <a href="/docs/${itemObj.slug}" target="_blank" onclick="showToast('Opened ${itemObj.name} in a new tab', 'info', 'fa-external-link-alt')" class="flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-blue-50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 border border-blue-100 hover:border-transparent shadow-sm hover:shadow text-xs sm:text-sm font-semibold tracking-wide" title="View Document">
                                         <i class="fas fa-external-link-alt mr-1.5"></i>
                                         Open
                                     </a>
-                                    <a href="/documents/${encodeURIComponent(itemObj.filename)}" download onclick="showToast('Downloaded ${itemObj.name}', 'success', 'fa-check-circle')" class="flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-900 hover:text-white transition-all duration-300 border border-gray-200 hover:border-transparent shadow-sm hover:shadow text-xs sm:text-sm font-semibold tracking-wide" title="Download Document">
+                                    <a href="/docs/${itemObj.slug}" download onclick="showToast('Downloaded ${itemObj.name}', 'success', 'fa-check-circle')" class="flex items-center justify-center px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-900 hover:text-white transition-all duration-300 border border-gray-200 hover:border-transparent shadow-sm hover:shadow text-xs sm:text-sm font-semibold tracking-wide" title="Download Document">
                                         <i class="fas fa-cloud-download-alt mr-1.5"></i>
                                         Save
                                     </a>
