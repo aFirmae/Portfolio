@@ -14,16 +14,13 @@
       "source": "/assets/(.*)",
       "destination": "/public/assets/$1"
     },
-    {
-      "source": "/documents/(.*)",
-      "destination": "/public/documents/$1"
-    },
+
     {
       "source": "/resume",
       "destination": "/public/assets/Resume_Nilashis_Saha.pdf"
     },
     {
-      "source": "/((?!assets/|documents/|robots.txt|sitemap.xml).*)",
+      "source": "/((?!assets/|robots.txt|sitemap.xml).*)",
       "destination": "/app.py"
     }
   ],
