@@ -75,7 +75,7 @@ DOCS_SLUG_MAP = {
 @limiter.exempt
 def serve_secure_document(slug):
     if request.cookies.get('docs_access') != 'true':
-        return redirect('/docs')
+        return redirect(f'/docs?next=/docs/{slug}')
         
     filename = DOCS_SLUG_MAP.get(slug)
     if not filename:
@@ -89,7 +89,7 @@ def docs():
     if request.cookies.get('docs_access') == 'true':
         return render_template('docs.html', version=VERSION)
     
-    return render_template('docs_auth.html', version=VERSION)
+    return render_template('docs_auth.html', version=VERSION, next_url=request.args.get('next', ''))
 
 @app.route('/docs/ping', methods=['POST'])
 @limiter.exempt
@@ -104,26 +104,28 @@ def docs_ping():
 @limiter.limit("10 per minute")
 def docs_auth():
     otp_code = request.form.get('otp_code')
+    next_url = request.form.get('next_url')
     totp_secret = os.environ.get("TOTP_SECRET")
     
     if not otp_code:
-        return render_template('docs_auth.html', version=VERSION, error="Missing authentication code.")
+        return render_template('docs_auth.html', version=VERSION, error="Missing authentication code.", next_url=next_url)
         
     if not totp_secret:
-        return render_template('docs_auth.html', version=VERSION, error="Server configuration error: TOTP secret missing.")
+        return render_template('docs_auth.html', version=VERSION, error="Server configuration error: TOTP secret missing.", next_url=next_url)
         
     totp = pyotp.TOTP(totp_secret)
     
     # Verify the code (allows 1 period before/after for slight time drift)
     if totp.verify(otp_code, valid_window=1):
-        # Create a response that redirects to /docs
-        resp = make_response(redirect('/docs'))
+        target = next_url if next_url and next_url.startswith('/docs/') else '/docs'
+        # Create a response that redirects to target
+        resp = make_response(redirect(target))
         # Set a cookie valid for 1 minute
         resp.set_cookie('docs_access', 'true', max_age=60, httponly=True, secure=False)
         return resp
     else:
         # Re-render with error
-        return render_template('docs_auth.html', version=VERSION, error="Invalid code. Please try again.")
+        return render_template('docs_auth.html', version=VERSION, error="Invalid code. Please try again.", next_url=next_url)
 
 
 # Serve specific root files

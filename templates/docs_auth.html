@@ -49,17 +49,19 @@
         {% endif %}
 
         <form action="/docs/auth" method="POST" id="totp-form">
+            <input type="hidden" name="next_url" value="{{ next_url or '' }}">
+            
             <!-- OTP 6-Box Section -->
-            <div class="flex justify-center gap-1 sm:gap-2 mb-8 transition-all duration-300" id="otp-inputs">
-                <input type="text" maxlength="1" inputmode="numeric" class="w-10 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 bg-white">
-                <input type="text" maxlength="1" inputmode="numeric" class="w-10 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 bg-white">
-                <input type="text" maxlength="1" inputmode="numeric" class="w-10 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 bg-white">
-                <input type="text" maxlength="1" inputmode="numeric" class="w-10 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 bg-white">
-                <input type="text" maxlength="1" inputmode="numeric" class="w-10 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 bg-white">
-                <input type="text" maxlength="1" inputmode="numeric" class="w-10 h-12 sm:w-14 sm:h-14 text-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent outline-none transition-all text-gray-900 bg-white">
+            <div class="relative flex justify-center gap-1 sm:gap-2 mb-8 transition-all duration-300" id="otp-container">
+                <input type="text" name="otp_code" id="otp-code-input" maxlength="6" inputmode="numeric" autocomplete="one-time-code" class="absolute inset-0 w-full h-full opacity-0 z-10 cursor-text text-transparent bg-transparent">
+                
+                <div class="w-10 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg bg-white otp-box transition-all"></div>
+                <div class="w-10 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg bg-white otp-box transition-all"></div>
+                <div class="w-10 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg bg-white otp-box transition-all"></div>
+                <div class="w-10 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg bg-white otp-box transition-all"></div>
+                <div class="w-10 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg bg-white otp-box transition-all"></div>
+                <div class="w-10 h-12 sm:w-14 sm:h-14 flex items-center justify-center text-xl sm:text-2xl font-semibold border border-gray-300 rounded-lg bg-white otp-box transition-all"></div>
             </div>
-
-            <input type="hidden" name="otp_code" id="otp-code">
 
             <!-- Verify OTP Button -->
             <button type="submit" id="verify-otp-btn" disabled class="w-full bg-gray-700 text-white font-semibold py-4 rounded-xl hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
@@ -69,77 +71,48 @@
     </div>
 
     <script>
-        const inputs = document.querySelectorAll('#otp-inputs input');
+        const realInput = document.getElementById('otp-code-input');
+        const boxes = document.querySelectorAll('.otp-box');
         const verifyOtpBtn = document.getElementById('verify-otp-btn');
-        const otpCodeHidden = document.getElementById('otp-code');
         const form = document.getElementById('totp-form');
 
-        // Input interactions
-        inputs.forEach(function(input, index) {
-            input.addEventListener('input', function(e) {
-                // Clear error UI if user starts typing again
-                const errorAlert = document.getElementById('error-alert');
-                if (errorAlert) {
-                    errorAlert.style.opacity = '0';
-                    setTimeout(() => errorAlert.remove(), 300);
-                }
-
-                e.target.value = e.target.value.replace(/[^0-9]/g, '');
-                if (e.target.value.length === 1 && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
-                checkOTPComplete();
-            });
-
-            input.addEventListener('keydown', function(e) {
-                if (e.key === 'Backspace' && !e.target.value && index > 0) {
-                    inputs[index - 1].focus();
-                    inputs[index - 1].value = '';
-                    checkOTPComplete();
+        function updateBoxes() {
+            const val = realInput.value.replace(/[^0-9]/g, '').substring(0, 6);
+            realInput.value = val; // enforce numeric
+            
+            boxes.forEach((box, i) => {
+                box.textContent = val[i] || '';
+                if (i === val.length || (val.length === 6 && i === 5)) {
+                    box.classList.add('ring-2', 'ring-gray-900', 'border-transparent');
+                } else {
+                    box.classList.remove('ring-2', 'ring-gray-900', 'border-transparent');
                 }
             });
 
-            input.addEventListener('paste', function(e) {
-                e.preventDefault();
-                var pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '').slice(0, 6);
-                if (pastedData) {
-                    for (var i = 0; i < pastedData.length; i++) {
-                        if (inputs[i]) inputs[i].value = pastedData[i];
-                    }
-                    if (pastedData.length === 6) {
-                        inputs[5].focus();
-                    } else if (inputs[pastedData.length]) {
-                        inputs[pastedData.length].focus();
-                    }
-                    checkOTPComplete();
-                }
-            });
-        });
-
-        function getOTPCode() {
-            var code = '';
-            inputs.forEach(function(input) { code += input.value; });
-            return code;
-        }
-
-        function checkOTPComplete() {
-            var code = getOTPCode();
-            otpCodeHidden.value = code;
-            if (code.length === 6) {
+            if (val.length === 6) {
                 verifyOtpBtn.disabled = false;
             } else {
                 verifyOtpBtn.disabled = true;
             }
         }
 
+        realInput.addEventListener('input', function() {
+            const errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                errorAlert.style.opacity = '0';
+                setTimeout(() => errorAlert.remove(), 300);
+            }
+            updateBoxes();
+        });
+
         form.addEventListener('submit', function() {
             verifyOtpBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Verifying...';
             verifyOtpBtn.disabled = true;
         });
 
-        // Focus first input on load
         window.addEventListener('load', function() {
-            inputs[0].focus();
+            realInput.focus();
+            updateBoxes();
         });
     </script>
 </body>
