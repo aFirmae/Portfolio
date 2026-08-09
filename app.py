@@ -81,7 +81,7 @@ def serve_secure_document(slug):
     if not filename:
         return render_template('404.html', version=VERSION), 404
         
-    return send_from_directory(os.path.join(app.root_path, 'public', 'documents'), filename)
+    return send_from_directory(os.path.join(app.root_path, 'private_docs'), filename)
 
 @app.route('/docs')
 def docs():

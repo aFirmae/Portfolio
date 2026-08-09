@@ -8,7 +8,7 @@
       "src": "app.py",
       "use": "@vercel/python",
       "config": {
-        "includeFiles": "public/documents/**"
+        "includeFiles": "private_docs/**"
       }
     }
   ],
