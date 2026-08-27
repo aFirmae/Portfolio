@@ -362,29 +362,71 @@ document.addEventListener('DOMContentLoaded', () => {
     const card = document.getElementById('leetcode-card');
 
     async function fetchLeetCodeStats() {
-        const cacheKey = 'leetcode_stats_cache';
+        const cacheKey = 'leetcode_stats_cache_v2';
         const cacheDuration = 15 * 60 * 1000; // 15 minutes in milliseconds
 
-        const updateUI = (statsData, profileData) => {
+        const updateUI = (statsData, badgesData) => {
             // Helper to update text safely
             const updateText = (id, text) => {
                 const el = document.getElementById(id);
                 if (el) el.innerText = text;
             };
 
-            // Update text content
-            updateText('leetcode-total', statsData.totalSolved);
-            updateText('leetcode-rank', statsData.ranking.toLocaleString());
+            // Update Total Solved & Rank
+            if (statsData.totalSolved !== undefined) {
+                updateText('leetcode-total', Number(statsData.totalSolved).toLocaleString());
+            }
+            if (statsData.ranking) {
+                updateText('leetcode-rank', Number(statsData.ranking).toLocaleString());
+            }
+
+            // Contest Rating
+            const contestRating = statsData.data?.currentRating || statsData.contestRating || 1858;
+            updateText('leetcode-rating', Math.round(Number(contestRating)).toLocaleString());
+
+            // Active Badge (only shown when an active badge exists and loads successfully)
+            const badgeContainer = document.getElementById('leetcode-badge-container');
+            const activeBadge = badgesData?.activeBadge || badgesData?.data?.active;
+            const badgeNameEl = document.getElementById('leetcode-active-badge-name');
+            const badgeIconEl = document.getElementById('leetcode-active-badge-icon');
+
+            if (activeBadge && activeBadge.icon && (activeBadge.displayName || activeBadge.name)) {
+                const badgeName = activeBadge.displayName || activeBadge.name;
+                const iconUrl = activeBadge.icon.startsWith('http')
+                    ? activeBadge.icon
+                    : `https://leetcode.com${activeBadge.icon}`;
+
+                if (badgeNameEl) badgeNameEl.innerText = badgeName;
+                if (badgeIconEl) {
+                    badgeIconEl.src = iconUrl;
+                    badgeIconEl.alt = `${badgeName} Badge`;
+                    badgeIconEl.onerror = () => {
+                        if (badgeContainer) {
+                            badgeContainer.classList.add('hidden');
+                            badgeContainer.classList.remove('flex');
+                        }
+                    };
+                }
+                if (badgeContainer) {
+                    badgeContainer.classList.remove('hidden');
+                    badgeContainer.classList.add('flex');
+                }
+            } else {
+                if (badgeContainer) {
+                    badgeContainer.classList.add('hidden');
+                    badgeContainer.classList.remove('flex');
+                }
+            }
 
             // Detailed stats & Denominators from API
-            updateText('leetcode-easy', statsData.easySolved);
-            updateText('leetcode-total-easy', statsData.totalEasy);
+            if (statsData.easySolved !== undefined) updateText('leetcode-easy', statsData.easySolved);
+            if (statsData.totalEasy !== undefined) updateText('leetcode-total-easy', statsData.totalEasy);
 
-            updateText('leetcode-medium', statsData.mediumSolved);
-            updateText('leetcode-total-medium', statsData.totalMedium);
+            if (statsData.mediumSolved !== undefined) updateText('leetcode-medium', statsData.mediumSolved);
+            if (statsData.totalMedium !== undefined) updateText('leetcode-total-medium', statsData.totalMedium);
 
-            updateText('leetcode-hard', statsData.hardSolved);
-            updateText('leetcode-total-hard', statsData.totalHard);
+            if (statsData.hardSolved !== undefined) updateText('leetcode-hard', statsData.hardSolved);
+            if (statsData.totalHard !== undefined) updateText('leetcode-total-hard', statsData.totalHard);
 
             // Progress Bars
             const updateBar = (id, pct) => {
@@ -392,41 +434,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (el) el.style.width = `${pct}%`;
             };
 
-            updateBar('leetcode-easy-bar', (statsData.easySolved / statsData.totalEasy) * 100);
-            updateBar('leetcode-medium-bar', (statsData.mediumSolved / statsData.totalMedium) * 100);
-            updateBar('leetcode-hard-bar', (statsData.hardSolved / statsData.totalHard) * 100);
-
-            // Acceptance Rate
-            updateText('leetcode-acceptance', `${statsData.acceptanceRate}%`);
-            // Badges
-            updateText('leetcode-badges', profileData.badges.length);
+            if (statsData.totalEasy) updateBar('leetcode-easy-bar', (statsData.easySolved / statsData.totalEasy) * 100);
+            if (statsData.totalMedium) updateBar('leetcode-medium-bar', (statsData.mediumSolved / statsData.totalMedium) * 100);
+            if (statsData.totalHard) updateBar('leetcode-hard-bar', (statsData.hardSolved / statsData.totalHard) * 100);
         };
 
         try {
             // Check cache first
             const cachedData = sessionStorage.getItem(cacheKey);
             if (cachedData) {
-                const { statsData, profileData, timestamp } = JSON.parse(cachedData);
+                const { statsData, badgesData, timestamp } = JSON.parse(cachedData);
                 if (Date.now() - timestamp < cacheDuration) {
-                    updateUI(statsData, profileData);
+                    updateUI(statsData, badgesData);
                     return;
                 }
             }
 
-            // Fetch from API if no valid cache
-            const statsPromise = fetch(`https://leetcode-stats.tashif.codes/${username}`);
-            const profilePromise = fetch(`https://leetcode-stats.tashif.codes/${username}/profile`);
+            // Fetch stats and badges concurrently
+            const statsPromise = fetch(`https://leetcode-stats.tashif.codes/${username}`).then(res => res.json());
+            const badgesPromise = fetch(`https://leetcode-stats.tashif.codes/${username}/badges`).then(res => res.json()).catch(() => null);
 
-            const [statsRes, profileRes] = await Promise.all([statsPromise, profilePromise]);
-            const statsData = await statsRes.json();
-            const profileData = await profileRes.json();
+            const [statsData, badgesData] = await Promise.all([statsPromise, badgesPromise]);
 
-            if (statsData.status === 'success' && profileData.status === 'success') {
-                updateUI(statsData, profileData);
+            if (statsData && statsData.status === 'success') {
+                updateUI(statsData, badgesData);
                 // Save to session storage
                 sessionStorage.setItem(cacheKey, JSON.stringify({
                     statsData,
-                    profileData,
+                    badgesData,
                     timestamp: Date.now()
                 }));
             } else {
@@ -434,31 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (err) {
             console.error('Error fetching LeetCode stats:', err);
-            // Error Fallback UI
-            card.innerHTML = `
-                <div class="absolute top-0 right-0 bg-yellow-400 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">LEETCODE</div>
-                
-                <div class="flex items-center mb-8">
-                    <div class="w-12 h-12 md:w-16 md:h-16 border-2 border-gray-100 rounded-lg flex items-center justify-center mr-4 shadow-lg shadow-black-100 flex-shrink-0">
-                        <img src="/assets/images/leetcode.svg" alt="LeetCode" class="w-8 h-8 md:w-10 md:h-10">
-                    </div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-gray-800">Competitive Programmer</h3>
-                        <p class="text-gray-500">Unleashing Algorithms</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col items-center justify-center py-6 text-center">
-                    <div class="bg-red-50 p-4 rounded-full mb-4 animate-bounce">
-                        <i class="fas fa-exclamation-triangle text-3xl text-red-500"></i>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">Stats Temporarily Unavailable</h4>
-                    <p class="text-gray-500 mb-6 max-w-xs text-sm">Couldn't fetch the latest stats right now, but you can verify my skills directly on LeetCode.</p>
-                    <a href="https://leetcode.com/u/${username}/" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white rounded-xl hover:bg-gray-800 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                        View Full Profile <i class="fas fa-external-link-alt ml-2"></i>
-                    </a>
-                </div>
-            `;
+            // Fallback gracefully without breaking pre-filled HTML values
         }
     }
 
